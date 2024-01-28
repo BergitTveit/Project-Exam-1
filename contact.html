@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lykke og liten</title>
+  </head>
+  <body>
+    <header>Logo? HOME, LOCATION, BLOG,ABOUT,CONTACT</header>
+
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (event) => { event.preventDefault(); const
+    name = form.elements.name.value; const email = form.elements.email.value;
+    const message = form.elements.message.value; if (name && email && message) {
+    // Form is valid, do something here (e.g. send form data to a server) } else
+    { // Form is invalid, display an error message } });
+  </body>
+</html>

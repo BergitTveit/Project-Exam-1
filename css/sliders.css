@@ -1,0 +1,19 @@
+@media only screen and (max-width: 768px) {
+  .home-slider-mob {
+    display: block;
+  }
+
+  .post-slider-mob {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .home-slider-desk {
+    display: block;
+  }
+
+  .post-slider-desk {
+    display: block;
+  }
+}
