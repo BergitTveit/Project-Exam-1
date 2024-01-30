@@ -1,26 +1,26 @@
-export function displayFilmDetails(film) {
-  const filmDetailsContainer = document.querySelector(".film-details");
-  const filmTitle = document.createElement("h2");
-  const filmImage = document.createElement("img");
-  const filmPrice = document.createElement("p");
-  const filmDescription = document.createElement("p");
+export function displaypostDetails(post) {
+  const postDetailsContainer = document.querySelector(".post-details");
+  const postTitle = document.createElement("h2");
+  const postImage = document.createElement("img");
+  const postPrice = document.createElement("p");
+  const postDescription = document.createElement("p");
 
-  filmTitle.textContent = film.name;
+  postTitle.textContent = post.name;
 
-  filmImage.src = film.images[0]?.src;
-  filmImage.alt = film.name;
-  if (film.prices && film.prices.price) {
-    const majorUnitsPrice = parseFloat(film.prices.price) / 100;
-    filmPrice.textContent = `${majorUnitsPrice.toFixed(0)} ,-`;
+  postImage.src = post.images[0]?.src;
+  postImage.alt = post.name;
+  if (post.prices && post.prices.price) {
+    const majorUnitsPrice = parseFloat(post.prices.price) / 100;
+    postPrice.textContent = `${majorUnitsPrice.toFixed(0)} ,-`;
   } else {
-    filmPrice.textContent = "Price not available";
+    postPrice.textContent = "Price not available";
   }
-  filmDescription.innerHTML = film.description || "Description not available";
+  postDescription.innerHTML = post.description || "Description not available";
 
-  filmDetailsContainer.innerHTML = "";
+  postDetailsContainer.innerHTML = "";
 
-  filmDetailsContainer.appendChild(filmTitle);
-  filmDetailsContainer.appendChild(filmImage);
-  filmDetailsContainer.appendChild(filmPrice);
-  filmDetailsContainer.appendChild(filmDescription);
+  postDetailsContainer.appendChild(postTitle);
+  postDetailsContainer.appendChild(postImage);
+  postDetailsContainer.appendChild(postPrice);
+  postDetailsContainer.appendChild(postDescription);
 }

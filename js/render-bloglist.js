@@ -1,42 +1,32 @@
-import { addToCart } from "../pages/cart.js";
-
-export async function displayFilm(film, displaySectionName) {
+export async function displayPost(post, displaySectionName) {
   const displayContainer = document.querySelector(displaySectionName);
 
-  const filmElements = document.createElement("div");
-  filmElements.classList.add("film-item");
+  const postElements = document.createElement("div");
+  postElements.classList.add("post-item");
 
-  const filmElement = document.createElement("a");
-  filmElement.href = `/film/?id=${film.id}`;
-  filmElement.classList.add("film-link");
+  const postElement = document.createElement("a");
+  postElement.href = `/post/?id=${post.id}`;
+  postElement.classList.add("post-link");
 
-  const img = document.createElement("img");
-  img.src = film.images[0]?.src;
-  img.alt = film.name;
+  // const img = document.createElement("img");
+  // img.src = post.images[0]?.src;
+  // img.src = post._embedded["wp:featuredmedia"][0].source_url;
+  // img.alt = post.name;
 
   const title = document.createElement("h4");
-  title.textContent = film.name;
+  title.textContent = post.title.rendered;
 
-  const addToCartBtn = document.createElement("button");
-  addToCartBtn.textContent = film.add_to_cart.text;
-  addToCartBtn.classList.add("button-style1");
-  addToCartBtn.addEventListener(`click`, () => {
-    addToCart(film);
-
-    alert("button clicked ", film.name);
-  });
-
-  filmElement.append(img);
-  filmElements.append(filmElement, title, addToCartBtn);
+  // postElement.append(img);
+  postElements.append(postElements, title);
 
   if (displayContainer) {
-    displayContainer.appendChild(filmElements);
+    displayContainer.appendChild(postElements);
   } else {
     console.error("Display container not found");
   }
 }
 
-export function displayFilms(filmList, displaySectionName) {
+export function displayPosts(postList, displaySectionName) {
   const displayContainer = document.querySelector(displaySectionName);
 
   if (!displayContainer) {
@@ -46,7 +36,7 @@ export function displayFilms(filmList, displaySectionName) {
 
   displayContainer.innerHTML = "";
 
-  filmList.forEach((film) => {
-    displayFilm(film, displaySectionName);
+  postList.forEach((post) => {
+    displayPost(post, displaySectionName);
   });
 }

@@ -1,7 +1,4 @@
-const url = assets.lykkeogliten.no / wp - json;
+const apiurl = "http://assets.lykkeogliten.no/";
+const wpUrl = "wp-json/wp/v2/posts";
 
-// js/constants.js
-/* const apiURL = "https://www.square-eyes.no";
-const wcURL = "/wp-json/wc/store/products";
-
-export const url = new URL(wcURL, apiURL); */
+export const url = new URL(wpUrl, apiurl);

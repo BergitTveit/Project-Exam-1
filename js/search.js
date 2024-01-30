@@ -1,5 +1,5 @@
-import { fetchAllPosts } from ""; // Create this
-import { displayPosts } from ""; // Create this
+import { fetchAllPosts } from "./api.js"; // Create this
+import { displayPosts } from "./render-bloglist.js"; // Create this
 
 const search = document.querySelector("#searchInput");
 
@@ -24,7 +24,7 @@ search.addEventListener("input", async (event) => {
     window.history.replaceState(
       {},
       "",
-      `../films/index.html?search=${encodeURIComponent(searchValue)}` //check this make new url
+      `../posts/index.html?search=${encodeURIComponent(searchValue)}` //check this make new url
     );
     localStorage.setItem("searchValue", searchValue);
 
@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (storedSearchValue) {
     search.value = storedSearchValue;
     const filteredPosts = await fetchPostsAccordingToSearch(storedSearchValue);
-    console.log("Filtered Films on Load:", filteredPosts);
+    console.log("Filtered posts on Load:", filteredPosts);
     displayPosts(filteredPosts, ".post-list");
   }
 });
 
-//double check no film is left in the functions.
+//double check no post is left in the functions.

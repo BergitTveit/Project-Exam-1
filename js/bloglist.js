@@ -1,56 +1,54 @@
-filmsPage();
-import { fetchAllFilms, fetchFilmsByGenre } from "../api/api.js";
-import { displayFilms } from "../render/list.js";
-import { showLoader, hideLoader } from "../loader.js";
-import { fetchFilmsAccordingToSearch } from "../api/search.js";
-import { handleError } from "../api/errorhandler.js";
+import { fetchAllPosts } from "./api.js";
+import { displayPosts } from "./render-bloglist.js";
+import { showLoader, hideLoader } from "./loader.js";
+import { fetchPostsAccordingToSearch } from "./search.js";
+import { handleError } from "./errors.js";
 
-export async function filmsPage() {
-  const filmListContainer = document.querySelector(".film-list");
+export async function postsPage() {
+  const postListContainer = document.querySelector(".post-list");
+  let posts;
+
   try {
     showLoader();
 
     const url = new URL(location.href);
     const searchValue = url.searchParams.get("search");
 
-    let films;
-
     if (searchValue) {
-      films = await fetchFilmsAccordingToSearch(searchValue);
+      posts = await fetchPostsAccordingToSearch(searchValue);
     } else {
-      films = await fetchAllFilms();
+      posts = await fetchAllPosts();
+      console.log(posts);
     }
-
-    hideLoader();
-
-    displayFilms(films, ".film-list");
-
-    const genreSelect = document.getElementById("genreSelect");
-    genreSelect.addEventListener("change", async function () {
-      const selectedGenre = genreSelect.value;
-
-      try {
-        showLoader();
-        let filteredFilms;
-
-        if (selectedGenre === "All") {
-          filteredFilms = await fetchAllFilms();
-        } else {
-          filteredFilms = await fetchFilmsByGenre(selectedGenre);
-        }
-
-        hideLoader();
-        filmListContainer.innerHTML = "";
-        displayFilms(filteredFilms, ".film-list");
-      } catch (error) {
-        hideLoader();
-        filmListContainer.innerHTML = handleError("Unable to load films");
-      }
-    });
   } catch (error) {
-    hideLoader();
-    filmListContainer.innerHTML = handleError(" Unable to load film page");
+    postListContainer.innerHTML = handleError(" Unable to load post page");
   }
+  hideLoader();
+
+  displayPosts(posts, ".post-list");
+
+  //   const genreSelect = document.getElementById("genreSelect");
+  //   genreSelect.addEventListener("change", async function () {
+  //     const selectedGenre = genreSelect.value;
+
+  //     try {
+  //       showLoader();
+  //       let filteredposts;
+
+  //       if (selectedGenre === "All") {
+  //         filteredposts = await fetchAllposts();
+  //       } else {
+  //         filteredposts = await fetchpostsByGenre(selectedGenre);
+  //       }
+
+  //       hideLoader();
+  //       postListContainer.innerHTML = "";
+  //       displayposts(filteredposts, ".post-list");
+  //     } catch (error) {
+  //       hideLoader();
+  //       postListContainer.innerHTML = handleError("Unable to load posts");
+  //     }
+  //   });
 }
 
-filmsPage();
+postsPage();

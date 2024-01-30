@@ -1,23 +1,23 @@
-import { fetchFilmById } from "../api/api.js";
-import { displayFilmDetails } from "../render/post.js";
+import { fetchPostById } from "./api.js";
+import { displaypostDetails } from "./render-blogdetails.js";
 
-export async function filmDetailPage() {
-  const filmDetailsContainer = document.querySelector(".film-details");
+export async function postDetailPage() {
+  const postDetailsContainer = document.querySelector(".post-details");
 
   try {
     const url = new URL(location.href);
-    const filmId = url.searchParams.get("id");
+    const postId = url.searchParams.get("id");
 
-    if (filmId) {
-      const film = await fetchFilmById(filmId);
-      displayFilmDetails(film);
+    if (postId) {
+      const post = await fetchPostById(postId);
+      displaypostDetails(post);
     } else {
-      throw new Error("Film ID is undefined");
+      throw new Error("post ID is undefined");
     }
   } catch (error) {
-    console.error("Error fetching film details:", error);
-    filmDetailsContainer.innerHTML = "Unable to fetch film details.";
+    console.error("Error fetching post details:", error);
+    postDetailsContainer.innerHTML = "Unable to fetch post details.";
   }
 }
 
-filmDetailPage();
+postDetailPage();

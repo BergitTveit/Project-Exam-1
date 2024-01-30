@@ -1,4 +1,4 @@
-import { url } from "js/constants.js";
+import { url } from "./constants.js";
 
 export async function fetchAllPosts() {
   try {
@@ -9,7 +9,7 @@ export async function fetchAllPosts() {
     }
 
     const getResults = await response.json();
-
+    console.log(getResults);
     return getResults;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -17,6 +17,8 @@ export async function fetchAllPosts() {
     throw error;
   }
 }
+
+fetchAllPosts();
 
 export async function fetchPostById(postId) {
   try {
@@ -31,23 +33,23 @@ export async function fetchPostById(postId) {
     }
 
     const post = await response.json();
-
+    console.log(post);
     return post;
   } catch (error) {
-    console.error("Error fetching film by ID:", error);
+    console.error("Error fetching post by ID:", error);
     throw error;
   }
 }
 
 /* 
 export async function fetchPostsSortedByRaiting(amount) {
-  let films = await fetchAllFilms();
-  films.sort(
-    (film1, film2) =>
-      parseInt(film2.average_rating) - parseInt(film1.average_rating)
+  let posts = await fetchAllposts();
+  posts.sort(
+    (post1, post2) =>
+      parseInt(post2.average_rating) - parseInt(post1.average_rating)
   );
 
-  return films.slice(0, amount);
+  return posts.slice(0, amount);
 } */
 //----------------------------------------------------------------------------------------------
 function getDatePosted(post) {
@@ -72,21 +74,21 @@ export async function fetchPostsSortedByDate(amount) {
 
     return posts.slice(0, amount);
   } catch (error) {
-    console.error("Error fetching and sorting films:", error);
+    console.error("Error fetching and sorting posts:", error);
     throw error;
   }
 } // double check sorting function
 //.-----------------------------------------------------------------------------------------
 //Can this be updated to filter something else. ??
 //-------------------------------------------------------------------------------------
-/* export async function fetchFilmsByGenre(genre) {
-  const films = await fetchAllFilms();
-  const filteredFilms = films.filter((film) => {
-    return film.categories.some(
+/* export async function fetchpostsByGenre(genre) {
+  const posts = await fetchAllposts();
+  const filteredposts = posts.filter((post) => {
+    return post.categories.some(
       (category) => category.name.toLowerCase() === genre.toLowerCase()
     );
   });
 
-  return filteredFilms;
+  return filteredposts;
 }
  */
