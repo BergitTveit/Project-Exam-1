@@ -12,21 +12,20 @@ export async function postsPage() {
     showLoader();
 
     const url = new URL(location.href);
-    console.log(url);
+    // console.log(url);
     const searchValue = url.searchParams.get("search");
 
     if (searchValue) {
       posts = await fetchPostsAccordingToSearch(searchValue);
     } else {
       posts = await fetchPostsSortedByDate();
-      console.log("SORTED BY DATE", posts);
     }
   } catch (error) {
     postListContainer.innerHTML = handleError(" Unable to load post page");
   }
   hideLoader();
   postListContainer.innerHTML = "";
-  console.log("CHECKING POSTS FOR SEARCH", posts);
+  // console.log("CHECKING POSTS FOR SEARCH", posts);
   displayPosts(posts, ".post-list");
 }
 

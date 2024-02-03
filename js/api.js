@@ -9,7 +9,7 @@ export async function fetchAllPosts() {
     }
 
     const wpData = await response.json();
-    console.log("LOG WPDATA", wpData);
+    // console.log("LOG WPDATA", wpData);
     const postsData = wpData.map((properties) => ({
       id: properties.id,
       title: properties.title.rendered,
@@ -38,7 +38,7 @@ export async function fetchPostById(postId) {
     const posts = await fetchAllPosts();
     posts.forEach((element) => {});
     const p = posts.find((prop) => prop.id === Number(postId));
-    console.log(p);
+    // console.log(p);
 
     return p;
   } catch (error) {

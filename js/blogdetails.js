@@ -4,7 +4,7 @@ import { displayPostDetails } from "./render-blogdetails.js";
 export async function updatePageTitle(postId) {
   try {
     const posts = await fetchAllPosts();
-    console.log("All Posts:", posts);
+
     const post = posts.find((post) => post.id === parseInt(postId));
 
     if (post && post.title) {
@@ -33,10 +33,10 @@ export async function postDetailPage() {
 
   try {
     const url = new URL(location.href);
-    console.log("Current URL:", url.href);
+    // console.log("Current URL:", url.href);
     const postId = url.searchParams.get("id");
     await updatePageTitle(postId);
-    console.log("Retrieved Post ID:", postId);
+    // console.log("Retrieved Post ID:", postId);
     if (postId) {
       const post = await fetchPostById(postId);
       displayPostDetails(post);
