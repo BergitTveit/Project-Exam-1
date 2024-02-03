@@ -79,3 +79,4 @@ export async function fetchpostsByCategory(targetCategory) {
   return filteredposts;
 }
 fetchpostsByCategory("Bridal");
+// Add it to the corect place. in html/class/ functions etc
