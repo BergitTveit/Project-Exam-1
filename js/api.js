@@ -24,7 +24,7 @@ export async function fetchAllPosts() {
       description: properties.excerpt.rendered,
       categories: properties.categories,
     }));
-    // FILTER POSTS THAT DOESNT CONTAIN properties._embedded["wp:featuredmedia"]:  .filter((post) => post.img !== null && post.altTxt !== null);
+
     return await postsData;
   } catch (error) {
     console.error("Error fetching posts:", error);
