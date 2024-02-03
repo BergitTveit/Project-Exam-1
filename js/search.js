@@ -5,28 +5,23 @@ const search = document.querySelector("#searchInput");
 
 let typeTimer;
 
-const doneTypingInterval = 50;
+const doneTypingInterval = 100;
 
 export async function fetchPostsAccordingToSearch(searchText) {
   const allPosts = await fetchAllPosts();
   const filteredPosts = allPosts.filter(
-    (post) =>
-      post.title.rendered.toLowerCase().includes(searchText.toLowerCase()) //check parameters (ADDED RENDERED)
+    (post) => post.title.toLowerCase().includes(searchText.toLowerCase()) //check parameters (ADDED RENDERED)
   );
   console.log("Filtered Posts:", filteredPosts);
   return filteredPosts;
 }
 
-search.addEventListener("input", async (event) => {
+search.addEventListener("keyup", async function (event) {
   clearTimeout(typeTimer);
-
+  console.log("TIMEEER", typeTimer);
   typeTimer = setTimeout(async () => {
     const searchValue = event.target.value.trim().toLowerCase();
-    window.history.replaceState(
-      {},
-      "",
-      `../bloglist/index.html?search=${encodeURIComponent(searchValue)}` //check this make new url UPDATED to bloglist.
-    );
+    location.href = getUrlWithSearchValue(location.href, searchValue);
     localStorage.setItem("searchValue", searchValue);
 
     const filteredPosts = await fetchPostsAccordingToSearch(searchValue);
@@ -43,3 +38,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     displayPosts(filteredPosts, ".post-list");
   }
 });
+
+function getUrlWithSearchValue(url, searchValue) {
+  const index = url.indexOf("?search");
+  if (searchValue) {
+    return index === -1
+      ? url + `?search=${encodeURIComponent(searchValue)}`
+      : url.substring(0, index + 8) + `${encodeURIComponent(searchValue)}`;
+  }
+
+  return index === -1 ? url : url.substring(0, index);
+}

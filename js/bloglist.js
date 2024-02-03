@@ -25,7 +25,8 @@ export async function postsPage() {
     postListContainer.innerHTML = handleError(" Unable to load post page");
   }
   hideLoader();
-
+  postListContainer.innerHTML = "";
+  console.log("CHECKING POSTS FOR SEARCH", posts);
   displayPosts(posts, ".post-list");
 }
 

@@ -11,7 +11,6 @@ export async function postDetailPage() {
     console.log("Retrieved Post ID:", postId);
     if (postId) {
       const post = await fetchPostById(postId);
-      console.log(post, "checking if it wokrs");
       displayPostDetails(post);
     } else {
       throw new Error("post ID is undefined");

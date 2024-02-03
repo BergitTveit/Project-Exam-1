@@ -34,7 +34,12 @@ export async function fetchAllPosts() {
 
 export async function fetchPostById(postId) {
   try {
-    return fetchAllPosts().find((prop) => prop.id === postId);
+    const posts = await fetchAllPosts();
+    posts.forEach((element) => {});
+    const p = posts.find((prop) => prop.id === Number(postId));
+    console.log(p);
+
+    return p;
   } catch (error) {
     console.error("Error fetching post by ID:", error);
     throw error;
