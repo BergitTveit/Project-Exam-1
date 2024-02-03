@@ -3,7 +3,7 @@ import { url } from "./constants.js";
 export async function fetchAllPosts() {
   try {
     const response = await fetch(url);
-
+    console.log(response);
     if (!response.ok) {
       throw new Error(`Failed to fetch posts. Status: ${response.status}`);
     }
@@ -62,17 +62,20 @@ export async function fetchPostsSortedByDate(amount) {
   }
 }
 
-//.-----------------------------------------------------------------------------------------
-//Can this be updated to instead of genre, but fetch different ALTERATIONS/ WHAT WE OFFER
-//-------------------------------------------------------------------------------------
-/* export async function fetchpostsByGenre(genre) {
-  const posts = await fetchAllposts();
+export async function fetchpostsByCategory(targetCategory) {
+  const posts = await fetchAllPosts();
   const filteredposts = posts.filter((post) => {
-    return post.categories.some(
-      (category) => category.name.toLowerCase() === genre.toLowerCase()
+    return (
+      post.categories &&
+      post.categories.some(
+        (category) =>
+          category &&
+          category.name &&
+          category.name.toLowerCase() === targetCategory.toLowerCase()
+      )
     );
   });
-
+  console.log(filteredposts);
   return filteredposts;
 }
- */
+fetchpostsByCategory("Bridal");
