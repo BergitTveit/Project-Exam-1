@@ -12,6 +12,7 @@ export async function postsPage() {
     showLoader();
 
     const url = new URL(location.href);
+    console.log(url);
     const searchValue = url.searchParams.get("search");
 
     if (searchValue) {
@@ -26,29 +27,28 @@ export async function postsPage() {
   hideLoader();
 
   displayPosts(posts, ".post-list");
-
-  //   const genreSelect = document.getElementById("genreSelect");
-  //   genreSelect.addEventListener("change", async function () {
-  //     const selectedGenre = genreSelect.value;
-
-  //     try {
-  //       showLoader();
-  //       let filteredposts;
-
-  //       if (selectedGenre === "All") {
-  //         filteredposts = await fetchAllposts();
-  //       } else {
-  //         filteredposts = await fetchpostsByGenre(selectedGenre);
-  //       }
-
-  //       hideLoader();
-  //       postListContainer.innerHTML = "";
-  //       displayposts(filteredposts, ".post-list");
-  //     } catch (error) {
-  //       hideLoader();
-  //       postListContainer.innerHTML = handleError("Unable to load posts");
-  //     }
-  //   });
 }
 
 postsPage();
+//   const genreSelect = document.getElementById("genreSelect");  // UPDATE TO SORT WHAT WE OFFER
+//   genreSelect.addEventListener("change", async function () {
+//     const selectedGenre = genreSelect.value;
+
+//     try {
+//       showLoader();
+//       let filteredposts;
+
+//       if (selectedGenre === "All") {
+//         filteredposts = await fetchAllposts();
+//       } else {
+//         filteredposts = await fetchpostsByGenre(selectedGenre);
+//       }
+
+//       hideLoader();
+//       postListContainer.innerHTML = "";
+//       displayposts(filteredposts, ".post-list");
+//     } catch (error) {
+//       hideLoader();
+//       postListContainer.innerHTML = handleError("Unable to load posts");
+//     }
+//   });

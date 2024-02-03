@@ -24,6 +24,9 @@ export async function fetchPostById(postId) {
   try {
     const postUrl = new URL(`${url}/${postId}`);
 
+    console.log(postUrl);
+    postUrl.searchParams.append("_embed", "");
+    console.log(postUrl);
     const response = await fetch(postUrl.toString());
 
     if (!response.ok) {
@@ -33,7 +36,7 @@ export async function fetchPostById(postId) {
     }
 
     const post = await response.json();
-    console.log(post);
+
     return post;
   } catch (error) {
     console.error("Error fetching post by ID:", error);
@@ -41,7 +44,7 @@ export async function fetchPostById(postId) {
   }
 }
 
-/* 
+/*  UPDATE TO SORT BY DATE ////////////////////////////
 export async function fetchPostsSortedByRaiting(amount) {
   let posts = await fetchAllposts();
   posts.sort(
@@ -77,9 +80,11 @@ export async function fetchPostsSortedByDate(amount) {
     console.error("Error fetching and sorting posts:", error);
     throw error;
   }
-} // double check sorting function
+}
+
+// double check sorting function
 //.-----------------------------------------------------------------------------------------
-//Can this be updated to filter something else. ??
+//Can this be updated to instead of genre, but fetch different ALTERATIONS/ WHAT WE OFFER
 //-------------------------------------------------------------------------------------
 /* export async function fetchpostsByGenre(genre) {
   const posts = await fetchAllposts();

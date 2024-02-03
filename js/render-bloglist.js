@@ -5,19 +5,21 @@ export async function displayPost(post, displaySectionName) {
   postElements.classList.add("post-item");
 
   const postElement = document.createElement("a");
-  postElement.href = `/post/?id=${post.id}`;
+  postElement.href = `/blogdetails/index.html?id=${post.id}`;
   postElement.classList.add("post-link");
 
-  // const img = document.createElement("img");
-  // img.src = post.images[0]?.src;
-  // img.src = post._embedded["wp:featuredmedia"][0].source_url;
-  // img.alt = post.name;
+  const imgElement = document.createElement("img");
+  // ADD IF IMAGE, Cuz now some post without image is not showing....?
+
+  imgElement.src = post._embedded["wp:featuredmedia"][0].source_url;
+  imgElement.classList.add("img-postlist");
 
   const title = document.createElement("h4");
   title.textContent = post.title.rendered;
 
-  // postElement.append(img);
-  postElements.append(postElements, title);
+  postElement.append(imgElement);
+  postElement.appendChild(title);
+  postElements.append(postElement);
 
   if (displayContainer) {
     displayContainer.appendChild(postElements);

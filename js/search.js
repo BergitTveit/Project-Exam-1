@@ -1,6 +1,6 @@
 import { fetchAllPosts } from "./api.js"; // Create this
 import { displayPosts } from "./render-bloglist.js"; // Create this
-
+//SEARCH WORKING BUT NOT WORKING ON DETAILS PAGE, check paths
 const search = document.querySelector("#searchInput");
 
 let typeTimer;
@@ -10,7 +10,8 @@ const doneTypingInterval = 50;
 export async function fetchPostsAccordingToSearch(searchText) {
   const allPosts = await fetchAllPosts();
   const filteredPosts = allPosts.filter(
-    (post) => post.title.toLowerCase().includes(searchText.toLowerCase()) //check if title. is the right argument=parameter
+    (post) =>
+      post.title.rendered.toLowerCase().includes(searchText.toLowerCase()) //check parameters (ADDED RENDERED)
   );
   console.log("Filtered Posts:", filteredPosts);
   return filteredPosts;
@@ -24,7 +25,7 @@ search.addEventListener("input", async (event) => {
     window.history.replaceState(
       {},
       "",
-      `../posts/index.html?search=${encodeURIComponent(searchValue)}` //check this make new url
+      `../bloglist/index.html?search=${encodeURIComponent(searchValue)}` //check this make new url UPDATED to bloglist.
     );
     localStorage.setItem("searchValue", searchValue);
 
@@ -42,5 +43,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     displayPosts(filteredPosts, ".post-list");
   }
 });
-
-//double check no post is left in the functions.

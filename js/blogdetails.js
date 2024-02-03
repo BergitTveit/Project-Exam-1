@@ -1,16 +1,18 @@
 import { fetchPostById } from "./api.js";
-import { displaypostDetails } from "./render-blogdetails.js";
+import { displayPostDetails } from "./render-blogdetails.js";
 
 export async function postDetailPage() {
   const postDetailsContainer = document.querySelector(".post-details");
 
   try {
     const url = new URL(location.href);
+    console.log("Current URL:", url.href);
     const postId = url.searchParams.get("id");
-
+    console.log("Retrieved Post ID:", postId);
     if (postId) {
       const post = await fetchPostById(postId);
-      displaypostDetails(post);
+      console.log(post, "checking if it wokrs");
+      displayPostDetails(post);
     } else {
       throw new Error("post ID is undefined");
     }
