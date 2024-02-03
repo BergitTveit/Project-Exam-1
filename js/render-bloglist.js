@@ -1,3 +1,5 @@
+import { fetchAllPosts } from "./api.js";
+
 export async function displayPost(post, displaySectionName) {
   const displayContainer = document.querySelector(displaySectionName);
 
@@ -8,16 +10,15 @@ export async function displayPost(post, displaySectionName) {
   postElement.href = `/blogdetails/index.html?id=${post.id}`;
   postElement.classList.add("post-link");
 
-  const imgElement = document.createElement("img");
-  // ADD IF IMAGE, Cuz now some post without image is not showing....?
-
-  imgElement.src = post._embedded["wp:featuredmedia"][0].source_url;
-  imgElement.classList.add("img-postlist");
-
+  if (post.img) {
+    const imgElement = document.createElement("img");
+    imgElement.src = post.img;
+    imgElement.classList.add("img-postlist");
+    postElement.append(imgElement);
+  }
   const title = document.createElement("h4");
-  title.textContent = post.title.rendered;
+  title.textContent = post.title;
 
-  postElement.append(imgElement);
   postElement.appendChild(title);
   postElements.append(postElement);
 
@@ -28,17 +29,8 @@ export async function displayPost(post, displaySectionName) {
   }
 }
 
-export function displayPosts(postList, displaySectionName) {
-  const displayContainer = document.querySelector(displaySectionName);
-
-  if (!displayContainer) {
-    console.error("Display container not found");
-    return;
-  }
-
-  displayContainer.innerHTML = "";
-
-  postList.forEach((post) => {
+export async function displayPosts(posts, displaySectionName) {
+  posts.forEach((post) => {
     displayPost(post, displaySectionName);
   });
 }

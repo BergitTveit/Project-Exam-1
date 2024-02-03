@@ -8,9 +8,23 @@ export async function fetchAllPosts() {
       throw new Error(`Failed to fetch posts. Status: ${response.status}`);
     }
 
-    const getResults = await response.json();
-    console.log(getResults);
-    return getResults;
+    const wpData = await response.json();
+    console.log("LOG WPDATA", wpData);
+    const postsData = wpData.map((properties) => ({
+      id: properties.id,
+      title: properties.title.rendered,
+      content: properties.content.rendered,
+      img: properties._embedded["wp:featuredmedia"]
+        ? properties._embedded["wp:featuredmedia"][0].source_url
+        : null,
+      altTxt: properties._embedded["wp:featuredmedia"]
+        ? properties._embedded["wp:featuredmedia"][0].alt_text
+        : null,
+      date: properties.date,
+      description: properties.excerpt.rendered,
+    }));
+    // FILTER POSTS THAT DOESNT CONTAIN properties._embedded["wp:featuredmedia"]:  .filter((post) => post.img !== null && post.altTxt !== null);
+    return await postsData;
   } catch (error) {
     console.error("Error fetching posts:", error);
 
@@ -18,31 +32,38 @@ export async function fetchAllPosts() {
   }
 }
 
-fetchAllPosts();
-
 export async function fetchPostById(postId) {
   try {
-    const postUrl = new URL(`${url}/${postId}`);
-
-    console.log(postUrl);
-    postUrl.searchParams.append("_embed", "");
-    console.log(postUrl);
-    const response = await fetch(postUrl.toString());
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to fetch post details. Status: ${response.status}`
-      );
-    }
-
-    const post = await response.json();
-
-    return post;
+    return fetchAllPosts().find((prop) => prop.id === postId);
   } catch (error) {
     console.error("Error fetching post by ID:", error);
     throw error;
   }
 }
+
+// export async function fetchPostById(postId) {
+//   try {
+//     const postUrl = new URL(`${url}/${postId}`);
+
+//     console.log(postUrl);
+//     postUrl.searchParams.append("_embed", "");
+//     console.log(postUrl);
+//     const response = await fetch(postUrl.toString());
+
+//     if (!response.ok) {
+//       throw new Error(
+//         `Failed to fetch post details. Status: ${response.status}`
+//       );
+//     }
+
+//     const post = await response.json();
+
+//     return post;
+//   } catch (error) {
+//     console.error("Error fetching post by ID:", error);
+//     throw error;
+//   }
+// }
 
 /*  UPDATE TO SORT BY DATE ////////////////////////////
 export async function fetchPostsSortedByRaiting(amount) {
