@@ -12,8 +12,11 @@ export function displayPostDetails(post) {
     imgElement.classList.add("img-postlist");
     postElement.append(imgElement);
   }
+  const contentElement = document.createElement("div");
+  contentElement.innerHTML = post.content;
 
   postDetailsContainer.innerHTML = "";
   postDetailsContainer.appendChild(postTitle);
+  postDetailsContainer.appendChild(contentElement);
   postDetailsContainer.appendChild(postElement);
 }

@@ -1,4 +1,4 @@
-import { fetchAllPosts } from "./api.js";
+import { fetchPostsSortedByDate } from "./api.js";
 import { displayPosts } from "./render-bloglist.js";
 import { showLoader, hideLoader } from "./loader.js";
 import { fetchPostsAccordingToSearch } from "./search.js";
@@ -18,8 +18,8 @@ export async function postsPage() {
     if (searchValue) {
       posts = await fetchPostsAccordingToSearch(searchValue);
     } else {
-      posts = await fetchAllPosts();
-      console.log(posts);
+      posts = await fetchPostsSortedByDate();
+      console.log("SORTED BY DATE", posts);
     }
   } catch (error) {
     postListContainer.innerHTML = handleError(" Unable to load post page");
