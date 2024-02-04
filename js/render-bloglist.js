@@ -29,8 +29,9 @@ export async function displayPost(post, displaySectionName) {
   }
 }
 
-export async function displayPosts(posts, displaySectionName) {
-  posts.forEach((post) => {
+export async function displayPosts(posts, displaySectionName, nrOfPosts = 9) {
+  const numberOfPosts = posts.slice(0, nrOfPosts);
+  numberOfPosts.forEach((post) => {
     displayPost(post, displaySectionName);
   });
 }

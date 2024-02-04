@@ -4,15 +4,15 @@ import { showLoader, hideLoader } from "./loader.js";
 import { fetchPostsAccordingToSearch } from "./search.js";
 import { handleError } from "./errors.js";
 
+let posts;
+
 export async function postsPage() {
   const postListContainer = document.querySelector(".post-list");
-  let posts;
 
   try {
     showLoader();
 
     const url = new URL(location.href);
-    // console.log(url);
     const searchValue = url.searchParams.get("search");
 
     if (searchValue) {
@@ -25,11 +25,27 @@ export async function postsPage() {
   }
   hideLoader();
   postListContainer.innerHTML = "";
-  // console.log("CHECKING POSTS FOR SEARCH", posts);
-  displayPosts(posts, ".post-list");
+
+  displayPosts(posts, ".post-list", 9);
+
+  if (posts.length > 9) {
+    const loadMoreBtn = document.createElement("button");
+    loadMoreBtn.textContent = "See more";
+    loadMoreBtn.addEventListener("click", loadMorePosts);
+    postListContainer.appendChild(loadMoreBtn);
+  }
 }
 
+async function loadMorePosts() {
+  const postListContainer = document.querySelector(".post-list");
+  const loadMoreBtn = document.querySelector("button");
+
+  displayPosts(posts, ".post-list", posts.length);
+
+  loadMoreBtn.style.display = "none";
+}
 postsPage();
+
 //   const genreSelect = document.getElementById("genreSelect");  // UPDATE TO SORT WHAT WE OFFER
 //   genreSelect.addEventListener("change", async function () {
 //     const selectedGenre = genreSelect.value;

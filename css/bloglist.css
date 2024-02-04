@@ -1,0 +1,23 @@
+.post-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.post-item {
+  width: calc(30% - 1%);
+  margin: 1%;
+}
+
+.img-postlist {
+  width: 200px;
+}
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+.post-item h4 {
+  margin-top: 10px;
+}

@@ -33,10 +33,10 @@ export async function postDetailPage() {
 
   try {
     const url = new URL(location.href);
-    // console.log("Current URL:", url.href);
+
     const postId = url.searchParams.get("id");
     await updatePageTitle(postId);
-    // console.log("Retrieved Post ID:", postId);
+
     if (postId) {
       const post = await fetchPostById(postId);
       displayPostDetails(post);
