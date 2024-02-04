@@ -1,17 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!--  Remember hotjar  !!!!!!!!!!!!!!!!!!!!!!!!!-->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lykke og liten</title>
+    <link href="../css/index.css" rel="stylesheet" />
+    <script type="module" src="../js/api.js" defer></script>
+    <script type="module" src="../js/bloglist.js" defer></script>
+    <script type="module" src="../js/errors.js" defer></script>
+    <script type="module" src="../js/render-bloglist.js" defer></script>
+    <script type="module" src="../js/loader.js" defer></script>
+    <link
+      rel="shortcut icon"
+      href="../assets/Lykkeogliten.png"
+      type="image/png"
+    />
   </head>
   <body>
     <header>Logo? HOME, LOCATION, BLOG,ABOUT,CONTACT</header>
+    <p></p>
+    <div>
+      <label for="searchInput">Search:</label>
+      <input type="text" id="searchInput" placeholder="Search" />
+    </div>
 
-    <div class="home-slider-desk">IMAGE SLIDER FULLSCREEN</div>
-    <div class="post-slider-desk">Three posts slider</div>
+    <div id="loader" class="loader"></div>
 
-    <div class="home-slider-mob">Mobile half screen slider</div>
-    <div class="post-slider-mob">Mobile one post slider</div>
+    <div class="post-list"></div>
+
+    <!-- <footer>Something for the footer. CAN BE NOT FUNCTIONAL</footer> -->
   </body>
 </html>
