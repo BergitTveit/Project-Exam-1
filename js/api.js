@@ -1,9 +1,9 @@
-import { url } from "./constants.js";
+import { url, imgUrl } from "./constants.js";
 
 export async function fetchAllPosts() {
   try {
     const response = await fetch(url);
-    console.log(response);
+    // console.log(response);
     if (!response.ok) {
       throw new Error(`Failed to fetch posts. Status: ${response.status}`);
     }
@@ -75,8 +75,58 @@ export async function fetchpostsByCategory(targetCategory) {
       )
     );
   });
-  console.log(filteredposts);
+  // console.log(filteredposts);
   return filteredposts;
 }
 fetchpostsByCategory("Bridal");
 // Add it to the corect place. in html/class/ functions etc
+
+//-------------------------------------------------------------------------------------------------------//
+
+// Slider images call
+
+export async function fetchAllImgs() {
+  try {
+    const response = await fetch(imgUrl);
+    // console.log(response);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch posts. Status: ${response.status}`);
+    }
+
+    const wpData = await response.json();
+    console.log("LOG WPDATA", wpData);
+    const pagesData = wpData.map((properties) => ({
+      id: properties.id,
+      images: extractImageSources(properties.content.rendered),
+    }));
+
+    console.log(pagesData);
+    return await pagesData;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+
+    throw error;
+  }
+}
+
+function extractImageSources(html) {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const images = Array.from(doc.querySelectorAll("img"));
+  return images.map((img) => img.src);
+}
+
+fetchAllImgs();
+
+// export async function fetchPostById(postId) {
+//   try {
+//     const posts = await fetchAllPosts();
+//     posts.forEach((element) => {});
+//     const p = posts.find((prop) => prop.id === Number(postId));
+//     // console.log(p);
+
+//     return p;
+//   } catch (error) {
+//     console.error("Error fetching post by ID:", error);
+//     throw error;
+//   }
+// }
