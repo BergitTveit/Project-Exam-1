@@ -5,6 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lykke og liten</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link href="css/index.css" rel="stylesheet" />
     <script type="module" src="./js/api.js" defer></script>
     <script type="module" src="./js/bloglist.js" defer></script>
@@ -18,17 +24,26 @@
     <link rel="shortcut icon" href="assets/Lykkeogliten.png" type="image/png" />
   </head>
   <body>
-    <header>Logo? HOME, LOCATION, BLOG,ABOUT,CONTACT</header>
-    <p></p>
-    <div>
-      <label for="searchInput">Search:</label>
-      <input type="text" id="searchInput" placeholder="Search" />
-    </div>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="bloglist/index.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="location.html">Location</a></li>
+        </ul>
+      </nav>
+    </header>
 
+    <p></p>
     <div id="loader" class="loader"></div>
 
     <div class="post-list"></div>
-
+    <div>
+      <label for="searchInput" class="hidden">Search:</label>
+      <input type="text" id="searchInput" placeholder="Search" />
+    </div>
     <footer>
       <div class="some">
         <a href="https://www.facebook.com/lykkeogliten/"

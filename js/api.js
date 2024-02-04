@@ -78,8 +78,8 @@ export async function fetchpostsByCategory(targetCategory) {
   // console.log(filteredposts);
   return filteredposts;
 }
-fetchpostsByCategory("Bridal");
-// Add it to the corect place. in html/class/ functions etc
+fetchpostsByCategory();
+console.log(fetchpostsByCategory);
 
 //-------------------------------------------------------------------------------------------------------//
 

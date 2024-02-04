@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!--  Remember hotjar  !!!!!!!!!!!!!!!!!!!!!!!!!-->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lykke og liten</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/index.css" rel="stylesheet" />
+    <script type="module" src="./js/api.js" defer></script>
+
+    <script type="module" src="./js/errors.js" defer></script>
+
+    <script type="module" src="./js/loader.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/0334ff4491.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" href="assets/Lykkeogliten.png" type="image/png" />
   </head>
   <body>
-    <header>Logo? HOME, LOCATION, BLOG,ABOUT,CONTACT</header>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="bloglist/index.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="location.html">Location</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <div class="home-slider-desk">IMAGE SLIDER FULLSCREEN</div>
-    <div class="post-slider-desk">Three posts slider</div>
+    <p></p>
+    <div id="loader" class="loader"></div>
 
-    <div class="home-slider-mob">Mobile half screen slider</div>
-    <div class="post-slider-mob">Mobile one post slider</div>
+    <footer>
+      <div class="some">
+        <a href="https://www.facebook.com/lykkeogliten/"
+          ><i class="fa-brands fa-facebook"></i
+        ></a>
+      </div>
+      <div class="some">
+        <a href="https://www.instagram.com/lykkeogliten/"
+          ><i class="fa-brands fa-square-instagram"></i
+        ></a>
+      </div>
+      <div class="some">
+        <a href="mailto:lykkebooking@gmail.com"
+          ><i class="fa-solid fa-envelope"></i
+        ></a>
+      </div>
+      <div class="some">
+        <a href="tel:+4791583211">
+          <i class="fa-solid fa-phone"></i>
+        </a>
+      </div>
+    </footer>
   </body>
 </html>

@@ -4,7 +4,7 @@ export async function displayPost(post, displaySectionName) {
   const displayContainer = document.querySelector(displaySectionName);
 
   const postElements = document.createElement("div");
-  postElements.classList.add("post-item");
+  postElements.classList.add("post-item", "m-left");
 
   const postElement = document.createElement("a");
   postElement.href = `/blogdetails/index.html?id=${post.id}`;
