@@ -1,48 +1,128 @@
 export function displayContactForm() {
-  const contactFormContainer = document.querySelector(".form");
-  const contactform = document.createElement("div");
+  const contactFormContainer = document.querySelector("#contactForm");
+  // const contactform = document.createElement("div");
 
   const formTitle = document.createElement("h1");
   formTitle.textContent = "Get in touch";
 
-  contactFormContainer.appendChild(contactform);
-  contactform.appendChild(formTitle);
+  const firstNameInput = createInput(
+    "text",
+    "Enter your first name",
+    "firstName"
+  );
+  const lastNameInput = createInput("text", "Enter your last name", "lastName");
+  const emailInput = createInput("email", "Enter your email", "email");
+  // Create telefon number input
+  const bridalRadio = createRadio("enquiry", "wedding", "Bridal alterations");
+  const otherRadio = createRadio("enquiry", "other", "Other enquiries");
+
+  const dateOfWedding = createDateInput(
+    "dateOfWedding",
+    "Date of the big day."
+  );
+  dateOfWedding.style.display = "none";
+
+  const alterationOption = createSelect(
+    [
+      "-- select alteration --",
+      "Suit",
+      "Trousers",
+      "Dress",
+      "Outerwear",
+      "Repairs",
+      "Custom",
+    ],
+    "alteration"
+  );
+  alterationOption.style.display = "none";
+  //Is the -- select alteration-- choseable? Make sure to make it not a valid option.
+
+  const messageLabel = document.createElement("span");
+  messageLabel.textContent = "What do you need help with?";
+
+  const messageTextarea = document.createElement("textarea");
+  messageTextarea.id = "message";
+  messageTextarea.rows = "7";
+
+  const sendContactFormButton = document.createElement("button");
+  sendContactFormButton.textContent = "Send us your message/enquiries";
+  sendContactFormButton.onclick = sendContactForm();
+  // Remember  bridal event listener to show date of wedding option.
+  // Remember other event listener, to show alterationOption..
+
+  contactForm.appendChild(formTitle);
+  contactForm.appendChild(firstNameInput);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(lastNameInput);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(emailInput);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(bridalRadio);
+  contactForm.appendChild(otherRadio);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(dateOfWedding);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(alterationOption);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(messageLabel);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(messageTextarea);
+  contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(sendContactFormButton);
+  // contactFormContainer.appendChild(contactForm);
 }
 
+function createInput(type, placeholder, id) {
+  const input = document.createElement("input");
+  input.type = type;
+  input.placeholder = placeholder;
+  input.id = id;
+  return input;
+}
 
+function createRadio(name, value, label) {
+  const radio = document.createElement("input");
+  radio.type = "radio";
+  radio.name = name;
+  radio.value = value;
 
-<form onsubmit="return false">
-</form>
+  const radioLabel = document.createTextNode(" " + label);
+  const container = document.createElement("label");
+  container.appendChild(radio);
+  container.appendChild(radioLabel);
 
+  return container;
+}
 
-<input type="text" placeholder="Enter your last name" id="lastName" />
-<br></br>
-<input type="text" placeholder="Enter your first name" id="firstName" />
-<br></br>
-<input type="radio" id="bridal" name="enquiry" value="wedding"> Bridal alterations
- <input type="radio" id="other" name="enquiry" value="other"> Other enquiries
- <br></br>
- <input type="email" placeholder="Enter your email" id="email" />
-    
+function createDateInput(id, placeholder) {
+  const dateInput = document.createElement("input");
+  dateInput.type = "date";
+  dateInput.id = id;
+  dateInput.placeholder = placeholder || "Date of the big day";
+  return dateInput;
+}
 
- {/* IF other show options*/}
-<select id="alteration">
- <option disabled selected value> -- select alteration -- </option>
- <option value="Suit">Suit</option>
- <option value="Trousers">Trousers</option>
- <option value="Dress">Dress</option> 
- <option value="Outerwear">Outerwear</option>
- <option value="Repairs">Repairs</option>
- <option value="Custom">Custom requests</option>
-</select>
-<br><br></br>
-<span>What is your question?</span>
-<br>
-<textarea id="question" rows="4"></textarea>
-<br><br>
-<button onclick="sendContact();">Send contact</button>
+function createSelect(options, id) {
+  const select = document.createElement("select");
+  select.id = id;
 
+  options.forEach((optionText) => {
+    const option = document.createElement("option");
+    option.value = optionText;
+    option.text = optionText;
+    select.appendChild(option);
+  });
 
+  return select;
+}
 
-{/* /* CREATE A FORM : NAME. LAST NAME, EMAIL, Tel Number, TEXT/ENQUIRY, OPTION BUTTONS: If BRIDAL : Show DATE OF WEDDING */ */}
-'
+function createLineBreak() {
+  return document.createElement("br");
+}
+
+function sendContactForm() {
+  // Make this, how to send it to the api? Can i solve this?
+}
+
+// <form onsubmit="return false"></form>
+displayContactForm();
