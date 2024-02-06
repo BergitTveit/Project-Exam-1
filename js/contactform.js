@@ -135,6 +135,7 @@ function createSelect(options, id) {
     const option = document.createElement("option");
     option.value = optionText;
     option.text = optionText;
+
     select.appendChild(option);
   });
 
