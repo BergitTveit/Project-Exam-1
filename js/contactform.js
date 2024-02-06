@@ -13,14 +13,23 @@ export function displayContactForm() {
   const lastNameInput = createInput("text", "Enter your last name", "lastName");
   const emailInput = createInput("email", "Enter your email", "email");
   // Create telefon number input
-  const bridalRadio = createRadio("enquiry", "wedding", "Bridal alterations");
-  const otherRadio = createRadio("enquiry", "other", "Other enquiries");
+  const bridalRadio = createRadio(
+    "enquiry",
+    "bridal_radio",
+    "wedding",
+    "Bridal alterations"
+  );
+  const otherRadio = createRadio(
+    "enquiry",
+    "other_radio",
+    "other",
+    "Other enquiries"
+  );
 
   const dateOfWedding = createDateInput(
     "dateOfWedding",
     "Date of the big day."
   );
-  dateOfWedding.style.display = "none";
 
   const alterationOption = createSelect(
     [
@@ -34,7 +43,7 @@ export function displayContactForm() {
     ],
     "alteration"
   );
-  alterationOption.style.display = "none";
+
   //Is the -- select alteration-- choseable? Make sure to make it not a valid option.
 
   const messageLabel = document.createElement("span");
@@ -47,8 +56,21 @@ export function displayContactForm() {
   const sendContactFormButton = document.createElement("button");
   sendContactFormButton.textContent = "Send us your message/enquiries";
   sendContactFormButton.onclick = sendContactForm();
-  // Remember  bridal event listener to show date of wedding option.
-  // Remember other event listener, to show alterationOption..
+
+  bridalRadio.addEventListener("change", function () {
+    dateOfWedding.style.display = document.getElementById("bridal_radio")
+      .checked
+      ? "block"
+      : "none";
+    alterationOption.style.display = "none";
+  });
+  otherRadio.addEventListener("change", function () {
+    alterationOption.style.display = document.getElementById("other_radio")
+      .checked
+      ? "block"
+      : "none";
+    dateOfWedding.style.display = "none";
+  });
 
   contactForm.appendChild(formTitle);
   contactForm.appendChild(firstNameInput);
@@ -80,10 +102,11 @@ function createInput(type, placeholder, id) {
   return input;
 }
 
-function createRadio(name, value, label) {
+function createRadio(name, id, value, label) {
   const radio = document.createElement("input");
   radio.type = "radio";
   radio.name = name;
+  radio.id = id;
   radio.value = value;
 
   const radioLabel = document.createTextNode(" " + label);
@@ -98,6 +121,7 @@ function createDateInput(id, placeholder) {
   const dateInput = document.createElement("input");
   dateInput.type = "date";
   dateInput.id = id;
+  dateInput.style.display = "none";
   dateInput.placeholder = placeholder || "Date of the big day";
   return dateInput;
 }
@@ -105,6 +129,7 @@ function createDateInput(id, placeholder) {
 function createSelect(options, id) {
   const select = document.createElement("select");
   select.id = id;
+  select.style.display = "none";
 
   options.forEach((optionText) => {
     const option = document.createElement("option");
