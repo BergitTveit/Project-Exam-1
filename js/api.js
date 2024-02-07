@@ -3,13 +3,13 @@ import { url, mediaUrl } from "./constants.js";
 export async function fetchAllPosts() {
   try {
     const response = await fetch(url);
-    // console.log(response);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch posts. Status: ${response.status}`);
     }
 
     const wpData = await response.json();
-    // console.log("LOG WPDATA", wpData);
+
     const postsData = wpData.map((properties) => ({
       id: properties.id,
       title: properties.title.rendered,
@@ -38,7 +38,6 @@ export async function fetchPostById(postId) {
     const posts = await fetchAllPosts();
     posts.forEach((element) => {});
     const p = posts.find((prop) => prop.id === Number(postId));
-    // console.log(p);
 
     return p;
   } catch (error) {
@@ -62,71 +61,49 @@ export async function fetchPostsSortedByDate(amount) {
   }
 }
 
-export async function fetchpostsByCategory(targetCategory) {
-  const posts = await fetchAllPosts();
-  const filteredposts = posts.filter((post) => {
-    return (
-      post.categories &&
-      post.categories.some(
-        (category) =>
-          category &&
-          category.name &&
-          category.name.toLowerCase() === targetCategory.toLowerCase()
-      )
-    );
-  });
-  // console.log(filteredposts);
-  return filteredposts;
-}
-fetchpostsByCategory();
-console.log(fetchpostsByCategory);
+// GET LARGE IMAGES FOR BACKGROUND AND BACKGROUND SLIDER
 
-//-------------------------------------------------------------------------------------------------------//
-
-// Slider images call
-
-export async function fetchAllImgs() {
+export async function imageUrlByName(imageName) {
   try {
     const response = await fetch(mediaUrl);
-    console.log("MEDIA RESPONSE", response);
+
     if (!response.ok) {
-      throw new Error(`Failed to fetch posts. Status: ${response.status}`);
+      throw new Error(`Failed to images. Status: ${response.status}`);
     }
 
-    const wpData = await response.json();
-    console.log("LOG WPDATA", wpData);
-    const mediaData = wpData.map((properties) => ({
-      id: properties.id,
-      images: extractImageSources(properties.media_details.sizes.full),
-    }));
+    const wpMedia = await response.json();
 
-    console.log(mediaData);
-    return await mediaData;
+    const imageMatch = wpMedia.find(
+      (properties) => properties.title.rendered === imageName
+    );
+
+    if (!imageMatch) {
+      throw new Error(`Image with name "${imageName}" not found.`);
+    }
+
+    const imageUrl = imageMatch.media_details.sizes.full.source_url;
+
+    return imageUrl;
   } catch (error) {
     console.error("Error fetching posts:", error);
 
     throw error;
   }
 }
-
-function extractImageSources(html) {
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  const images = Array.from(doc.querySelectorAll("img"));
-  return images.map((img) => img.src);
-}
-
-fetchAllImgs();
-
-// export async function fetchPostById(postId) {
-//   try {
-//     const posts = await fetchAllPosts();
-//     posts.forEach((element) => {});
-//     const p = posts.find((prop) => prop.id === Number(postId));
-//     // console.log(p);
-
-//     return p;
-//   } catch (error) {
-//     console.error("Error fetching post by ID:", error);
-//     throw error;
-//   }
+// export async function fetchpostsByCategory(targetCategory) {
+//   const posts = await fetchAllPosts();
+//   const filteredposts = posts.filter((post) => {
+//     return (
+//       post.categories &&
+//       post.categories.some(
+//         (category) =>
+//           category &&
+//           category.name &&
+//           category.name.toLowerCase() === targetCategory.toLowerCase()
+//       )
+//     );
+//   });
+//   // console.log(filteredposts);
+//   return filteredposts;
 // }
+// fetchpostsByCategory();
