@@ -153,6 +153,7 @@ function createDateInput(id, placeholder) {
 function createSelect(options, id) {
   const select = document.createElement("select");
   select.id = id;
+  console.log("log 1", id);
   select.style.display = "none";
 
   options.forEach((optionText) => {
@@ -162,8 +163,19 @@ function createSelect(options, id) {
 
     select.appendChild(option);
   });
+  disableFirstSelectOption(id);
 
   return select;
+}
+// ASK MILENA
+function disableFirstSelectOption(selectId) {
+  console.log("log 2", selectId);
+  console.log("log 3", typeof selectId);
+  let selectDropdown = document.getElementById(selectId);
+
+  console.log("log 4", selectDropdown);
+  let selectionOptions = selectDropdown.getElementsByTagName("option");
+  selectionOptions[0].disabled = true;
 }
 
 function createLineBreak() {

@@ -65,6 +65,9 @@ function validateContactForm() {
   if (!validatePhoneNumber("phonenumber")) {
     return false;
   }
+  if (!validateDateofWedding("dateOfWedding")) {
+    return false;
+  }
   return true;
 }
 validateContatForm();
