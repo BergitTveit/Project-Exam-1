@@ -1,6 +1,5 @@
 export function displayContactForm() {
   const contactFormContainer = document.querySelector("#contactForm");
-  // const contactform = document.createElement("div");
 
   const formTitle = document.createElement("h1");
   formTitle.textContent = "Get in touch";
@@ -12,7 +11,8 @@ export function displayContactForm() {
   );
   const lastNameInput = createInput("text", "Enter your last name", "lastName");
   const emailInput = createInput("email", "Enter your email", "email");
-  // Create telefon number input
+  const phoneNuImput = createInput("tel", "xxx xx xxx", "phonenumber", true);
+
   const bridalRadio = createRadio(
     "enquiry",
     "bridal_radio",
@@ -79,6 +79,8 @@ export function displayContactForm() {
   contactForm.appendChild(createLineBreak());
   contactForm.appendChild(emailInput);
   contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(phoneNuImput);
+  contactForm.appendChild(createLineBreak());
   contactForm.appendChild(bridalRadio);
   contactForm.appendChild(otherRadio);
   contactForm.appendChild(createLineBreak());
@@ -91,14 +93,23 @@ export function displayContactForm() {
   contactForm.appendChild(messageTextarea);
   contactForm.appendChild(createLineBreak());
   contactForm.appendChild(sendContactFormButton);
-  // contactFormContainer.appendChild(contactForm);
+  contactForm.appendChild(createLineBreak());
 }
+// Name (Should be more than 5 characters long)
+// Email address (Must be a valid email address)
+// Subject (Should be more than 15 characters long)
+// Message content (Should be more than 25 characters long)
 
-function createInput(type, placeholder, id) {
+function createInput(type, placeholder, id, hasPhonePattern = false) {
   const input = document.createElement("input");
   input.type = type;
   input.placeholder = placeholder;
   input.id = id;
+  if (hasPhonePattern) {
+    input.pattern = "[0-9]{3}-[0-9]{2}-[0-9]{3}";
+    console.log("CHECKING INPUT PATTERN:", input.pattern, input.type, input.id);
+  }
+
   return input;
 }
 
@@ -125,6 +136,16 @@ function createDateInput(id, placeholder) {
   dateInput.placeholder = placeholder || "Date of the big day";
   return dateInput;
 }
+
+// pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
+
+// This requires the user to put in spaces like this 012 345 6789. If you want the spaces to be added automatically you should add javascript to the onchange of the input. Add onchange="this.value=addSpaces(this.value);" to the input and see if it works:
+
+// function addSpaces(initial){
+//     initial.replace("/([0-9]{3})/","\1 ");
+//     initial.replace("/[0-9]{3} ([0-9]{3})/","\1 ");
+//     return initial;
+// Try stackoverflow comments}
 
 function createSelect(options, id) {
   const select = document.createElement("select");
