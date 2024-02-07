@@ -163,20 +163,20 @@ function createSelect(options, id) {
 
     select.appendChild(option);
   });
-  disableFirstSelectOption(id);
+  // disableFirstSelectOption(id);
 
   return select;
 }
 // ASK MILENA
-function disableFirstSelectOption(selectId) {
-  console.log("log 2", selectId);
-  console.log("log 3", typeof selectId);
-  let selectDropdown = document.getElementById(selectId);
+// function disableFirstSelectOption(selectId) {
+//   console.log("log 2", selectId);
+//   console.log("log 3", typeof selectId);
+//   let selectDropdown = document.getElementById(selectId);
 
-  console.log("log 4", selectDropdown);
-  let selectionOptions = selectDropdown.getElementsByTagName("option");
-  selectionOptions[0].disabled = true;
-}
+//   console.log("log 4", selectDropdown);
+//   let selectionOptions = selectDropdown.getElementsByTagName("option");
+//   selectionOptions[0].disabled = true;
+// }
 
 function createLineBreak() {
   return document.createElement("br");
