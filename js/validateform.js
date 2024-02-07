@@ -32,9 +32,11 @@ function validatePhoneNumber(phoneNumberId) {
 
 function validateDateofWedding(DOWId) {
   let dateValue = document.getElementById(DOWId).value;
+  let selectedDate = new Date(dateValue);
   let todayDate = Date.now();
+  let minDate = new Date(todayDate.getTime() + 3 * 7 * 24 * 60 * 60 * 1000);
 
-  if ((dateValue = !todayDate)) {
+  if (selectedDate < minDate) {
     alert("Online requests must be made three weeks before, if not call.");
     //  (INSERT TEXT OR CALL FUNCTION???)
     return false;
