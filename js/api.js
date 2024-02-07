@@ -1,4 +1,4 @@
-import { url, imgUrl } from "./constants.js";
+import { url, mediaUrl } from "./constants.js";
 
 export async function fetchAllPosts() {
   try {
@@ -87,21 +87,21 @@ console.log(fetchpostsByCategory);
 
 export async function fetchAllImgs() {
   try {
-    const response = await fetch(imgUrl);
-    // console.log(response);
+    const response = await fetch(mediaUrl);
+    console.log("MEDIA RESPONSE", response);
     if (!response.ok) {
       throw new Error(`Failed to fetch posts. Status: ${response.status}`);
     }
 
     const wpData = await response.json();
     console.log("LOG WPDATA", wpData);
-    const pagesData = wpData.map((properties) => ({
+    const mediaData = wpData.map((properties) => ({
       id: properties.id,
-      images: extractImageSources(properties.content.rendered),
+      images: extractImageSources(properties.media_details.sizes.full),
     }));
 
-    console.log(pagesData);
-    return await pagesData;
+    console.log(mediaData);
+    return await mediaData;
   } catch (error) {
     console.error("Error fetching posts:", error);
 

@@ -1,0 +1,6 @@
+.contact-form {
+  border: 1px solid black;
+  background-image: url("path/to/your/image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
