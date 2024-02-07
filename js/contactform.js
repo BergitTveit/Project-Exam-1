@@ -40,6 +40,7 @@ export function displayContactForm() {
       "Outerwear",
       "Repairs",
       "Custom",
+      "Other Requests",
     ],
     "alteration"
   );
