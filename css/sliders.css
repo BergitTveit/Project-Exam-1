@@ -6,3 +6,8 @@
 .post {
   margin: 20px;
 }
+.slider-wrapper {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}

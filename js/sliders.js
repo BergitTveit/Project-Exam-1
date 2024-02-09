@@ -2,10 +2,17 @@ import { fetchPostsSortedByDate } from "./api.js";
 import { displayPosts } from "./render-bloglist.js";
 import { showLoader, hideLoader } from "./loader.js";
 import { handleError } from "./errors.js";
-let posts;
+
+let currentIndex = 0;
+
 export async function sliderBlogPosts() {
   const sliderContainer = document.querySelector(".slider-container");
-
+  const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
+  const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
+  // const sliderWrapper = createElement("div", { class: "slider-wrapper" });
+  const sliderWrapper = document.createElement("div");
+  sliderWrapper.classList.add("slider-wrapper");
+  let posts;
   try {
     showLoader();
 
@@ -18,35 +25,42 @@ export async function sliderBlogPosts() {
   hideLoader();
   sliderContainer.innerHTML = "";
 
-  displayPosts(posts, ".slider-container", 3);
-  //   displaySlider();
+  backBtn.addEventListener("click", () => moveSlider(posts, -1));
+  nextBtn.addEventListener("click", () => moveSlider(posts, 1));
+
+  sliderContainer.appendChild(backBtn);
+  sliderContainer.appendChild(sliderWrapper);
+  sliderContainer.appendChild(nextBtn);
+  const sss = document.querySelector(".slider-wrapper");
+
+  console.log("¤¤¤¤¤¤¤¤¤¤: ", sss);
+  displayPosts(
+    posts.slice(currentIndex, currentIndex + 3),
+    ".slider-wrapper",
+    3
+  );
 }
 
-// async function displaySlider() {
-//   const sliderContainer = document.querySelector(".slider-container");
-//   const posts = document.querySelectorAll(".post");
-//   const totalPosts = posts.length;
-//   let currentIndex = 0;
+function moveSlider(posts, direction) {
+  currentIndex += direction;
+  if (currentIndex < 0) {
+    currentIndex = 0;
+  } else if (currentIndex > posts.length - 3) {
+    currentIndex = posts.length - 3;
+  }
 
-//   sliderContainer.style.width = `${totalPosts * 100}%`;
+  const visiblePosts = posts.slice(currentIndex, currentIndex + 3);
+  displayPosts(visiblePosts, ".slider-wrapper", 3);
+}
 
-//   document.getElementById("prevBtn").addEventListener("click", function () {
-//     slideTo(currentIndex - 1);
-//   });
+function createElement(tag, options) {
+  const element = document.createElement(tag);
 
-//   document.getElementById("nextBtn").addEventListener("click", function () {
-//     slideTo(currentIndex + 1);
-//   });
+  Object.assign(element, options);
+  return element;
+}
 
-//   function slideTo(index) {
-//     if (index >= totalPosts || index < 0) {
-//       return;
-//     }
-
-//     const translateValue = -index * (100 / totalPosts) + "%";
-//     sliderContainer.style.transform = "translateX(" + translateValue + ")";
-//     currentIndex = index;
-//   }
-// }
-
-sliderBlogPosts();
+// sliderBlogPosts();
+document.addEventListener("DOMContentLoaded", async () => {
+  await sliderBlogPosts();
+});
