@@ -1,0 +1,8 @@
+.slider-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+}
+.post {
+  margin: 20px;
+}

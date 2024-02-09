@@ -1,9 +1,16 @@
+import { imageUrlByName } from "./api.js";
+
+const imageUrl = await imageUrlByName("Contact_form");
+console.log(imageUrl);
+
 export function displayContactForm() {
   const contactFormContainer = document.querySelector("#contactForm");
+  contactFormContainer.style.backgroundImage = `url("${imageUrl}")`;
 
   const formTitle = document.createElement("h1");
   formTitle.textContent = "Get in touch";
 
+  const personalInfoGroup = document.createElement("div");
   const firstNameInput = createInput(
     "text",
     "Enter your first name",
@@ -54,9 +61,9 @@ export function displayContactForm() {
   messageTextarea.id = "message";
   messageTextarea.rows = "7";
 
-  const sendContactFormButton = document.createElement("button");
-  sendContactFormButton.textContent = "Send us your message/enquiries";
-  sendContactFormButton.onclick = sendContactForm();
+  // const sendContactFormButton = document.createElement("button");
+  // sendContactFormButton.textContent = "Send us your message/enquiries";
+  // sendContactFormButton.onclick = sendContactForm();
 
   bridalRadio.addEventListener("change", function () {
     dateOfWedding.style.display = document.getElementById("bridal_radio")
@@ -98,10 +105,12 @@ export function displayContactForm() {
   contactForm.appendChild(sendContactFormButton);
   contactForm.appendChild(createLineBreak());
 }
-// Name (Should be more than 5 characters long)
-// Email address (Must be a valid email address)
-// Subject (Should be more than 15 characters long)
-// Message content (Should be more than 25 characters long)
+
+// CREATES THE DIFFERENT INPUTS FOR THE FORM
+
+function createLineBreak() {
+  return document.createElement("br");
+}
 
 function createInput(type, placeholder, id, hasPhonePattern = false) {
   const input = document.createElement("input");
@@ -118,7 +127,9 @@ function createInput(type, placeholder, id, hasPhonePattern = false) {
   }
 
   return input;
-} // ASK MILENA
+}
+
+// ASK MILENA
 function addSpacesToPhoneNumber(initial) {
   initial = initial.replace(/([0-9]{8})/);
   initial = initial.replace(/([0-9]{3}) ([0-9]{2}) ([0-9]{3})/, "$1 $2");
@@ -126,6 +137,7 @@ function addSpacesToPhoneNumber(initial) {
   return initial;
 }
 
+// Creates and filters the option of requests
 function createRadio(name, id, value, label) {
   const radio = document.createElement("input");
   radio.type = "radio";
@@ -178,13 +190,8 @@ function createSelect(options, id) {
 //   selectionOptions[0].disabled = true;
 // }
 
-function createLineBreak() {
-  return document.createElement("br");
-}
+// function sendContactForm() {
+//   // Make this, how to send it to the api? Can i solve this?
+// }
 
-function sendContactForm() {
-  // Make this, how to send it to the api? Can i solve this?
-}
-
-// <form onsubmit="return false"></form>
 displayContactForm();

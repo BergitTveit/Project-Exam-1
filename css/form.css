@@ -1,6 +1,16 @@
-.contact-form {
+.section-container {
   border: 1px solid black;
-  /* background-image: url("path/to/your/image.jpg"); */
+  padding: 20px;
+}
+.contact-form h1 {
+  margin: 0;
+}
+
+.contact-form {
+  color: white;
+
   background-size: cover;
   background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
 }
