@@ -1,4 +1,10 @@
 import { imageUrlByName } from "./api.js";
+import {
+  validateTextField,
+  validateEmail,
+  validatePhoneNumber,
+  validateDateofWedding,
+} from "./validateform.js";
 
 const imageUrl = await imageUrlByName("Contact_form");
 
@@ -9,13 +15,19 @@ export function displayContactForm() {
   const formTitle = document.createElement("h1");
   formTitle.textContent = "Get in touch";
 
-  const personalInfoGroup = document.createElement("div");
+  // const personalInfoGroup = document.createElement("div");
   const firstNameInput = createInput(
     "text",
     "Enter your first name",
-    "firstName"
+    "firstName",
+    5
   );
-  const lastNameInput = createInput("text", "Enter your last name", "lastName");
+  const lastNameInput = createInput(
+    "text",
+    "Enter your last name",
+    "lastName",
+    5
+  );
   const emailInput = createInput("email", "Enter your email", "email");
   const phoneNuImput = createInput("tel", "00000000", "phonenumber", true);
 
@@ -53,7 +65,7 @@ export function displayContactForm() {
 
   const messageLabel = document.createElement("span");
   messageLabel.textContent = "What do you need help with?";
-  const subjectInput = createInput("text", "Short description", "subject");
+  const subjectInput = createInput("text", "Short description", "subject", 15);
   const messageTextarea = document.createElement("textarea");
   messageTextarea.id = "message";
   messageTextarea.rows = "7";
@@ -109,23 +121,27 @@ function createLineBreak() {
   return document.createElement("br");
 }
 
-function createInput(type, placeholder, id, hasPhonePattern = false) {
+function createInput(type, placeholder, id, minLength) {
   const input = document.createElement("input");
   input.type = type;
   input.placeholder = placeholder;
   input.id = id;
-  if (hasPhonePattern) {
-    input.pattern = "[0-9]{8}";
-
-    console.log("CHECKING INPUT PATTERN:", input.pattern, input.type, input.id);
-    input.onchange = function () {
-      this.value = addSpacesToPhoneNumber(this.value);
-    };
-  }
+  input.addEventListener("input", function () {
+    validateTextField(id, minLength);
+  });
 
   return input;
 }
 
+// hasPhonePattern = false
+// if (hasPhonePattern) {
+//   input.pattern = "[0-9]{8}";
+
+//   console.log("CHECKING INPUT PATTERN:", input.pattern, input.type, input.id);
+//   input.onchange = function () {
+//     this.value = addSpacesToPhoneNumber(this.value);
+//   };
+// }
 // ASK MILENA
 function addSpacesToPhoneNumber(initial) {
   initial = initial.replace(/([0-9]{8})/);
@@ -156,6 +172,10 @@ function createDateInput(id, placeholder) {
   dateInput.id = id;
   dateInput.style.display = "none";
   dateInput.placeholder = placeholder || "Date of the big day";
+
+  dateInput.addEventListener("change", function () {
+    validateDateofWedding(id);
+  });
   return dateInput;
 }
 
@@ -172,11 +192,12 @@ function createSelect(options, id) {
 
     select.appendChild(option);
   });
-  // disableFirstSelectOption(id);
 
   return select;
 }
-// ASK MILENA
+
+displayContactForm();
+// ASK MILENA // disableFirstSelectOption(id);
 // function disableFirstSelectOption(selectId) {
 //   console.log("log 2", selectId);
 //   console.log("log 3", typeof selectId);
@@ -190,5 +211,3 @@ function createSelect(options, id) {
 // function sendContactForm() {
 //   // Make this, how to send it to the api? Can i solve this?
 // }
-
-displayContactForm();
