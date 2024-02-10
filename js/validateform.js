@@ -1,3 +1,5 @@
+import { displayContactForm } from "./contactform";
+
 function validateTextField(fieldId, minLength) {
   let fieldValue = document.getElementById(fieldId).value;
   console.log("FIELDVALDUE", fieldValue, fieldId);
@@ -45,7 +47,7 @@ function validateDateofWedding(DOWId) {
   }
 }
 
-function validateContactForm() {
+function validateContactForm(form) {
   if (!validateTextField("firstName", 5)) {
     return false;
   }
@@ -70,4 +72,5 @@ function validateContactForm() {
   }
   return true;
 }
-validateContatForm();
+
+validateContatForm(displayContactForm);

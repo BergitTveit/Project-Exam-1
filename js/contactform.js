@@ -1,7 +1,6 @@
 import { imageUrlByName } from "./api.js";
 
 const imageUrl = await imageUrlByName("Contact_form");
-console.log(imageUrl);
 
 export function displayContactForm() {
   const contactFormContainer = document.querySelector("#contactForm");
@@ -51,8 +50,6 @@ export function displayContactForm() {
     ],
     "alteration"
   );
-
-  //Is the -- select alteration-- choseable? Make sure to make it not a valid option.
 
   const messageLabel = document.createElement("span");
   messageLabel.textContent = "What do you need help with?";

@@ -7,8 +7,7 @@
 }
 
 .post-item {
-  width: calc(30% - 1%);
-  margin: 1%;
+  width: 200px;
 }
 
 .img-postlist {

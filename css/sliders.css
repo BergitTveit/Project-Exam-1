@@ -3,11 +3,10 @@
   flex-direction: row;
   overflow-x: auto;
 }
-.post {
-  margin: 20px;
-}
+
 .slider-wrapper {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
+  gap: 20px;
 }

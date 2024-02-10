@@ -40,6 +40,8 @@ async function loadMorePosts() {
   const postListContainer = document.querySelector(".post-list");
   const loadMoreBtn = document.querySelector("button");
 
+  const displayContainer = document.querySelector(".post-list");
+  displayContainer.innerHTML = "";
   displayPosts(posts, ".post-list", posts.length);
 
   loadMoreBtn.style.display = "none";
