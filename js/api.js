@@ -1,4 +1,4 @@
-import { url, mediaUrl, ContactFormUrl } from "./constants.js";
+import { url, mediaUrl, ContactFormUrl, commentsUrl } from "./constants.js";
 
 // Get all Posts.
 export async function fetchAllPosts() {
@@ -23,7 +23,9 @@ export async function fetchAllPosts() {
         : null,
       date: properties.date,
       description: properties.excerpt.rendered,
-      categories: properties.categories,
+      categories: properties._embedded?.["wp:term"]?.[0]?.map(
+        (category) => category.name
+      ),
     }));
 
     return await postsData;
@@ -116,20 +118,58 @@ export async function sendContactForm(formData) {
   }
 }
 
-// export async function fetchpostsByCategory(targetCategory) {
-//   const posts = await fetchAllPosts();
-//   const filteredposts = posts.filter((post) => {
-//     return (
-//       post.categories &&
-//       post.categories.some(
-//         (category) =>
-//           category &&
-//           category.name &&
-//           category.name.toLowerCase() === targetCategory.toLowerCase()
-//       )
-//     );
-//   });
-//   // console.log(filteredposts);
-//   return filteredposts;
-// }
-// fetchpostsByCategory();
+///////////////////////////////////////////////////////////////////
+
+export async function fetchpostsByCategory(targetCategory, callback) {
+  try {
+    const posts = await fetchAllPosts();
+
+    const uniqueCategories = [
+      ...new Set(posts.flatMap((post) => post.categories)),
+    ];
+
+    console.log("All Categories:", uniqueCategories);
+
+    const filteredPosts = posts.filter((post) => {
+      console.log(`Post ID ${post.id} Categories:`, post.categories);
+      return (
+        post.categories &&
+        post.categories.some(
+          (category) =>
+            category && category.toLowerCase() === targetCategory.toLowerCase()
+        )
+      );
+    });
+
+    if (typeof callback === "function") {
+      callback(filteredPosts);
+    }
+
+    console.log(
+      `Filtered Posts for Category ${targetCategory}:`,
+      filteredPosts
+    );
+
+    return filteredPosts;
+  } catch (error) {
+    console.error("Error fetching posts by category", error);
+  }
+}
+
+fetchpostsByCategory("YourTargetCategory");
+
+////////////////////////////////////////
+export async function postComment(commentData) {
+  try {
+    const response = await fetch(commentsUrl, {
+      method: "POST",
+      body: commentData,
+    });
+    console.log("LOG RESPONSE PC:", response);
+    if (!response.ok) {
+      throw new Error("Could not create a comment. Status: ${response.status}");
+    }
+  } catch (error) {
+    console.error("ERROR;", error);
+  }
+}
