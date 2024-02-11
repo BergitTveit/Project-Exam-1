@@ -22,7 +22,18 @@ export function renderCategoryDropdown(categories, containerId) {
   container.appendChild(dropdown);
 }
 
-renderCategoryDropdown(
-  ["Category1", "Category2", "Category3"],
-  "categoryDropdownContainer"
-);
+document
+  .getElementById("categoryDropdown")
+  .addEventListener("change", async (event) => {
+    const selectedCategory = event.target.value;
+
+    if (selectedCategory !== "-- Select Category --") {
+      try {
+        const filteredPosts = await fetchpostsByCategory(selectedCategory);
+
+        console.log("Filtered posts:", filteredPosts);
+      } catch (error) {
+        console.error("Error handling filtered posts:", error);
+      }
+    }
+  });

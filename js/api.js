@@ -1,3 +1,4 @@
+import { renderCategoryDropdown } from "./category.js";
 import { url, mediaUrl, ContactFormUrl, commentsUrl } from "./constants.js";
 
 // Get all Posts.
@@ -120,7 +121,10 @@ export async function sendContactForm(formData) {
 
 ///////////////////////////////////////////////////////////////////
 
-export async function fetchpostsByCategory(targetCategory, callback) {
+export async function fetchpostsByCategory(
+  targetCategory,
+  renderDropdownCallback
+) {
   try {
     const posts = await fetchAllPosts();
 
@@ -129,6 +133,12 @@ export async function fetchpostsByCategory(targetCategory, callback) {
     ];
 
     console.log("All Categories:", uniqueCategories);
+
+    if (typeof renderDropdownCallback === "function") {
+      renderDropdownCallback(uniqueCategories, "categoryDropdownContainer");
+    }
+
+    console.log("All Posts:", posts);
 
     const filteredPosts = posts.filter((post) => {
       console.log(`Post ID ${post.id} Categories:`, post.categories);
@@ -141,22 +151,17 @@ export async function fetchpostsByCategory(targetCategory, callback) {
       );
     });
 
-    if (typeof callback === "function") {
-      callback(filteredPosts);
-    }
-
     console.log(
       `Filtered Posts for Category ${targetCategory}:`,
       filteredPosts
     );
-
     return filteredPosts;
   } catch (error) {
     console.error("Error fetching posts by category", error);
   }
 }
 
-fetchpostsByCategory("YourTargetCategory");
+fetchpostsByCategory("YourTargetCategory", renderCategoryDropdown);
 
 ////////////////////////////////////////
 export async function postComment(commentData) {
