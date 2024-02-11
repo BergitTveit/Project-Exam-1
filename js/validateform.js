@@ -3,7 +3,8 @@ export function validateTextField(fieldId, minLength) {
   let fieldValue = inputField.value.trim();
 
   if (fieldValue === "" || fieldValue.length < minLength) {
-    alert(`${fieldId} must be longer than ${minLength}`);
+    messageElement.textContent = `${fieldId} must be longer than ${minLength}`;
+    inputField.parentNode.appendChild(messageElement);
     return false;
   } else {
     return true;

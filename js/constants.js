@@ -1,10 +1,13 @@
-const apiUrl = "https://assets.lykkeogliten.no/wp-json/wp/v2/";
-const wpPostUrl = "posts/?_embed&per_page=20";
-// const wpImgUrl = "pages/?_embed";
-const wpMediaUrl = "media?per_page=100";
+const apiUrl = "https://assets.lykkeogliten.no/wp-json/";
+const wpPostUrl = "wp/v2/posts/?_embed&per_page=20";
+const wpMediaUrl = "wp/v2/media?per_page=100";
+const CF7Url = "contact-form-7/v1/contact-forms/a8f7c5d/feedback";
 
+//Get posts URL
 export const url = new URL(wpPostUrl, apiUrl);
 
-// export const imgUrl = new URL(wpImgUrl, apiUrl);
-
+//Get Media for styling website
 export const mediaUrl = new URL(wpMediaUrl, apiUrl);
+
+//Send form to Wordpress API
+export const ContactFormUrl = new URL(CF7Url, apiUrl);

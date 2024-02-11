@@ -1,5 +1,6 @@
-import { url, mediaUrl } from "./constants.js";
+import { url, mediaUrl, ContactFormUrl } from "./constants.js";
 
+// Get all Posts.
 export async function fetchAllPosts() {
   try {
     const response = await fetch(url);
@@ -33,6 +34,7 @@ export async function fetchAllPosts() {
   }
 }
 
+//Get ID from single Post.
 export async function fetchPostById(postId) {
   try {
     const posts = await fetchAllPosts();
@@ -46,6 +48,7 @@ export async function fetchPostById(postId) {
   }
 }
 
+//Sort posts by date created.
 export async function fetchPostsSortedByDate(amount) {
   try {
     let posts = await fetchAllPosts();
@@ -61,7 +64,7 @@ export async function fetchPostsSortedByDate(amount) {
   }
 }
 
-// GET LARGE IMAGES FOR BACKGROUND AND BACKGROUND SLIDER
+// Get large images based on name, for easy maintenance of styling background images.
 
 export async function imageUrlByName(imageName) {
   try {
@@ -90,6 +93,28 @@ export async function imageUrlByName(imageName) {
     throw error;
   }
 }
+
+// Send Contact Form - Connect to API
+export async function sendContactForm(formData) {
+  try {
+    console.log(ContactFormUrl);
+    const response = await fetch(ContactFormUrl.href, {
+      method: "POST",
+
+      body: JSON.stringify(Object.fromEntries(formData)),
+    });
+    console.log(response);
+    if (!response.ok) {
+      throw new Error("HTTP Error! Status: ${response.status}");
+    }
+
+    const data = await response.json();
+    console.log("SUCCESS POST CONTACT FORM API ", data);
+  } catch (error) {
+    console.error("ERROR;", error);
+  }
+}
+
 // export async function fetchpostsByCategory(targetCategory) {
 //   const posts = await fetchAllPosts();
 //   const filteredposts = posts.filter((post) => {

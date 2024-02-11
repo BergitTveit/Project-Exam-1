@@ -1,3 +1,4 @@
+//Render post details for single post entered. //////////////////////////////////////
 export function displayPostDetails(post) {
   const postDetailsContainer = document.querySelector(".post-details");
   postDetailsContainer.classList.add("m-top", "m-bottom");
@@ -32,6 +33,7 @@ export function displayPostDetails(post) {
   postContentContainer.appendChild(contentElement);
 }
 
+// Open Modal on detailspage. ////////////////////////////////////////
 function openModal(imgSrc) {
   const modalContainer = document.createElement("div");
   modalContainer.classList.add("modal-container");
@@ -55,6 +57,7 @@ function openModal(imgSrc) {
   document.addEventListener("click", clickOutsideModal);
 }
 
+// Close Modal on detailspage. ///////////////////////////////////////////////
 function closeModal(modalContainer) {
   document.body.removeChild(modalContainer);
   document.removeEventListener("click", clickOutsideModal);

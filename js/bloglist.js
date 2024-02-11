@@ -5,7 +5,7 @@ import { fetchPostsAccordingToSearch } from "./search.js";
 import { handleError } from "./errors.js";
 
 let posts;
-
+// Creating the posts page for all posts, initially show 9 posts.////////////////
 export async function postsPage() {
   const postListContainer = document.querySelector(".post-list");
 
@@ -35,7 +35,7 @@ export async function postsPage() {
     postListContainer.appendChild(loadMoreBtn);
   }
 }
-
+// Loading more posts. ////////////////////////////////////////
 async function loadMorePosts() {
   const postListContainer = document.querySelector(".post-list");
   const loadMoreBtn = document.querySelector("button");
@@ -46,6 +46,8 @@ async function loadMorePosts() {
 
   loadMoreBtn.style.display = "none";
 }
+
+//Calling postspage //////////////////////////////////////
 postsPage();
 
 //   const genreSelect = document.getElementById("genreSelect");  // UPDATE TO SORT WHAT WE OFFER

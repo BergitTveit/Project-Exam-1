@@ -1,6 +1,7 @@
 import { fetchAllPosts, fetchPostById } from "./api.js";
 import { displayPostDetails } from "./render-blogdetails.js";
 
+// Update page title, for the post entered.
 export async function updatePageTitle(postId) {
   try {
     const posts = await fetchAllPosts();
@@ -27,6 +28,8 @@ document.addEventListener("click", async (event) => {
     await updatePageTitle(postId);
   }
 });
+
+// Creating the detail page for single post.
 
 export async function postDetailPage() {
   const postDetailsContainer = document.querySelector(".post-details");

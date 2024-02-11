@@ -1,21 +1,30 @@
-import { imageUrlByName } from "./api.js";
+import { imageUrlByName, sendContactForm } from "./api.js";
 import {
   validateTextField,
-  validateEmail,
-  validatePhoneNumber,
+  // validateEmail,
+  // validatePhoneNumber,
   validateDateofWedding,
 } from "./validateform.js";
 
 const imageUrl = await imageUrlByName("Contact_form");
 
 export function displayContactForm() {
-  const contactFormContainer = document.querySelector("#contactForm");
+  const contactFormContainer = document.querySelector(".section-container");
   contactFormContainer.style.backgroundImage = `url("${imageUrl}")`;
 
   const formTitle = document.createElement("h1");
   formTitle.textContent = "Get in touch";
 
-  // const personalInfoGroup = document.createElement("div");
+  const contactForm = document.createElement("form");
+  contactForm.id = "contactForm";
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+
+    sendContactForm(formData);
+  });
+
   const firstNameInput = createInput(
     "text",
     "Enter your first name",
@@ -29,7 +38,7 @@ export function displayContactForm() {
     5
   );
   const emailInput = createInput("email", "Enter your email", "email");
-  const phoneNuImput = createInput("tel", "00000000", "phonenumber", true);
+  // const phoneNuImput = createInput("tel", "00000000", "phonenumber", true);
 
   const bridalRadio = createRadio(
     "enquiry",
@@ -70,10 +79,6 @@ export function displayContactForm() {
   messageTextarea.id = "message";
   messageTextarea.rows = "7";
 
-  // const sendContactFormButton = document.createElement("button");
-  // sendContactFormButton.textContent = "Send us your message/enquiries";
-  // sendContactFormButton.onclick = sendContactForm();
-
   bridalRadio.addEventListener("change", function () {
     dateOfWedding.style.display = document.getElementById("bridal_radio")
       .checked
@@ -89,6 +94,11 @@ export function displayContactForm() {
     dateOfWedding.style.display = "none";
   });
 
+  const sendContactFormButton = document.createElement("button");
+  sendContactFormButton.type = "submit";
+  sendContactFormButton.textContent = "Send message";
+
+  contactFormContainer.appendChild(contactForm);
   contactForm.appendChild(formTitle);
   contactForm.appendChild(firstNameInput);
   contactForm.appendChild(createLineBreak());
@@ -96,8 +106,8 @@ export function displayContactForm() {
   contactForm.appendChild(createLineBreak());
   contactForm.appendChild(emailInput);
   contactForm.appendChild(createLineBreak());
-  contactForm.appendChild(phoneNuImput);
-  contactForm.appendChild(createLineBreak());
+  // contactForm.appendChild(phoneNuImput);
+  // contactForm.appendChild(createLineBreak());
   contactForm.appendChild(bridalRadio);
   contactForm.appendChild(otherRadio);
   contactForm.appendChild(createLineBreak());
@@ -133,22 +143,7 @@ function createInput(type, placeholder, id, minLength) {
   return input;
 }
 
-// hasPhonePattern = false
-// if (hasPhonePattern) {
-//   input.pattern = "[0-9]{8}";
-
-//   console.log("CHECKING INPUT PATTERN:", input.pattern, input.type, input.id);
-//   input.onchange = function () {
-//     this.value = addSpacesToPhoneNumber(this.value);
-//   };
-// }
-// ASK MILENA
-function addSpacesToPhoneNumber(initial) {
-  initial = initial.replace(/([0-9]{8})/);
-  initial = initial.replace(/([0-9]{3}) ([0-9]{2}) ([0-9]{3})/, "$1 $2");
-  console.log(type.initial);
-  return initial;
-}
+// function createPhoneInput (){}
 
 // Creates and filters the option of requests
 function createRadio(name, id, value, label) {

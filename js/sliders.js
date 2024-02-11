@@ -11,6 +11,7 @@ const widthArrows = 64 * 2;
 let containerPostsCapasity;
 calculatePostsCapasity();
 
+// Finds gow many posts to display on device, for dynamic scaling ////////////////////////////
 function calculatePostsCapasity() {
   const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
 
@@ -30,7 +31,7 @@ addEventListener("resize", () => {
     sliderBlogPosts();
   }
 });
-
+// Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
 export async function sliderBlogPosts() {
   const sliderContainer = document.querySelector(".slider-container");
   const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
@@ -66,7 +67,7 @@ export async function sliderBlogPosts() {
     containerPostsCapasity
   );
 }
-
+// Move Slider //////////////////////////////////////////////////////////////////
 function moveSlider(posts, direction) {
   currentIndex += direction;
   if (currentIndex < 0) {
@@ -91,7 +92,7 @@ function createElement(tag, options) {
   return element;
 }
 
-// sliderBlogPosts();
+// Loading content..... /////////////////
 document.addEventListener("DOMContentLoaded", async () => {
   await sliderBlogPosts();
 });
