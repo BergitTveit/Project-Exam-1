@@ -19,25 +19,29 @@ export function displayContactForm() {
   contactForm.id = "contactForm";
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
+    const formData = new FormData(event.target);
 
-    const formData = new FormData(contactForm);
+    console.log(event.target);
+    console.log(formData);
 
     sendContactForm(formData);
   });
 
   const firstNameInput = createInput(
+    "firstName",
     "text",
     "Enter your first name",
     "firstName",
     5
   );
   const lastNameInput = createInput(
+    "lastName",
     "text",
     "Enter your last name",
     "lastName",
     5
   );
-  const emailInput = createInput("email", "Enter your email", "email");
+  const emailInput = createInput("email", "email", "Enter your email", "email");
   // const phoneNuImput = createInput("tel", "00000000", "phonenumber", true);
 
   const bridalRadio = createRadio(
@@ -55,10 +59,12 @@ export function displayContactForm() {
 
   const dateOfWedding = createDateInput(
     "dateOfWedding",
+    "dateOfWedding",
     "Date of the big day."
   );
 
   const alterationOption = createSelect(
+    "alteration",
     [
       "-- select alteration --",
       "Suit",
@@ -74,8 +80,15 @@ export function displayContactForm() {
 
   const messageLabel = document.createElement("span");
   messageLabel.textContent = "What do you need help with?";
-  const subjectInput = createInput("text", "Short description", "subject", 15);
+  const subjectInput = createInput(
+    "subject",
+    "text",
+    "Short description",
+    "subject",
+    15
+  );
   const messageTextarea = document.createElement("textarea");
+  messageTextarea.name = "message";
   messageTextarea.id = "message";
   messageTextarea.rows = "7";
 
@@ -131,8 +144,9 @@ function createLineBreak() {
   return document.createElement("br");
 }
 
-function createInput(type, placeholder, id, minLength) {
+function createInput(name, type, placeholder, id, minLength) {
   const input = document.createElement("input");
+  input.name = name;
   input.type = type;
   input.placeholder = placeholder;
   input.id = id;
@@ -161,8 +175,9 @@ function createRadio(name, id, value, label) {
   return container;
 }
 
-function createDateInput(id, placeholder) {
+function createDateInput(name, id, placeholder) {
   const dateInput = document.createElement("input");
+  dateInput.name = name;
   dateInput.type = "date";
   dateInput.id = id;
   dateInput.style.display = "none";
@@ -174,8 +189,9 @@ function createDateInput(id, placeholder) {
   return dateInput;
 }
 
-function createSelect(options, id) {
+function createSelect(name, options, id) {
   const select = document.createElement("select");
+  select.name = name;
   select.id = id;
   console.log("log 1", id);
   select.style.display = "none";
