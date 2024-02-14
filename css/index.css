@@ -1,10 +1,10 @@
 /* IMPORTED STYLESHEETS */
-
-@import url(loader.css);
-@import url(body.css);
+@import url(blogdetails.css);
 @import url(bloglist.css);
+@import url(body.css);
 @import url(footer.css);
 @import url(form.css);
-@import url(sliders.css);
-@import url(blog-details.css);
+@import url(loader.css);
+@import url(location.css);
 @import url(modal.css);
+@import url(sliders.css);

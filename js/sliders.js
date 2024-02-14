@@ -33,7 +33,11 @@ addEventListener("resize", () => {
 });
 
 // Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
-export async function sliderBlogPosts() {
+export async function sliderBlogPosts(
+  containerSelector,
+  slidesToShow,
+  moveSliderButtons
+) {
   const sliderContainer = document.querySelector(".slider-container");
   const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
   const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
