@@ -97,3 +97,6 @@ function createElement(tag, options) {
 document.addEventListener("DOMContentLoaded", async () => {
   await sliderBlogPosts();
 });
+
+//HOMEPAGE SLIDER
+// WIDTH = device width

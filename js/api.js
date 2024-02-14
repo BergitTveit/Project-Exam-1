@@ -27,7 +27,7 @@ export async function fetchAllPosts() {
         (category) => category.name
       ),
     }));
-
+    console.log(postsData);
     return await postsData;
   } catch (error) {
     console.error("Error fetching posts:", error);

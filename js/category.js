@@ -1,15 +1,15 @@
 import { fetchAllPosts } from "./api.js";
 
 export function renderCategoryDropdown(categories, containerId) {
-  const container = document.getElementById(containerId);
+  const dropDowncontainer = document.getElementById(containerId);
 
-  if (!container) {
+  if (!dropDowncontainer) {
     console.error(`Container with ID ${containerId} not found.`);
     return;
   }
 
   const dropdown = document.createElement("select");
-  dropdown.id = "categoryDropdown";
+  dropdown.id = "categoryDropdownElement";
 
   const defaultOption = document.createElement("option");
   defaultOption.text = "-- Select Category --";
@@ -21,7 +21,7 @@ export function renderCategoryDropdown(categories, containerId) {
     dropdown.add(option);
   });
 
-  container.appendChild(dropdown);
+  dropDowncontainer.appendChild(dropdown);
 
   document
     .getElementById(containerId)
@@ -34,8 +34,6 @@ export function renderCategoryDropdown(categories, containerId) {
             selectedCategory,
             renderCategoryDropdown
           );
-
-          console.log("Filtered posts:", filteredPosts);
         } catch (error) {
           console.error("Error handling filtered posts:", error);
         }
@@ -56,16 +54,11 @@ export async function fetchPostsByCategory(
       ...new Set(posts.flatMap((post) => post.categories)),
     ];
 
-    console.log("All Categories:", uniqueCategories);
-
     if (typeof renderDropdownCallback === "function") {
       renderDropdownCallback(uniqueCategories, "categoryDropdownContainer");
     }
 
-    console.log("All Posts:", posts);
-
     const filteredPosts = posts.filter((post) => {
-      console.log(`Post ID ${post.id} Categories:`, post.categories);
       return (
         post.categories &&
         post.categories.some(
@@ -75,13 +68,8 @@ export async function fetchPostsByCategory(
       );
     });
 
-    console.log(
-      `Filtered Posts for Category ${targetCategory}:`,
-      filteredPosts
-    );
     return filteredPosts;
   } catch (error) {
     console.error("Error fetching posts by category", error);
   }
 }
-fetchPostsByCategory("YourTargetCategory", renderCategoryDropdown);

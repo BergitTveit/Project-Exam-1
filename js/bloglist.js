@@ -3,6 +3,7 @@ import { displayPosts } from "./render-bloglist.js";
 import { showLoader, hideLoader } from "./loader.js";
 import { fetchPostsAccordingToSearch } from "./search.js";
 import { handleError } from "./errors.js";
+import { renderCategoryDropdown, fetchPostsByCategory } from "./category.js";
 
 let posts;
 // Creating the posts page for all posts, initially show 9 posts.////////////////
@@ -20,9 +21,14 @@ export async function postsPage() {
     } else {
       posts = await fetchPostsSortedByDate();
     }
+
+    renderCategoryDropdown(posts, "categoryDropdownContainer");
   } catch (error) {
     postListContainer.innerHTML = handleError(" Unable to load post page");
+    hideLoader();
+    return;
   }
+
   hideLoader();
   postListContainer.innerHTML = "";
 
@@ -35,6 +41,7 @@ export async function postsPage() {
     postListContainer.appendChild(loadMoreBtn);
   }
 }
+
 // Loading more posts. ////////////////////////////////////////
 async function loadMorePosts() {
   const postListContainer = document.querySelector(".post-list");
@@ -47,9 +54,8 @@ async function loadMorePosts() {
   loadMoreBtn.style.display = "none";
 }
 
-//Calling postspage //////////////////////////////////////
 postsPage();
-
+//Calling postspage //////////////////////////////////////
 //   const genreSelect = document.getElementById("genreSelect");  // UPDATE TO SORT WHAT WE OFFER
 //   genreSelect.addEventListener("change", async function () {
 //     const selectedGenre = genreSelect.value;

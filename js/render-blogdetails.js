@@ -15,9 +15,13 @@ export function displayPostDetails(post) {
   if (post.img) {
     const imgElement = document.createElement("img");
     imgElement.src = post.img;
+    imgElement.alt = post.altTxt;
+    console.log(imgElement.alt);
     imgElement.classList.add("img-details", "img-details-position");
 
-    imgElement.addEventListener("click", () => openModal(post.img));
+    imgElement.addEventListener("click", () =>
+      openModal(post.img, post.altTxt)
+    );
 
     imgContainer.appendChild(imgElement);
   }
@@ -34,7 +38,7 @@ export function displayPostDetails(post) {
 }
 
 // Open Modal on detailspage. ////////////////////////////////////////
-function openModal(imgSrc) {
+function openModal(imgSrc, altTxt) {
   const modalContainer = document.createElement("div");
   modalContainer.classList.add("modal-container");
 
@@ -43,7 +47,11 @@ function openModal(imgSrc) {
 
   const modalImage = document.createElement("img");
   modalImage.src = imgSrc;
+  modalImage.alt = altTxt;
   console.log("MODALIMAGE", modalImage);
+
+  const modalText = document.createElement("p");
+  modalText.textContent = altTxt;
 
   const closeModalBtn = document.createElement("button");
   closeModalBtn.textContent = "X";
@@ -51,6 +59,7 @@ function openModal(imgSrc) {
 
   modalContainer.appendChild(modalContent);
   modalContent.appendChild(modalImage);
+  modalContent.appendChild(modalText);
   modalContent.appendChild(closeModalBtn);
   document.body.appendChild(modalContainer);
 
