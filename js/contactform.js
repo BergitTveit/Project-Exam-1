@@ -3,8 +3,37 @@ import {
   validateTextField,
   validateEmail,
   validatePhone,
-  validateDateofWedding,
+  validateDateOfWedding,
+  getValidationMessage,
 } from "./validateform.js";
+
+export const firstNameVal = [
+  "firstName",
+  "text",
+  "Enter your first name",
+  "firstName",
+  5,
+];
+export const lastNameVal = [
+  "lastName",
+  "text",
+  "Enter your last name",
+  "lastName",
+  5,
+];
+export const emailVal = ["email", "Enter your email", "email"];
+export const phoneVal = [
+  "phoneNumber",
+  "Enter your phone number",
+  "phoneNumber",
+];
+export const subjectVal = [
+  "subject",
+  "text",
+  "Short description",
+  "subject",
+  15,
+];
 
 const imageUrl = await imageUrlByName("Contact_form");
 
@@ -19,32 +48,16 @@ export function displayContactForm() {
   contactForm.id = "contactForm";
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    sendContactForm(formData);
+    // const formData = new FormData(event.target);
+    sendContactForm(getValidationMessage());
   });
 
-  const firstNameInput = createInput(
-    "firstName",
-    "text",
-    "Enter your first name",
-    "firstName",
-    5
-  );
-  const lastNameInput = createInput(
-    "lastName",
-    "text",
-    "Enter your last name",
-    "lastName",
-    5
-  );
+  const firstNameInput = createInput(firstNameVal);
+  const lastNameInput = createInput(lastNameVal);
 
-  const emailInput = createEmailInput("email", "Enter your email", "email");
+  const emailInput = createEmailInput(emailVal);
 
-  const phoneNuInput = createPhoneInput(
-    "phoneNumber",
-    "Enter your phone number",
-    "phoneNumber"
-  );
+  const phoneNuInput = createPhoneInput(phoneVal);
 
   const bridalRadio = createRadio(
     "enquiry",
@@ -82,13 +95,7 @@ export function displayContactForm() {
 
   const messageLabel = document.createElement("span");
   messageLabel.textContent = "What do you need help with?";
-  const subjectInput = createInput(
-    "subject",
-    "text",
-    "Short description",
-    "subject",
-    15
-  );
+  const subjectInput = createInput(subjectVal);
 
   const messageTextarea = document.createElement("textarea");
   messageTextarea.name = "message";
@@ -112,6 +119,11 @@ export function displayContactForm() {
   const sendContactFormButton = document.createElement("button");
   sendContactFormButton.type = "submit";
   sendContactFormButton.textContent = "Send message";
+  sendContactFormButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    sendContactForm(getValidationMessage());
+  });
 
   contactFormContainer.appendChild(contactForm);
   contactForm.appendChild(formTitle);
@@ -146,39 +158,39 @@ function createLineBreak() {
   return document.createElement("br");
 }
 
-function createInput(name, type, placeholder, id, minLength) {
+function createInput(inputVal) {
   const input = document.createElement("input");
-  input.name = name;
-  input.type = type;
-  input.placeholder = placeholder;
-  input.id = id;
+  input.name = inputVal[0];
+  input.type = inputVal[1];
+  input.placeholder = inputVal[2];
+  input.id = inputVal[3];
   input.addEventListener("input", function () {
-    validateTextField(id, minLength);
+    validateTextField(inputVal[3], inputVal[4]);
   });
 
   return input;
 }
 
-function createEmailInput(name, placeholder, id) {
+function createEmailInput(emailVal) {
   const emailInput = document.createElement("input");
-  emailInput.name = name;
+  emailInput.name = emailVal[0];
   emailInput.type = "email";
-  emailInput.placeholder = placeholder;
-  emailInput.id = id;
+  emailInput.placeholder = emailVal[1];
+  emailInput.id = emailVal[2];
   emailInput.addEventListener("input", function () {
-    validateEmail(id);
+    validateEmail(emailVal[2]);
   });
   return emailInput;
 }
 
-function createPhoneInput(name, placeholder, id) {
+function createPhoneInput(phoneVal) {
   const phoneInput = document.createElement("input");
-  phoneInput.name = name;
+  phoneInput.name = phoneVal[0];
   phoneInput.type = "tel";
-  phoneInput.placeholder = placeholder;
-  phoneInput.id = id;
+  phoneInput.placeholder = phoneVal[1];
+  phoneInput.id = phoneVal[2];
   phoneInput.addEventListener("input", function () {
-    validatePhone(id);
+    validatePhone(phoneVal[2]);
   });
   return phoneInput;
 }
@@ -207,7 +219,7 @@ function createDateInput(name, id, placeholder) {
   dateInput.placeholder = placeholder || "Date of the big day";
 
   dateInput.addEventListener("change", function () {
-    validateDateofWedding(id);
+    validateDateOfWedding(id);
   });
   return dateInput;
 }

@@ -1,80 +1,89 @@
+import {
+  firstNameVal,
+  lastNameVal,
+  emailVal,
+  phoneVal,
+  subjectVal,
+} from "./contactform.js";
+
 export function validateTextField(fieldId, minLength) {
   const inputField = document.getElementById(fieldId);
   let fieldValue = inputField.value.trim();
 
-  if (fieldValue === "" || fieldValue.length < minLength) {
-    messageElement.textContent = `${fieldId} must be longer than ${minLength}`;
-    inputField.parentNode.appendChild(messageElement);
+  if (fieldValue.length < minLength) {
+    changeColorIfNotValid(inputField);
     return false;
-  } else {
-    return true;
   }
+  inputField.style.color = "black";
+  return true;
 }
 
 export function validateEmail(emailId) {
-  let emailValue = document.getElementById(emailId).value;
+  let emailElement = document.getElementById(emailId);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(emailValue)) {
-    alert(`${emailId} not a valid email adresss.`);
+  if (!emailRegex.test(emailElement.value)) {
+    changeColorIfNotValid(emailElement);
     return false;
-  } else {
-    return true;
   }
+  emailElement.style.color = "black";
+  return true;
 }
 
 export function validatePhone(phoneNumberId) {
-  let phoneValue = document.getElementById(phoneNumberId).value;
+  const phoneElement = document.getElementById(phoneNumberId);
   let phoneRegex = /^(9|4)\d{7}$/;
-  if (!phoneRegex.test(phoneValue)) {
-    alert(`${phoneNumberId} not a valid phone number.`);
+  if (!phoneRegex.test(phoneElement.value)) {
+    changeColorIfNotValid(phoneElement);
     return false;
-  } else {
-    return true;
   }
+
+  phoneElement.style.color = "black";
+  return true;
 }
 
-export function validateDateofWedding(DOWId) {
-  let dateValue = document.getElementById(DOWId).value;
+export function validateDateOfWedding(DOWId) {
+  let dateElement = document.getElementById(DOWId);
+  let dateValue = dateElement.value;
   let selectedDate = new Date(dateValue);
   let todayDate = Date.now();
   let minDate = new Date(todayDate + 3 * 7 * 24 * 60 * 60 * 1000);
-  console.log("Selected Date:", selectedDate);
-  console.log("Minimum Date:", minDate);
-  if (selectedDate < minDate) {
-    console.log("Invalid Date");
-    alert("Online requests must be made three weeks before, if not call.");
-
+  if (!isNaN(selectedDate) && selectedDate < minDate) {
+    dateElement.style.color = "red";
     return false;
   } else {
-    console.log("Valid Date");
+    dateElement.style.color = "black";
     return true;
   }
 }
 
-// export function validateContactForm() {
-//   if (!validateTextField("firstName", 5)) {
-//     return false;
-//   }
+export function getValidationMessage() {
+  let message = "";
+  if (!validateTextField(firstNameVal[3], firstNameVal[4])) {
+    message += "Name field must contain min 5 characters\n";
+  }
+  if (!validateTextField(lastNameVal[3], lastNameVal[4])) {
+    message += "Last field must contain min 5 characters\n";
+  }
+  if (!validateEmail(emailVal[2])) {
+    message += "Email has wrong format\n";
+  }
+  if (!validatePhone(phoneVal[2])) {
+    message += "Phone number has wrong format\n";
+  }
+  if (!validateDateOfWedding("dateOfWedding")) {
+    message +=
+      "Online requests must be made three weeks before, if not call.\n";
+  }
+  if (!validateTextField(subjectVal[3], subjectVal[4])) {
+    message += "Name field must contain min 5 characters\n";
+  }
+  return message;
+}
 
-//   if (!validateTextField("lastName", 5)) {
-//     return false;
-//   }
-//   if (!validateTextField("subject", 15)) {
-//     return false;
-//   }
-//   if (!validateTextField("message", 25)) {
-//     return false;
-//   }
-//   if (!validateEmail("email")) {
-//     return false;
-//   }
-//   if (!validatePhoneNumber("phonenumber")) {
-//     return false;
-//   }
-//   if (!validateDateofWedding("dateOfWedding")) {
-//     return false;
-//   }
-//   return true;
-// }
-
-// validateContactForm();
+function changeColorIfNotValid(element) {
+  if (element.value.trim().length !== 0) {
+    element.style.color = "red";
+  } else {
+    element.style.color = "black";
+  }
+}
