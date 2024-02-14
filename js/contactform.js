@@ -1,8 +1,8 @@
 import { imageUrlByName, sendContactForm } from "./api.js";
 import {
   validateTextField,
-  // validateEmail,
-  // validatePhoneNumber,
+  validateEmail,
+  validatePhone,
   validateDateofWedding,
 } from "./validateform.js";
 
@@ -20,10 +20,6 @@ export function displayContactForm() {
   contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-
-    console.log(event.target);
-    console.log(formData);
-
     sendContactForm(formData);
   });
 
@@ -41,8 +37,14 @@ export function displayContactForm() {
     "lastName",
     5
   );
-  const emailInput = createInput("email", "email", "Enter your email", "email");
-  // const phoneNuImput = createInput("tel", "00000000", "phonenumber", true);
+
+  const emailInput = createEmailInput("email", "Enter your email", "email");
+
+  const phoneNuInput = createPhoneInput(
+    "phoneNumber",
+    "Enter your phone number",
+    "phoneNumber"
+  );
 
   const bridalRadio = createRadio(
     "enquiry",
@@ -50,6 +52,7 @@ export function displayContactForm() {
     "wedding",
     "Bridal alterations"
   );
+
   const otherRadio = createRadio(
     "enquiry",
     "other_radio",
@@ -66,7 +69,6 @@ export function displayContactForm() {
   const alterationOption = createSelect(
     "alteration",
     [
-      "-- select alteration --",
       "Suit",
       "Trousers",
       "Dress",
@@ -87,10 +89,10 @@ export function displayContactForm() {
     "subject",
     15
   );
+
   const messageTextarea = document.createElement("textarea");
   messageTextarea.name = "message";
   messageTextarea.id = "message";
-  messageTextarea.rows = "7";
 
   bridalRadio.addEventListener("change", function () {
     dateOfWedding.style.display = document.getElementById("bridal_radio")
@@ -119,8 +121,8 @@ export function displayContactForm() {
   contactForm.appendChild(createLineBreak());
   contactForm.appendChild(emailInput);
   contactForm.appendChild(createLineBreak());
-  // contactForm.appendChild(phoneNuImput);
-  // contactForm.appendChild(createLineBreak());
+  contactForm.appendChild(phoneNuInput);
+  contactForm.appendChild(createLineBreak());
   contactForm.appendChild(bridalRadio);
   contactForm.appendChild(otherRadio);
   contactForm.appendChild(createLineBreak());
@@ -157,9 +159,30 @@ function createInput(name, type, placeholder, id, minLength) {
   return input;
 }
 
-// function createPhoneInput (){}
+function createEmailInput(name, placeholder, id) {
+  const emailInput = document.createElement("input");
+  emailInput.name = name;
+  emailInput.type = "email";
+  emailInput.placeholder = placeholder;
+  emailInput.id = id;
+  emailInput.addEventListener("input", function () {
+    validateEmail(id);
+  });
+  return emailInput;
+}
 
-// Creates and filters the option of requests
+function createPhoneInput(name, placeholder, id) {
+  const phoneInput = document.createElement("input");
+  phoneInput.name = name;
+  phoneInput.type = "tel";
+  phoneInput.placeholder = placeholder;
+  phoneInput.id = id;
+  phoneInput.addEventListener("input", function () {
+    validatePhone(id);
+  });
+  return phoneInput;
+}
+
 function createRadio(name, id, value, label) {
   const radio = document.createElement("input");
   radio.type = "radio";
@@ -196,29 +219,14 @@ function createSelect(name, options, id) {
   console.log("log 1", id);
   select.style.display = "none";
 
-  options.forEach((optionText) => {
+  options.forEach((optionText, index) => {
     const option = document.createElement("option");
+    select.appendChild(option);
     option.value = optionText;
     option.text = optionText;
-
-    select.appendChild(option);
   });
 
   return select;
 }
 
 displayContactForm();
-// ASK MILENA // disableFirstSelectOption(id);
-// function disableFirstSelectOption(selectId) {
-//   console.log("log 2", selectId);
-//   console.log("log 3", typeof selectId);
-//   let selectDropdown = document.getElementById(selectId);
-
-//   console.log("log 4", selectDropdown);
-//   let selectionOptions = selectDropdown.getElementsByTagName("option");
-//   selectionOptions[0].disabled = true;
-// }
-
-// function sendContactForm() {
-//   // Make this, how to send it to the api? Can i solve this?
-// }

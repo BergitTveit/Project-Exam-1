@@ -22,9 +22,9 @@ export function validateEmail(emailId) {
   }
 }
 
-export function validatePhoneNumber(phoneNumberId) {
+export function validatePhone(phoneNumberId) {
   let phoneValue = document.getElementById(phoneNumberId).value;
-  let phoneRegex = /^\d{8}$/;
+  let phoneRegex = /^(9|4)\d{7}$/;
   if (!phoneRegex.test(phoneValue)) {
     alert(`${phoneNumberId} not a valid phone number.`);
     return false;
@@ -38,12 +38,15 @@ export function validateDateofWedding(DOWId) {
   let selectedDate = new Date(dateValue);
   let todayDate = Date.now();
   let minDate = new Date(todayDate + 3 * 7 * 24 * 60 * 60 * 1000);
-
+  console.log("Selected Date:", selectedDate);
+  console.log("Minimum Date:", minDate);
   if (selectedDate < minDate) {
+    console.log("Invalid Date");
     alert("Online requests must be made three weeks before, if not call.");
-    //  (INSERT TEXT OR CALL FUNCTION???)
+
     return false;
   } else {
+    console.log("Valid Date");
     return true;
   }
 }
