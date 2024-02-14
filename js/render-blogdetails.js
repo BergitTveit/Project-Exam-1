@@ -1,4 +1,4 @@
-//Render post details for single post entered. //////////////////////////////////////
+//Render post details for single post.
 export function displayPostDetails(post) {
   const postDetailsContainer = document.querySelector(".post-details");
   postDetailsContainer.classList.add("m-top", "m-bottom");
@@ -12,21 +12,20 @@ export function displayPostDetails(post) {
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("img-details-container");
 
+  const contentElement = document.createElement("div");
+  contentElement.innerHTML = post.content;
+
   if (post.img) {
     const imgElement = document.createElement("img");
     imgElement.src = post.img;
     imgElement.alt = post.altTxt;
     imgElement.classList.add("img-details", "img-details-position");
+    imgContainer.appendChild(imgElement);
 
     imgElement.addEventListener("click", () =>
       openModal(post.img, post.altTxt)
     );
-
-    imgContainer.appendChild(imgElement);
   }
-
-  const contentElement = document.createElement("div");
-  contentElement.innerHTML = post.content;
 
   postDetailsContainer.innerHTML = "";
 
@@ -36,7 +35,7 @@ export function displayPostDetails(post) {
   postContentContainer.appendChild(contentElement);
 }
 
-// Open Modal on detailspage. ////////////////////////////////////////
+// Open Modal on detailspage.
 function openModal(imgSrc, altTxt) {
   const modalContainer = document.createElement("div");
   modalContainer.classList.add("modal-container");
@@ -58,19 +57,16 @@ function openModal(imgSrc, altTxt) {
   modalContainer.appendChild(modalImage);
   modalContainer.appendChild(modalText);
   modalContainer.appendChild(closeModalBtn);
-
   document.body.appendChild(modalContainer);
-
   document.addEventListener("click", clickOutsideModal);
 }
 
-// Close Modal on detailspage. ///////////////////////////////////////////////
+// Close Modal on detailspage.
 function closeModal(modalContainer) {
   document.body.removeChild(modalContainer);
   document.removeEventListener("click", clickOutsideModal);
 }
 
-// const modalContent = document.querySelector(".modal-content");
 function clickOutsideModal(event) {
   const modalContainer = document.querySelector(".modal-container");
 
