@@ -31,6 +31,7 @@ addEventListener("resize", () => {
     sliderBlogPosts();
   }
 });
+
 // Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
 export async function sliderBlogPosts() {
   const sliderContainer = document.querySelector(".slider-container");

@@ -1,3 +1,5 @@
+import { fetchAllPosts } from "./api.js";
+
 export function renderCategoryDropdown(categories, containerId) {
   const container = document.getElementById(containerId);
 
@@ -20,20 +22,66 @@ export function renderCategoryDropdown(categories, containerId) {
   });
 
   container.appendChild(dropdown);
+
+  document
+    .getElementById(containerId)
+    .addEventListener("change", async (event) => {
+      const selectedCategory = event.target.value;
+
+      if (selectedCategory !== "-- Select Category --") {
+        try {
+          const filteredPosts = await fetchPostsByCategory(
+            selectedCategory,
+            renderCategoryDropdown
+          );
+
+          console.log("Filtered posts:", filteredPosts);
+        } catch (error) {
+          console.error("Error handling filtered posts:", error);
+        }
+      }
+    });
 }
 
-document
-  .getElementById("categoryDropdown")
-  .addEventListener("change", async (event) => {
-    const selectedCategory = event.target.value;
+///////////////////////////////////////////////////////////////////
 
-    if (selectedCategory !== "-- Select Category --") {
-      try {
-        const filteredPosts = await fetchpostsByCategory(selectedCategory);
+export async function fetchPostsByCategory(
+  targetCategory,
+  renderDropdownCallback
+) {
+  try {
+    const posts = await fetchAllPosts();
 
-        console.log("Filtered posts:", filteredPosts);
-      } catch (error) {
-        console.error("Error handling filtered posts:", error);
-      }
+    const uniqueCategories = [
+      ...new Set(posts.flatMap((post) => post.categories)),
+    ];
+
+    console.log("All Categories:", uniqueCategories);
+
+    if (typeof renderDropdownCallback === "function") {
+      renderDropdownCallback(uniqueCategories, "categoryDropdownContainer");
     }
-  });
+
+    console.log("All Posts:", posts);
+
+    const filteredPosts = posts.filter((post) => {
+      console.log(`Post ID ${post.id} Categories:`, post.categories);
+      return (
+        post.categories &&
+        post.categories.some(
+          (category) =>
+            category && category.toLowerCase() === targetCategory.toLowerCase()
+        )
+      );
+    });
+
+    console.log(
+      `Filtered Posts for Category ${targetCategory}:`,
+      filteredPosts
+    );
+    return filteredPosts;
+  } catch (error) {
+    console.error("Error fetching posts by category", error);
+  }
+}
+fetchPostsByCategory("YourTargetCategory", renderCategoryDropdown);

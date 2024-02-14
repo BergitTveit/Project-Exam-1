@@ -1,4 +1,3 @@
-import { renderCategoryDropdown } from "./category.js";
 import { url, mediaUrl, ContactFormUrl, commentsUrl } from "./constants.js";
 
 // Get all Posts.
@@ -118,50 +117,6 @@ export async function sendContactForm(formData) {
     console.error("ERROR;", error);
   }
 }
-
-///////////////////////////////////////////////////////////////////
-
-export async function fetchpostsByCategory(
-  targetCategory,
-  renderDropdownCallback
-) {
-  try {
-    const posts = await fetchAllPosts();
-
-    const uniqueCategories = [
-      ...new Set(posts.flatMap((post) => post.categories)),
-    ];
-
-    console.log("All Categories:", uniqueCategories);
-
-    if (typeof renderDropdownCallback === "function") {
-      renderDropdownCallback(uniqueCategories, "categoryDropdownContainer");
-    }
-
-    console.log("All Posts:", posts);
-
-    const filteredPosts = posts.filter((post) => {
-      console.log(`Post ID ${post.id} Categories:`, post.categories);
-      return (
-        post.categories &&
-        post.categories.some(
-          (category) =>
-            category && category.toLowerCase() === targetCategory.toLowerCase()
-        )
-      );
-    });
-
-    console.log(
-      `Filtered Posts for Category ${targetCategory}:`,
-      filteredPosts
-    );
-    return filteredPosts;
-  } catch (error) {
-    console.error("Error fetching posts by category", error);
-  }
-}
-
-fetchpostsByCategory("YourTargetCategory", renderCategoryDropdown);
 
 ////////////////////////////////////////
 export async function postComment(commentData) {
