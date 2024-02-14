@@ -1,2 +1,32 @@
+.modal-container {
+  box-sizing: border-box;
+  max-width: 45vw;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 5rem;
+}
+.modal-image-container {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.modal-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
 .modal-content {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #000;
 }

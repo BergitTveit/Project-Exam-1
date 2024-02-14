@@ -16,7 +16,6 @@ export function displayPostDetails(post) {
     const imgElement = document.createElement("img");
     imgElement.src = post.img;
     imgElement.alt = post.altTxt;
-    console.log(imgElement.alt);
     imgElement.classList.add("img-details", "img-details-position");
 
     imgElement.addEventListener("click", () =>
@@ -30,10 +29,10 @@ export function displayPostDetails(post) {
   contentElement.innerHTML = post.content;
 
   postDetailsContainer.innerHTML = "";
+
   postDetailsContainer.appendChild(postContentContainer);
   postContentContainer.appendChild(postTitle);
   postContentContainer.appendChild(imgContainer);
-
   postContentContainer.appendChild(contentElement);
 }
 
@@ -46,21 +45,24 @@ function openModal(imgSrc, altTxt) {
   modalContent.classList.add("modal-content");
 
   const modalImage = document.createElement("img");
+  modalImage.classList.add("modal-img");
   modalImage.src = imgSrc;
   modalImage.alt = altTxt;
-  console.log("MODALIMAGE", modalImage);
 
   const modalText = document.createElement("p");
   modalText.textContent = altTxt;
 
   const closeModalBtn = document.createElement("button");
   closeModalBtn.textContent = "X";
+  closeModalBtn.classList.add("close-button");
   closeModalBtn.addEventListener("click", () => closeModal(modalContainer));
 
   modalContainer.appendChild(modalContent);
-  modalContent.appendChild(modalImage);
-  modalContent.appendChild(modalText);
+  modalContent.appendChild(imageContainer);
   modalContent.appendChild(closeModalBtn);
+  modalContent.appendChild(modalText);
+  imageContainer.appendChild(modalImage);
+
   document.body.appendChild(modalContainer);
 
   document.addEventListener("click", clickOutsideModal);
