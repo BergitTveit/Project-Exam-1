@@ -3,26 +3,40 @@ import { displayPosts } from "./render-bloglist.js";
 import { showLoader, hideLoader } from "./loader.js";
 import { fetchPostsAccordingToSearch } from "./search.js";
 import { handleError } from "./errors.js";
-import { renderCategoryDropdown, fetchPostsByCategory } from "./category.js";
+import {
+  fetchPostsByCategory,
+  getSelectedCategory,
+  renderCategoryDropdown,
+  isDefaultCategorySelected,
+} from "./category.js";
+
+const numberOfPostsToDisplay = 9;
+const categoryDropdownName = "categoryDropdownContainer";
 
 let posts;
 // Creating the posts page for all posts, initially show 9 posts.////////////////
 export async function postsPage() {
-  const postListContainer = document.querySelector(".post-list");
+  await renderCategoryDropdown(categoryDropdownName);
+  await renderPosts();
+}
 
+export async function renderPosts() {
+  const postListContainer = document.querySelector(".post-list");
   try {
     showLoader();
 
     const url = new URL(location.href);
     const searchValue = url.searchParams.get("search");
 
+    const category = getSelectedCategory(categoryDropdownName);
+
     if (searchValue) {
       posts = await fetchPostsAccordingToSearch(searchValue);
+    } else if (!isDefaultCategorySelected(category)) {
+      posts = await fetchPostsByCategory(category);
     } else {
       posts = await fetchPostsSortedByDate();
     }
-
-    renderCategoryDropdown(posts, "categoryDropdownContainer");
   } catch (error) {
     postListContainer.innerHTML = handleError(" Unable to load post page");
     hideLoader();
@@ -32,9 +46,9 @@ export async function postsPage() {
   hideLoader();
   postListContainer.innerHTML = "";
 
-  displayPosts(posts, ".post-list", 9);
+  displayPosts(posts, ".post-list", numberOfPostsToDisplay);
 
-  if (posts.length > 9) {
+  if (posts.length > numberOfPostsToDisplay) {
     const loadMoreBtn = document.createElement("button");
     loadMoreBtn.textContent = "See more";
     loadMoreBtn.addEventListener("click", loadMorePosts);
@@ -55,26 +69,3 @@ async function loadMorePosts() {
 }
 
 postsPage();
-//Calling postspage //////////////////////////////////////
-//   const genreSelect = document.getElementById("genreSelect");  // UPDATE TO SORT WHAT WE OFFER
-//   genreSelect.addEventListener("change", async function () {
-//     const selectedGenre = genreSelect.value;
-
-//     try {
-//       showLoader();
-//       let filteredposts;
-
-//       if (selectedGenre === "All") {
-//         filteredposts = await fetchAllposts();
-//       } else {
-//         filteredposts = await fetchpostsByGenre(selectedGenre);
-//       }
-
-//       hideLoader();
-//       postListContainer.innerHTML = "";
-//       displayposts(filteredposts, ".post-list");
-//     } catch (error) {
-//       hideLoader();
-//       postListContainer.innerHTML = handleError("Unable to load posts");
-//     }
-//   });
