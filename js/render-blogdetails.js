@@ -41,27 +41,23 @@ function openModal(imgSrc, altTxt) {
   const modalContainer = document.createElement("div");
   modalContainer.classList.add("modal-container");
 
-  const modalContent = document.createElement("div");
-  modalContent.classList.add("modal-content");
-
   const modalImage = document.createElement("img");
   modalImage.classList.add("modal-img");
   modalImage.src = imgSrc;
   modalImage.alt = altTxt;
 
   const modalText = document.createElement("p");
+  modalText.classList.add("modal-text");
   modalText.textContent = altTxt;
 
   const closeModalBtn = document.createElement("button");
-  closeModalBtn.textContent = "X";
+  closeModalBtn.textContent = "x";
   closeModalBtn.classList.add("close-button");
   closeModalBtn.addEventListener("click", () => closeModal(modalContainer));
 
-  modalContainer.appendChild(modalContent);
-  modalContent.appendChild(imageContainer);
-  modalContent.appendChild(closeModalBtn);
-  modalContent.appendChild(modalText);
-  imageContainer.appendChild(modalImage);
+  modalContainer.appendChild(modalImage);
+  modalContainer.appendChild(modalText);
+  modalContainer.appendChild(closeModalBtn);
 
   document.body.appendChild(modalContainer);
 
@@ -75,7 +71,7 @@ function closeModal(modalContainer) {
 }
 
 function clickOutsideModal(event) {
-  const modalContent = document.querySelector(".modal-content");
+  // const modalContent = document.querySelector(".modal-content");
   const modalContainer = document.querySelector(".modal-container");
 
   if (

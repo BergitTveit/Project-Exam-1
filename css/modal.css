@@ -1,25 +1,26 @@
 .modal-container {
   box-sizing: border-box;
+  background-color: #fff;
   max-width: 45vw;
   height: auto;
   margin: 0 auto;
   border: 1px solid black;
   padding: 5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.modal-image-container {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
+
 .modal-img {
   width: 100%;
   max-width: 100%;
   height: auto;
 }
-.modal-content {
-  position: relative;
+.modal-text {
+  font-size: 1rem;
+  font-weight: 1000;
 }
-
 .close-button {
   position: absolute;
   top: 1rem;

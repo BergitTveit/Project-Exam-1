@@ -1,0 +1,39 @@
+.frame {
+  border: 1px solid black;
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-details {
+  max-width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.img-details-container {
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 50%;
+  position: relative;
+}
+
+.img-details {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img-details-position {
+  object-position: center 30%;
+}
+
+/* * {
+  box-sizing: border-box;
+} */
