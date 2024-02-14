@@ -70,12 +70,12 @@ function closeModal(modalContainer) {
   document.removeEventListener("click", clickOutsideModal);
 }
 
+// const modalContent = document.querySelector(".modal-content");
 function clickOutsideModal(event) {
-  // const modalContent = document.querySelector(".modal-content");
   const modalContainer = document.querySelector(".modal-container");
 
   if (
-    !modalContent.contains(event.target) &&
+    !modalContainer.contains(event.target) &&
     event.target.tagName.toLowerCase() !== "img"
   ) {
     closeModal(modalContainer);
