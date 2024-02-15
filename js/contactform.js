@@ -41,7 +41,7 @@ export function displayContactForm() {
   const contactFormContainer = document.querySelector(".section-container");
   contactFormContainer.style.backgroundImage = `url("${imageUrl}")`;
 
-  const formTitle = document.createElement("h1");
+  const formTitle = document.createElement("h2");
   formTitle.textContent = "Get in touch";
 
   const contactForm = document.createElement("form");
