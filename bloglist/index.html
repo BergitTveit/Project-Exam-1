@@ -12,12 +12,12 @@
       rel="stylesheet"
     />
     <link href="../css/index.css" rel="stylesheet" />
-    <script type="module" src="../js/api.js" ></script>
-    <script type="module" src="../js/bloglist.js" ></script>
-    <script type="module" src="../js/errors.js" ></script>
-    <script type="module" src="../js/render-bloglist.js" ></script>
-    <script type="module" src="../js/loader.js" ></script>
-    <script type="module" src="../js/category.js" ></script>
+    <script type="module" src="../js/api.js"></script>
+    <script type="module" src="../js/bloglist.js"></script>
+    <script type="module" src="../js/errors.js"></script>
+    <script type="module" src="../js/render-bloglist.js"></script>
+    <script type="module" src="../js/loader.js"></script>
+    <script type="module" src="../js/category.js"></script>
     <script
       src="https://kit.fontawesome.com/0334ff4491.js"
       crossorigin="anonymous"
@@ -40,18 +40,18 @@
         </ul>
       </nav>
     </header>
+    <main>
+      <div>
+        <label for="searchInput" class="hidden">Search:</label>
+        <input type="text" id="searchInput" placeholder="Search" />
+      </div>
+      <div id="categoryDropdownContainer"></div>
+      <p></p>
+      <div id="loader" class="loader"></div>
 
-    <div>
-      <label for="searchInput" class="hidden">Search:</label>
-      <input type="text" id="searchInput" placeholder="Search" />
-    </div>
-    <div id="categoryDropdownContainer"></div>
-    <p></p>
-    <div id="loader" class="loader"></div>
-
-    <div class="post-list"></div>
-
-    <footer role="contentinfo">
+      <div class="post-list"></div>
+    </main>
+    <footer>
       <div class="some">
         <a href="https://www.facebook.com/lykkeogliten/">
           <span class="visually-hidden">Visit our Facebook page</span>
@@ -81,6 +81,6 @@
           <i class="fa-solid fa-phone"></i>
         </a>
       </div>
-    </footer
+    </footer>
   </body>
 </html>
