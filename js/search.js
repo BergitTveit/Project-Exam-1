@@ -12,7 +12,7 @@ export async function fetchPostsAccordingToSearch(searchText) {
   const filteredPosts = allPosts.filter(
     (post) => post.title.toLowerCase().includes(searchText.toLowerCase()) //check parameters (ADDED RENDERED)
   );
-  console.log("Filtered Posts:", filteredPosts);
+
   return filteredPosts;
 }
 
@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (storedSearchValue) {
     search.value = storedSearchValue;
     const filteredPosts = await fetchPostsAccordingToSearch(storedSearchValue);
-    console.log("Filtered posts on Load:", filteredPosts);
     displayPosts(filteredPosts, ".post-list");
   }
 });
