@@ -35,15 +35,12 @@ addEventListener("resize", () => {
 // Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
 export async function sliderBlogPosts(
   containerSelector,
-  backAndNextButtons,
-  fetchSlidesSourceCallback
+  fetchPostsSourceCallback
 ) {
   const sliderContainer = document.querySelector(containerSelector);
 
-  const backAndNextButtons = { leftArrow, rightArrow };
-
-  const backBtn = createElement("img", { src: leftArrow });
-  const nextBtn = createElement("img", { src: rightArrow });
+  const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
+  const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
 
   const sliderWrapper = document.createElement("div");
   sliderWrapper.classList.add("slider-wrapper");
@@ -52,10 +49,10 @@ export async function sliderBlogPosts(
   try {
     showLoader();
 
-    if (typeof fetchSlidesSourceCallback === "function") {
-      posts = await fetchSlidesSourceCallback();
+    if (typeof fetchPostsSourceCallback === "function") {
+      posts = await fetchPostsSourceCallback();
     } else {
-      throw new Error("fetchSLidesCallback is not a function");
+      throw new Error("fetchPostsSourceCallback is not a function");
     }
   } catch (error) {
     sliderContainer.innerHTML = handleError(" Unable to load posts slider");
@@ -105,7 +102,7 @@ function createElement(tag, options) {
 
 // Loading content..... /////////////////
 document.addEventListener("DOMContentLoaded", async () => {
-  await sliderBlogPosts();
+  await sliderBlogPosts(".slider-container", fetchPostsSortedByDate);
 });
 
 //HOMEPAGE SLIDER

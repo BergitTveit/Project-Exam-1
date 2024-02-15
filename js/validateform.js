@@ -34,6 +34,7 @@ export function validatePhone(phoneNumberId) {
   let phoneRegex = /^(9|4)\d{7}$/;
   if (!phoneRegex.test(phoneElement.value)) {
     changeColorIfNotValid(phoneElement);
+
     return false;
   }
 
