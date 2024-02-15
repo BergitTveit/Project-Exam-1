@@ -9,10 +9,10 @@ const spaceBetweenPost = 20;
 const widthArrows = 64 * 2;
 
 let containerPostsCapasity;
-calculatePostsCapasity();
+calculatePostsCapacity();
 
 // Finds gow many posts to display on device, for dynamic scaling ////////////////////////////
-function calculatePostsCapasity() {
+function calculatePostsCapacity() {
   const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
 
   const widthWithoutArrows = width - widthArrows;
@@ -26,31 +26,37 @@ function calculatePostsCapasity() {
 addEventListener("resize", () => {
   const previousCapasity = containerPostsCapasity;
 
-  calculatePostsCapasity();
+  calculatePostsCapacity();
   if (previousCapasity !== containerPostsCapasity) {
-    sliderBlogPosts();
+    sliderBlogPosts(fetchPostsSortedByDate);
   }
 });
 
 // Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
 export async function sliderBlogPosts(
   containerSelector,
-  slidesToShow,
-  moveSliderButtons
+  backAndNextButtons,
+  fetchSlidesSourceCallback
 ) {
-  const sliderContainer = document.querySelector(".slider-container");
-  const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
-  const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
+  const sliderContainer = document.querySelector(containerSelector);
+
+  const backAndNextButtons = { leftArrow, rightArrow };
+
+  const backBtn = createElement("img", { src: leftArrow });
+  const nextBtn = createElement("img", { src: rightArrow });
+
   const sliderWrapper = document.createElement("div");
   sliderWrapper.classList.add("slider-wrapper");
-
-  console.log(containerPostsCapasity);
 
   let posts;
   try {
     showLoader();
 
-    posts = await fetchPostsSortedByDate();
+    if (typeof fetchSlidesSourceCallback === "function") {
+      posts = await fetchSlidesSourceCallback();
+    } else {
+      throw new Error("fetchSLidesCallback is not a function");
+    }
   } catch (error) {
     sliderContainer.innerHTML = handleError(" Unable to load posts slider");
     hideLoader();
