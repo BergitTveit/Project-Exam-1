@@ -1,7 +1,9 @@
 /* IMPORTED STYLESHEETS */
+@import url(about.css);
 @import url(blogdetails.css);
 @import url(bloglist.css);
 @import url(body.css);
+
 @import url(footer.css);
 @import url(form.css);
 @import url(loader.css);

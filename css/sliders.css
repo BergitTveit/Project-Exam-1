@@ -10,3 +10,16 @@
   overflow-x: auto;
   gap: 20px;
 }
+
+.homepage-slider {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  width: 500px;
+}
+.homepage-slider-wrapper {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  width: 500px;
+}

@@ -28,17 +28,21 @@ addEventListener("resize", () => {
 
   calculatePostsCapacity();
   if (previousCapasity !== containerPostsCapasity) {
-    sliderBlogPosts(fetchPostsSortedByDate);
+    sliderBlogPosts(".slider-container", fetchPostsSortedByDate);
   }
 });
 
 // Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
+
 export async function sliderBlogPosts(
   containerSelector,
   fetchPostsSourceCallback
 ) {
-  const sliderContainer = document.querySelector(containerSelector);
-
+  const container = document.querySelector(containerSelector);
+  if (!container) {
+    console.error("Container not found.");
+    return;
+  }
   const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
   const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
 
@@ -55,19 +59,23 @@ export async function sliderBlogPosts(
       throw new Error("fetchPostsSourceCallback is not a function");
     }
   } catch (error) {
-    sliderContainer.innerHTML = handleError(" Unable to load posts slider");
+    container.innerHTML = handleError(" Unable to load posts slider");
     hideLoader();
     return;
   }
   hideLoader();
-  sliderContainer.innerHTML = "";
+  container.innerHTML = "";
 
-  backBtn.addEventListener("click", () => moveSlider(posts, -1));
-  nextBtn.addEventListener("click", () => moveSlider(posts, 1));
+  backBtn.addEventListener("click", () =>
+    moveSlider(posts, -1, ".slider-wrapper", calculatePostsCapacity)
+  );
+  nextBtn.addEventListener("click", () =>
+    moveSlider(posts, 1, ".slider-wrapper", calculatePostsCapacity)
+  );
 
-  sliderContainer.appendChild(backBtn);
-  sliderContainer.appendChild(sliderWrapper);
-  sliderContainer.appendChild(nextBtn);
+  container.appendChild(backBtn);
+  container.appendChild(sliderWrapper);
+  container.appendChild(nextBtn);
 
   displayPosts(
     posts.slice(currentIndex, currentIndex + containerPostsCapasity),
@@ -75,25 +83,26 @@ export async function sliderBlogPosts(
     containerPostsCapasity
   );
 }
+
 // Move Slider //////////////////////////////////////////////////////////////////
-function moveSlider(posts, direction) {
+export function moveSlider(items, direction, containerSelector, capacity) {
   currentIndex += direction;
   if (currentIndex < 0) {
     currentIndex = 0;
-  } else if (currentIndex > posts.length - containerPostsCapasity) {
-    currentIndex = posts.length - containerPostsCapasity;
+  } else if (currentIndex > items.length - containerPostsCapasity) {
+    currentIndex = items.length - containerPostsCapasity;
   }
 
-  const visiblePosts = posts.slice(
+  const visibleItems = items.slice(
     currentIndex,
     currentIndex + containerPostsCapasity
   );
-  const displayContainer = document.querySelector(".slider-wrapper");
+  const displayContainer = document.querySelector(containerSelector);
   displayContainer.innerHTML = "";
-  displayPosts(visiblePosts, ".slider-wrapper", containerPostsCapasity);
+  displayPosts(visibleItems, containerSelector, containerPostsCapasity);
 }
 
-function createElement(tag, options) {
+export function createElement(tag, options) {
   const element = document.createElement(tag);
 
   Object.assign(element, options);
@@ -104,6 +113,3 @@ function createElement(tag, options) {
 document.addEventListener("DOMContentLoaded", async () => {
   await sliderBlogPosts(".slider-container", fetchPostsSortedByDate);
 });
-
-//HOMEPAGE SLIDER
-// WIDTH = device width
