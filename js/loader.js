@@ -4,7 +4,7 @@ export function showLoader() {
   loader.style.display = "block";
 }
 
-export function hideLoader() {
-  const loader = document.getElementById("loader");
-  loader.style.display = "none";
-}
+// export function hideLoader() {
+//   const loader = document.getElementById("loader");
+//   loader.style.display = "none";
+// }
