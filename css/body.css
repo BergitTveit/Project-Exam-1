@@ -6,7 +6,13 @@ body {
   justify-content: center;
   margin: 0;
 }
-
+header {
+  position: absolute;
+  top: 1vh;
+  width: 100%;
+  background-color: #fff;
+  z-index: 2;
+}
 h1 {
   font-size: 32px;
   font-weight: 700;
@@ -63,6 +69,7 @@ nav {
 .topnav {
   display: none;
 }
+
 @media screen and (max-width: 767px) {
   .nav-style {
     display: none;

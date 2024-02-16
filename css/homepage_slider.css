@@ -6,7 +6,6 @@
   align-items: center;
   max-height: auto;
   position: relative;
-  z-index: 2;
 }
 .homepage-slider-wrapper {
   position: relative;
@@ -31,8 +30,8 @@ button {
   right: 10px;
 }
 
-@media screen and (max-width: 767px) {
+/* @media screen and (max-width: 767px) {
   .homepage-background {
     max-height: 30vh;
   }
-}
+} */
