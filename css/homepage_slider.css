@@ -4,6 +4,7 @@
   overflow-x: auto;
 }
 .homepage-slider-wrapper {
+  position: relative;
   display: flex;
   flex-direction: row;
   overflow-x: auto;

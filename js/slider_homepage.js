@@ -5,8 +5,8 @@ import { hideLoader } from "./loader.js";
 import { moveSlider, createElement } from "./sliders.js";
 
 export const homepageImages = ["homepage1", "homepage2", "homepage3"];
+let HPImages = [];
 let currentIndex = 0;
-
 export async function wholeScreenImageSlider(containerSelector) {
   const container = document.querySelector(containerSelector);
 
@@ -17,26 +17,29 @@ export async function wholeScreenImageSlider(containerSelector) {
 
   const sliderWrapper = document.createElement("div");
   sliderWrapper.classList.add("homepage-slider-wrapper");
+
   try {
     hideLoader();
     container.innerHTML = "";
 
     // Fetching image URLs
-    const HPImages = await Promise.all(
+    const imageUrls = await Promise.all(
       homepageImages.map((imageName) => imageUrlByName(imageName))
     );
+
     // create img with width
-    console.log("ELEMENTS:::::", HPImages.id);
+
     const width = getDeviceWidth();
 
-    HPImages.forEach((imageUrl) => {
+    imageUrls.forEach((imageUrl, index) => {
       const imgElement = document.createElement("img");
       imgElement.src = imageUrl;
       imgElement.style.width = "100%";
-      console.log("IMG ELEMENT", imgElement, imgElement.id);
-      setAttributeWidth(imgElement, width);
+      imgElement.style.display = index === 0 ? "block" : "none";
       sliderWrapper.appendChild(imgElement);
+      HPImages.push(imgElement);
     });
+
     container.appendChild(sliderWrapper);
 
     // Adding event listener for window resize
@@ -45,14 +48,50 @@ export async function wholeScreenImageSlider(containerSelector) {
       HPImages.forEach((imgElement) => {
         setAttributeWidth(imgElement, w);
       });
-
-      container.appendChild(sliderWrapper);
     });
+    window.addEventListener("keydown", handleKeyboardNavigation);
+
+    const prevButton = createNavigationButton("Previous", showPrevImage);
+    container.appendChild(prevButton);
+    container.appendChild(sliderWrapper);
+    const nextButton = createNavigationButton("Next", showNextImage);
+    container.appendChild(nextButton);
+
+    function handleKeyboardNavigation(event) {
+      if (event.key === "ArrowRight") {
+        showNextImage();
+      } else if (event.key === "ArrowLeft") {
+        showPrevImage();
+      }
+    }
   } catch (error) {
     container.innerHTML = handleError(" Unable to load homepage images");
     hideLoader();
     return;
   }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await wholeScreenImageSlider(".homepage-slider");
+});
+
+function showNextImage() {
+  HPImages[currentIndex].style.display = "none";
+  currentIndex = (currentIndex + 1) % HPImages.length;
+  HPImages[currentIndex].style.display = "block";
+}
+
+function showPrevImage() {
+  HPImages[currentIndex].style.display = "none";
+  currentIndex = (currentIndex - 1 + HPImages.length) % HPImages.length;
+  HPImages[currentIndex].style.display = "block";
+}
+
+function createNavigationButton(text, clickHandler) {
+  const button = document.createElement("button");
+  button.textContent = text;
+  button.addEventListener("click", clickHandler);
+  return button;
 }
 
 function getDeviceWidth() {
@@ -62,15 +101,3 @@ function getDeviceWidth() {
 function setAttributeWidth(element, width) {
   element.width = width;
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-  await wholeScreenImageSlider(".homepage-slider");
-});
-
-// backBtn.addEventListener("click", () =>
-//   moveSlider(HPImages, -1, ".homepage-slider-wrapper")
-// );
-// nextBtn.addEventListener("click", () =>
-//   moveSlider(HPImages, 1, ".homepage-slider-wrapper")
-// );
-// container.appendChild(backBtn); // container.appendChild(nextBtn);
