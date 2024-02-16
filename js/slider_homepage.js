@@ -5,9 +5,10 @@ import { hideLoader } from "./loader.js";
 import { moveSlider, createElement } from "./sliders.js";
 
 export const homepageImages = ["homepage1", "homepage2", "homepage3"];
+const aboutImages = ["About_me"];
 let HPImages = [];
 let currentIndex = 0;
-export async function wholeScreenImageSlider(containerSelector) {
+export async function imageSlider(containerSelector, imageNames) {
   const container = document.querySelector(containerSelector);
 
   if (!container) {
@@ -24,7 +25,7 @@ export async function wholeScreenImageSlider(containerSelector) {
 
     // Fetching image URLs
     const imageUrls = await Promise.all(
-      homepageImages.map((imageName) => imageUrlByName(imageName))
+      imageNames.map((imageName) => imageUrlByName(imageName))
     );
 
     // create img with width
@@ -82,9 +83,11 @@ export async function wholeScreenImageSlider(containerSelector) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await wholeScreenImageSlider(".homepage-slider");
+  await imageSlider(".homepage-slider", homepageImages);
 });
-
+document.addEventListener("DOMContentLoaded", async () => {
+  await imageSlider(".about-slider", aboutImages);
+});
 function showNextImage() {
   HPImages[currentIndex].style.display = "none";
   currentIndex = (currentIndex + 1) % HPImages.length;

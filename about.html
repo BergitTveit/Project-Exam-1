@@ -16,6 +16,7 @@
     <script type="module" src="./js/errors.js"></script>
 
     <script type="module" src="./js/loader.js"></script>
+    <script type="module" src="./js/slider_homepage.js"></script>
     <script
       src="https://kit.fontawesome.com/0334ff4491.js"
       crossorigin="anonymous"
@@ -40,7 +41,7 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav class="nav-style">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -49,11 +50,27 @@
           <li><a href="location.html">Location</a></li>
         </ul>
       </nav>
+
+      <div class="topnav">
+        <a href="#home" class="active">Home</a>
+
+        <div id="myLinks">
+          <a href="about.html">About</a>
+          <a href="bloglist/index.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="location.html">Location</a>
+        </div>
+
+        <a href="#" class="icon" id="menuToggle">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     </header>
     <main>
       <div id="loader" class="loader"></div>
       <section class="about">
-        <h2>About Us</h2>
+        <div class="about-slider"></div>
+        <h1>About Lykke og Liten</h1>
         <div></div>
       </section>
     </main>
