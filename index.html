@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lykke og liten</title>
+    <meta property="og:title" content="Lykke og liten - Skredder i Haugesund" />
+    <meta
+      property="og:description"
+      content="Professional tailoring services in Haugesund. Specializing in adjusting bridal gowns, suits, and other custom sewing projects."
+    />
+    <meta
+      property="og:url"
+      content="https://roaring-halva-10c5cb.netlify.app/"
+    />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://roaring-halva-10c5cb.netlify.app/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Lykke og liten",
+        "description": "Professional tailoring services in Haugesund. Specializing in adjusting bridal gowns, suits, and other custom sewing projects.",
+        "url": "https://roaring-halva-10c5cb.netlify.app/",
+
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Haugesund",
+          "postalCode": "5527",
+          "streetAddress": "Haraldsgata 139"
+        },
+        "telephone": "+4791583211"
+      }
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
       rel="stylesheet"
@@ -18,6 +46,7 @@
     <script type="module" src="./js/loader.js"></script>
     <script type="module" src="./js/sliders.js"></script>
     <script type="module" src="./js/slider_homepage.js"></script>
+    <script type="module" src="./js/mobilemenu.js"></script>
     <script
       src="https://kit.fontawesome.com/0334ff4491.js"
       crossorigin="anonymous"
@@ -51,14 +80,29 @@
           <li><a href="location.html">Location</a></li>
         </ul>
       </nav>
+
+      <div class="topnav">
+        <a href="#home" class="active">Home</a>
+
+        <div id="myLinks">
+          <a href="about.html">About</a>
+          <a href="bloglist/index.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="location.html">Location</a>
+        </div>
+
+        <a href="#" class="icon" id="menuToggle">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     </header>
     <main>
       <div id="loader" class="loader"></div>
 
-      <div>
+      <!-- <div>
         <label for="searchInput" class="visually-hidden">Search:</label>
         <input type="text" id="searchInput" placeholder="Search" />
-      </div>
+      </div> -->
       <section class="homepage-background">
         <div class="homepage-slider"></div>
       </section>

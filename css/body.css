@@ -4,11 +4,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0;
 }
 
 h1 {
   font-size: 32px;
-  font-weight: 7000;
+  font-weight: 700;
 }
 
 h2 {
@@ -40,7 +41,7 @@ p {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
+/* /////////////////////////////////////////////////////////////////////////////////// */
 nav ul {
   justify-content: center;
   display: flex;
@@ -55,4 +56,68 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: black;
+}
+nav {
+  position: relative;
+}
+.topnav {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .nav-style {
+    display: none;
+  }
+  .topnav {
+    display: block;
+    margin-top: 0;
+    overflow: hidden;
+    background-color: white;
+    position: relative;
+    width: 100vw;
+  }
+
+  /* Hide the links inside the navigation menu (except for logo/home) */
+  .topnav #myLinks {
+    display: none;
+  }
+
+  /* Style navigation menu links */
+  .topnav a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+  }
+  .topnav #myLinks a {
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+  }
+  /* Style the hamburger menu */
+  .topnav a.icon {
+    background: #d4bdbc;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav .icon {
+    color: rgb(255, 255, 255); /* Change this to the desired color */
+  }
+  /* Add a grey background color on mouse-over */
+  .topnav a:hover {
+    background-color: #d4bdbc;
+    color: black;
+  }
+  .topnav #myLinks.show {
+    display: block;
+  }
+  /* Style the active link (or home/logo) */
+  .active {
+    background-color: #fff;
+    color: black;
+  }
 }
