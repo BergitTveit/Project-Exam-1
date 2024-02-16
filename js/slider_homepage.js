@@ -1,13 +1,13 @@
 import { imageUrlByName } from "./api.js";
 import { handleError } from "./errors.js";
 import { hideLoader } from "./loader.js";
-import { displayPosts } from "./render-bloglist.js";
+
 import { moveSlider, createElement } from "./sliders.js";
 
 export const homepageImages = ["homepage1", "homepage2", "homepage3"];
 let currentIndex = 0;
 
-export async function wholescreenImageSlider(containerSelector) {
+export async function wholeScreenImageSlider(containerSelector) {
   const container = document.querySelector(containerSelector);
 
   if (!container) {
@@ -15,42 +15,62 @@ export async function wholescreenImageSlider(containerSelector) {
     return;
   }
 
-  const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
-  const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
-
   const sliderWrapper = document.createElement("div");
   sliderWrapper.classList.add("homepage-slider-wrapper");
+  try {
+    hideLoader();
+    container.innerHTML = "";
 
-  // try {
-  hideLoader();
-  container.innerHTML = "";
-  const HPImages = await Promise.all(
-    homepageImages.map((imageName) => imageUrlByName(imageName))
-  );
-  console.log(HPImages);
+    // Fetching image URLs
+    const HPImages = await Promise.all(
+      homepageImages.map((imageName) => imageUrlByName(imageName))
+    );
+    // create img with width
+    console.log("ELEMENTS:::::", HPImages.id);
+    const width = getDeviceWidth();
 
-  backBtn.addEventListener("click", () =>
-    moveSlider(HPImages, -1, ".homepage-slider-wrapper")
-  );
-  nextBtn.addEventListener("click", () =>
-    moveSlider(HPImages, 1, ".homepage-slider-wrapper")
-  );
+    HPImages.forEach((imageUrl) => {
+      const imgElement = document.createElement("img");
+      imgElement.src = imageUrl;
+      imgElement.style.width = "100%";
+      console.log("IMG ELEMENT", imgElement, imgElement.id);
+      setAttributeWidth(imgElement, width);
+      sliderWrapper.appendChild(imgElement);
+    });
+    container.appendChild(sliderWrapper);
 
-  container.appendChild(backBtn);
-  container.appendChild(sliderWrapper);
-  container.appendChild(nextBtn);
-  HPImages.forEach((imageUrl) => {
-    const imgElement = createElement("img", { src: imageUrl });
-    sliderWrapper.appendChild(imgElement);
-  });
+    // Adding event listener for window resize
+    window.addEventListener("resize", () => {
+      const w = getDeviceWidth();
+      HPImages.forEach((imgElement) => {
+        setAttributeWidth(imgElement, w);
+      });
 
-  // } catch (error) {
-  //   container.innerHTML = handleError(" Unable to load homepage images");
-  //   hideLoader();
-  //   return;
-  // }
+      container.appendChild(sliderWrapper);
+    });
+  } catch (error) {
+    container.innerHTML = handleError(" Unable to load homepage images");
+    hideLoader();
+    return;
+  }
+}
+
+function getDeviceWidth() {
+  return window.innerWidth > 0 ? window.innerWidth : screen.width;
+}
+
+function setAttributeWidth(element, width) {
+  element.width = width;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await wholescreenImageSlider(".homepage-slider");
+  await wholeScreenImageSlider(".homepage-slider");
 });
+
+// backBtn.addEventListener("click", () =>
+//   moveSlider(HPImages, -1, ".homepage-slider-wrapper")
+// );
+// nextBtn.addEventListener("click", () =>
+//   moveSlider(HPImages, 1, ".homepage-slider-wrapper")
+// );
+// container.appendChild(backBtn); // container.appendChild(nextBtn);

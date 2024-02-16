@@ -1,12 +1,10 @@
-.slider-container {
+.homepage-slider {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
 }
-
-.slider-wrapper {
+.homepage-slider-wrapper {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  gap: 20px;
 }
