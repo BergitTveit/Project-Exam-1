@@ -26,7 +26,7 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav class="nav-style">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -43,13 +43,30 @@
         <label for="searchInput" class="visually-hidden">Search:</label>
         <input type="text" id="searchInput" placeholder="Search" />
       </div>
-
-      <input id="bridal" type="radio" name="slider" checked />
-      <input id="custom" type="radio" name="slider" />
-      <input id="personal" type="radio" name="slider" />
-
-      <section class="homepage-slider"></section>
+      <section class="homepage-background">
+        <div class="homepage-slider"></div>
+      </section>
+      <br />
       <section class="slider-container"></section>
+      <section class="video">
+        <div>
+          <video width="360" height="640" controls>
+            <source
+              src="assets/LykkeOgLitenSkjole.mov"
+              type="video/quicktime"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="video-text">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+            quod reprehenderit ullam libero id doloribus consequuntur enim iure
+            consectetur cumque iusto rerum numquam maiores accusamus hic,
+            distinctio quas doloremque fuga.
+          </p>
+        </div>
+      </section>
     </main>
 
     <footer>

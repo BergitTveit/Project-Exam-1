@@ -1,11 +1,38 @@
 .homepage-slider {
+  margin: 0;
   display: flex;
   flex-direction: row;
   overflow-x: auto;
+  align-items: center;
+  max-height: auto;
+  position: relative;
+  z-index: 2;
 }
 .homepage-slider-wrapper {
   position: relative;
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+
+  position: relative;
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+#prevBtn {
+  left: 10px;
+}
+
+#nextBtn {
+  right: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .homepage-background {
+    max-height: 30vh;
+  }
 }

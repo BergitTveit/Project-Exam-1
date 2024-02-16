@@ -51,10 +51,20 @@ export async function wholeScreenImageSlider(containerSelector) {
     });
     window.addEventListener("keydown", handleKeyboardNavigation);
 
-    const prevButton = createNavigationButton("Previous", showPrevImage);
+    const prevButton = createNavigationButton(
+      "Previous",
+      showPrevImage,
+      "prvBtn",
+      "prev-button"
+    );
     container.appendChild(prevButton);
     container.appendChild(sliderWrapper);
-    const nextButton = createNavigationButton("Next", showNextImage);
+    const nextButton = createNavigationButton(
+      "Next",
+      showNextImage,
+      "nextBtn",
+      "next-button"
+    );
     container.appendChild(nextButton);
 
     function handleKeyboardNavigation(event) {
@@ -87,10 +97,12 @@ function showPrevImage() {
   HPImages[currentIndex].style.display = "block";
 }
 
-function createNavigationButton(text, clickHandler) {
+function createNavigationButton(text, clickHandler, id, className) {
   const button = document.createElement("button");
   button.textContent = text;
   button.addEventListener("click", clickHandler);
+  button.classList.add(className);
+  button.id = id;
   return button;
 }
 
