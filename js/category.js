@@ -29,7 +29,9 @@ export async function renderCategoryDropdown(containerId) {
     .getElementById(containerId)
     .addEventListener("change", async (event) => {
       try {
-        const postListContainer = document.querySelector(".post-list");
+        const postListContainer = document.querySelector(
+          ".blog-list-container"
+        );
         postListContainer.innerHTML = "";
         renderPosts();
       } catch (error) {

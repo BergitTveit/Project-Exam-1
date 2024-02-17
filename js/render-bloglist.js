@@ -1,37 +1,48 @@
-// Render single post card.
-export async function displayPost(post, displaySectionName) {
-  const displayContainer = document.querySelector(displaySectionName);
-
-  const postElements = document.createElement("div");
-  postElements.classList.add("post-item");
-
+function createPostElement(post) {
   const postElement = document.createElement("a");
   postElement.href = `/blogdetails/index.html?id=${post.id}`;
   postElement.classList.add("post-link");
 
   if (post.img) {
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("listImgContainer");
     const imgElement = document.createElement("img");
     imgElement.src = post.img;
-    imgElement.classList.add("img-postlist");
-    postElement.append(imgElement);
+    imgElement.classList.add("list-img");
+    imgContainer.appendChild(imgElement);
+    postElement.appendChild(imgContainer);
   }
-  const title = document.createElement("h4");
-  title.textContent = post.title;
+  const maxChar = 100;
+  const contentContainer = document.createElement("div");
+  contentContainer.classList.add("content-container");
 
-  postElement.appendChild(title);
-  postElements.append(postElement);
+  const titleElement = document.createElement("h4");
+  titleElement.textContent = post.title;
+  contentContainer.appendChild(titleElement);
 
-  if (displayContainer) {
-    displayContainer.appendChild(postElements);
-  } else {
-    console.error("Display container not found");
-  }
+  const introElement = document.createElement("div");
+  introElement.innerHTML =
+    post.content.length > maxChar
+      ? post.content.substring(0, maxChar) + "..."
+      : post.content;
+  contentContainer.appendChild(introElement);
+
+  postElement.appendChild(contentContainer);
+  return postElement;
 }
 
-// Displaying posts in desired outcome in desired place.
-export async function displayPosts(posts, displaySectionName, nrOfPosts = 9) {
+export function displayPosts(posts, displaySectionName, nrOfPosts = 9) {
+  const displayContainer = document.querySelector(displaySectionName);
+  if (!displayContainer) {
+    console.error("Display container not found");
+    return;
+  }
+
   const numberOfPosts = posts.slice(0, nrOfPosts);
   numberOfPosts.forEach((post) => {
-    displayPost(post, displaySectionName);
+    const postCard = document.createElement("div");
+    postCard.classList.add("post-card");
+    postCard.appendChild(createPostElement(post));
+    displayContainer.appendChild(postCard);
   });
 }

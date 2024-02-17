@@ -21,7 +21,8 @@ export async function postsPage() {
 }
 
 export async function renderPosts() {
-  const postListContainer = document.querySelector(".post-list");
+  const postListContainer = document.querySelector(".blog-list-container");
+  const loadMoreContainer = document.getElementById("load-more");
   try {
     showLoader();
 
@@ -46,24 +47,26 @@ export async function renderPosts() {
   hideLoader();
   postListContainer.innerHTML = "";
 
-  displayPosts(posts, ".post-list", numberOfPostsToDisplay);
+  displayPosts(posts, ".blog-list-container", numberOfPostsToDisplay);
 
   if (posts.length > numberOfPostsToDisplay) {
     const loadMoreBtn = document.createElement("button");
     loadMoreBtn.textContent = "See more";
+    loadMoreBtn.classList.add("load-more-button");
     loadMoreBtn.addEventListener("click", loadMorePosts);
-    postListContainer.appendChild(loadMoreBtn);
+    loadMoreContainer.appendChild(loadMoreBtn);
   }
 }
 
 // Loading more posts. ////////////////////////////////////////
+
 async function loadMorePosts() {
-  const postListContainer = document.querySelector(".post-list");
+  const postListContainer = document.querySelector(".blog-list-container");
   const loadMoreBtn = document.querySelector("button");
 
-  const displayContainer = document.querySelector(".post-list");
+  const displayContainer = document.querySelector(".blog-list-container");
   displayContainer.innerHTML = "";
-  displayPosts(posts, ".post-list", posts.length);
+  displayPosts(posts, ".blog-list-container", posts.length);
 
   loadMoreBtn.style.display = "none";
 }

@@ -56,15 +56,22 @@
       </nav>
     </header>
     <main class="m-top">
-      <div>
-        <label for="searchInput" class="hidden">Search:</label>
-        <input type="text" id="searchInput" placeholder="Search" />
+      <div class="sortposts">
+        <div>
+          <label for="searchInput" class="visually-hidden">Search:</label>
+          <input type="text" id="searchInput" placeholder="Search" />
+        </div>
+
+        <div id="categoryDropdownContainer"></div>
       </div>
-      <div id="categoryDropdownContainer"></div>
       <p></p>
       <div id="loader" class="loader"></div>
-
-      <div class="post-list"></div>
+      <section>
+        <div class="blog-page">
+          <div class="blog-list-container"></div>
+          <div id="load-more"></div>
+        </div>
+      </section>
     </main>
     <footer>
       <div class="some">

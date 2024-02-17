@@ -6,6 +6,7 @@
   align-items: center;
   max-height: auto;
   position: relative;
+  justify-content: center;
 }
 .homepage-slider-wrapper {
   position: relative;
@@ -15,7 +16,7 @@
   position: relative;
 }
 
-button {
+.homepage-slider-wrapper button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

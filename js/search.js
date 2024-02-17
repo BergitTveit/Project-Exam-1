@@ -25,7 +25,7 @@ search.addEventListener("keyup", async function (event) {
     localStorage.setItem("searchValue", searchValue);
 
     const filteredPosts = await fetchPostsAccordingToSearch(searchValue);
-    displayPosts(filteredPosts, ".post-list"); // create class
+    displayPosts(filteredPosts, ".blog-list-container"); // create class
   }, doneTypingInterval);
 });
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (storedSearchValue) {
     search.value = storedSearchValue;
     const filteredPosts = await fetchPostsAccordingToSearch(storedSearchValue);
-    displayPosts(filteredPosts, ".post-list");
+    displayPosts(filteredPosts, ".blog-list-container");
   }
 });
 
