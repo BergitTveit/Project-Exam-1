@@ -44,11 +44,13 @@ export async function sliderBlogPosts(
 
   const backDiv = document.createElement("div");
   const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
+  backBtn.setAttribute("aria-label", "Previous Button");
   backDiv.appendChild(backBtn);
 
   const nextDiv = document.createElement("div");
 
   const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
+  nextBtn.setAttribute("aria-label", "Next Button");
   nextDiv.appendChild(nextBtn);
   const sliderWrapper = document.createElement("div");
   sliderWrapper.classList.add("slider-wrapper");

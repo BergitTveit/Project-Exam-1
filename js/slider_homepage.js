@@ -56,6 +56,7 @@ export async function imageSlider(containerSelector, imageNames) {
       "prvBtn",
       "prev-button"
     );
+    prevButton.setAttribute("aria-label", "Previous Button");
     container.appendChild(prevButton);
     container.appendChild(sliderWrapper);
     const nextButton = createNavigationButton(
@@ -64,6 +65,7 @@ export async function imageSlider(containerSelector, imageNames) {
       "nextBtn",
       "next-button"
     );
+    nextButton.setAttribute("aria-label", "Next Button");
     container.appendChild(nextButton);
 
     function handleKeyboardNavigation(event) {
