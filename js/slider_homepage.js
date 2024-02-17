@@ -2,8 +2,6 @@ import { imageUrlByName } from "./api.js";
 import { handleError } from "./errors.js";
 import { hideLoader } from "./loader.js";
 
-import { moveSlider, createElement } from "./sliders.js";
-
 export const homepageImages = ["homepage1", "homepage2", "homepage3"];
 const aboutImages = ["About_me"];
 let HPImages = [];
@@ -53,7 +51,7 @@ export async function imageSlider(containerSelector, imageNames) {
     window.addEventListener("keydown", handleKeyboardNavigation);
 
     const prevButton = createNavigationButton(
-      "Previous",
+      "",
       showPrevImage,
       "prvBtn",
       "prev-button"
@@ -61,7 +59,7 @@ export async function imageSlider(containerSelector, imageNames) {
     container.appendChild(prevButton);
     container.appendChild(sliderWrapper);
     const nextButton = createNavigationButton(
-      "Next",
+      "",
       showNextImage,
       "nextBtn",
       "next-button"

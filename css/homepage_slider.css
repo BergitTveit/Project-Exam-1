@@ -16,18 +16,36 @@
   position: relative;
 }
 
-.homepage-slider-wrapper button {
+.homepage-slider button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
 }
 
-#prevBtn {
+#prvBtn {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.3;
+  border: none;
   left: 10px;
+}
+#prvBtn:hover,
+#nextBtn:hover {
+  background-color: #d4bdbc;
 }
 
 #nextBtn {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.3;
+  border: none;
   right: 10px;
 }
 

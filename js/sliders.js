@@ -5,7 +5,7 @@ import { handleError } from "./errors.js";
 
 let currentIndex = 0;
 const singlePostWidth = 200;
-const spaceBetweenPost = 20;
+
 const widthArrows = 64 * 2;
 
 let containerPostsCapasity;
@@ -18,7 +18,7 @@ function calculatePostsCapacity() {
   const widthWithoutArrows = width - widthArrows;
 
   containerPostsCapasity = Math.min(
-    Math.floor(widthWithoutArrows / (singlePostWidth + spaceBetweenPost)),
+    Math.floor(widthWithoutArrows / singlePostWidth),
     4
   );
 }
@@ -32,8 +32,6 @@ addEventListener("resize", () => {
   }
 });
 
-// Creating slider, Make more generic, so i can use it for homeslider ////////////******** */
-
 export async function sliderBlogPosts(
   containerSelector,
   fetchPostsSourceCallback
@@ -43,9 +41,15 @@ export async function sliderBlogPosts(
     console.error("Container not found.");
     return;
   }
-  const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
-  const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
 
+  const backDiv = document.createElement("div");
+  const backBtn = createElement("img", { src: "../assets/left_arrow.png" });
+  backDiv.appendChild(backBtn);
+
+  const nextDiv = document.createElement("div");
+
+  const nextBtn = createElement("img", { src: "../assets/right_arrow.png" });
+  nextDiv.appendChild(nextBtn);
   const sliderWrapper = document.createElement("div");
   sliderWrapper.classList.add("slider-wrapper");
 
@@ -73,9 +77,9 @@ export async function sliderBlogPosts(
     moveSlider(posts, 1, ".slider-wrapper", calculatePostsCapacity)
   );
 
-  container.appendChild(backBtn);
+  container.appendChild(backDiv);
   container.appendChild(sliderWrapper);
-  container.appendChild(nextBtn);
+  container.appendChild(nextDiv);
 
   displayPosts(
     posts.slice(currentIndex, currentIndex + containerPostsCapasity),
@@ -84,7 +88,7 @@ export async function sliderBlogPosts(
   );
 }
 
-// Move Slider //////////////////////////////////////////////////////////////////
+// Move Slider
 export function moveSlider(items, direction, containerSelector, capacity) {
   currentIndex += direction;
   if (currentIndex < 0) {
@@ -109,7 +113,6 @@ export function createElement(tag, options) {
   return element;
 }
 
-// Loading content..... /////////////////
 document.addEventListener("DOMContentLoaded", async () => {
   await sliderBlogPosts(".slider-container", fetchPostsSortedByDate);
 });
