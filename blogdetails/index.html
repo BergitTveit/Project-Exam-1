@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link href="../css/index.css" rel="stylesheet" />
+    <script type="module" src="../js/index.js"></script>
     <script type="module" src="../js/api.js"></script>
     <script type="module" src="../js/blogdetails.js"></script>
     <script type="module" src="../js/errors.js"></script>
@@ -46,7 +47,7 @@
   </head>
   <body>
     <header>
-      <nav>
+      <nav class="nav-style">
         <ul>
           <li><a href="../index.html">Home</a></li>
           <li><a href="../about.html">About</a></li>
@@ -55,6 +56,21 @@
           <li><a href="../location.html">Location</a></li>
         </ul>
       </nav>
+
+      <div class="topnav">
+        <a href="../index.html" class="active">Home</a>
+
+        <div id="myLinks">
+          <a href="../about.html">About</a>
+          <a href="../bloglist/index.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+          <a href="../location.html">Location</a>
+        </div>
+
+        <a href="#" class="icon" id="menuToggle">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     </header>
     <main>
       <div>
@@ -70,21 +86,30 @@
 
     <footer>
       <div class="some">
-        <a href="https://www.facebook.com/lykkeogliten/">
+        <a
+          href="https://www.facebook.com/lykkeogliten/"
+          aria-label="Visit our Facebook page"
+        >
           <span class="visually-hidden">Visit our Facebook page</span>
           <i class="fa-brands fa-facebook"></i>
         </a>
       </div>
 
       <div class="some">
-        <a href="https://www.instagram.com/lykkeogliten/">
+        <a
+          href="https://www.instagram.com/lykkeogliten/"
+          aria-label="Visit our Instagram page"
+        >
           <span class="visually-hidden">Visit our Instagram page</span>
           <i class="fa-brands fa-square-instagram"></i>
         </a>
       </div>
 
       <div class="some">
-        <a href="mailto:lykkebooking@gmail.com">
+        <a
+          href="mailto:lykkebooking@gmail.com"
+          aria-label="Email us at lykkebooking@gmail.com"
+        >
           <span class="visually-hidden"
             >Email us at lykkebooking@gmail.com</span
           >
@@ -93,7 +118,7 @@
       </div>
 
       <div class="some">
-        <a href="tel:+4791583211">
+        <a href="tel:+4791583211" aria-label="Call us at +47 915 83 211">
           <span class="visually-hidden">Call us at +47 915 83 211</span>
           <i class="fa-solid fa-phone"></i>
         </a>
