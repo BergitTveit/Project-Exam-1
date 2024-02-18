@@ -1,39 +1,28 @@
-import { fetchPostsSortedByDate } from "../api/fetching_api.js";
 import { displayPosts } from "../render/bloglist.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 import { handleError } from "../utils/errors.js";
 import { createElement } from "../utils/utils.js";
 
 let currentIndex = 0;
-const singlePostWidth = 200;
 
-const widthArrows = 64 * 2;
-
-let containerPostsCapasity;
+export let containerPostsCapacity;
 calculatePostsCapacity();
 
 // Finds gow many posts to display on device, for dynamic scaling ////////////////////////////
-function calculatePostsCapacity() {
+export function calculatePostsCapacity() {
+  const widthArrows = 64 * 2;
+  const singlePostWidth = 200;
   const width = window.innerWidth > 0 ? window.innerWidth : screen.width;
 
   const widthWithoutArrows = width - widthArrows;
 
-  containerPostsCapasity = Math.min(
+  containerPostsCapacity = Math.min(
     Math.floor(widthWithoutArrows / singlePostWidth),
     4
   );
 }
 
-addEventListener("resize", () => {
-  const previousCapasity = containerPostsCapasity;
-
-  calculatePostsCapacity();
-  if (previousCapasity !== containerPostsCapasity) {
-    sliderBlogPosts(".slider-container", fetchPostsSortedByDate);
-  }
-});
-
-export async function sliderBlogPosts(
+export async function displayPostsSlider(
   containerSelector,
   fetchPostsSourceCallback
 ) {
@@ -85,9 +74,9 @@ export async function sliderBlogPosts(
   container.appendChild(nextDiv);
 
   displayPosts(
-    posts.slice(currentIndex, currentIndex + containerPostsCapasity),
+    posts.slice(currentIndex, currentIndex + containerPostsCapacity),
     ".slider-wrapper",
-    containerPostsCapasity
+    containerPostsCapacity
   );
 }
 
@@ -96,19 +85,15 @@ export function moveSlider(items, direction, containerSelector, capacity) {
   currentIndex += direction;
   if (currentIndex < 0) {
     currentIndex = 0;
-  } else if (currentIndex > items.length - containerPostsCapasity) {
-    currentIndex = items.length - containerPostsCapasity;
+  } else if (currentIndex > items.length - containerPostsCapacity) {
+    currentIndex = items.length - containerPostsCapacity;
   }
 
   const visibleItems = items.slice(
     currentIndex,
-    currentIndex + containerPostsCapasity
+    currentIndex + containerPostsCapacity
   );
   const displayContainer = document.querySelector(containerSelector);
   displayContainer.innerHTML = "";
-  displayPosts(visibleItems, containerSelector, containerPostsCapasity);
+  displayPosts(visibleItems, containerSelector, containerPostsCapacity);
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-  await sliderBlogPosts(".slider-container", fetchPostsSortedByDate);
-});

@@ -38,11 +38,8 @@ export const subjectVal = [
   15,
 ];
 
-const imageUrl = await imageUrlByName("Contact_form");
-
 export function displayContactForm() {
   const contactFormContainer = document.querySelector(".section-container");
-  // contactFormContainer.style.backgroundImage = `url("${imageUrl}")`;
 
   const contactForm = document.createElement("form");
   contactForm.id = "contactForm";
@@ -151,7 +148,3 @@ export function displayContactForm() {
   contactForm.appendChild(sendContactFormButton);
   contactForm.appendChild(createLineBreak());
 }
-
-// CREATES THE DIFFERENT INPUTS FOR THE FORM
-
-displayContactForm();

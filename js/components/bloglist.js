@@ -6,10 +6,7 @@ import {
 } from "../api/fetching_api.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 import { handleError } from "../utils/errors.js";
-import {
-  renderCategoryDropdown,
-  isDefaultCategorySelected,
-} from "./category.js";
+import { isDefaultCategorySelected } from "./category.js";
 import { getSelectedCategory } from "../utils/utils.js";
 
 const numberOfPostsToDisplay = 9;
@@ -17,10 +14,6 @@ const categoryDropdownName = "categoryDropdownContainer";
 
 let posts;
 // Creating the posts page for all posts, initially show 9 posts.////////////////
-export async function postsPage() {
-  await renderCategoryDropdown(categoryDropdownName);
-  await renderPosts();
-}
 
 export async function renderPosts() {
   const postListContainer = document.querySelector(".blog-list-container");
@@ -72,5 +65,3 @@ async function loadMorePosts() {
 
   loadMoreBtn.style.display = "none";
 }
-
-postsPage();

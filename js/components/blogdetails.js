@@ -19,16 +19,6 @@ export async function updatePageTitle(postId) {
   }
 }
 
-document.addEventListener("click", async (event) => {
-  if (event.target.classList.contains("post-link")) {
-    event.preventDefault();
-
-    const postId = new URL(event.target.href).searchParams.get("id");
-
-    await updatePageTitle(postId);
-  }
-});
-
 // Creating the detail page for single post.
 
 export async function postDetailPage() {
@@ -51,5 +41,3 @@ export async function postDetailPage() {
     postDetailsContainer.innerHTML = "Unable to fetch post details.";
   }
 }
-
-postDetailPage();

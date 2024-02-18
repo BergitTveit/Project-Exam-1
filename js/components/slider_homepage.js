@@ -1,12 +1,10 @@
 import { imageUrlByName } from "../api/api.js";
 import { handleError } from "../utils/errors.js";
-import { hideLoader } from "../utils/loader.js";
+import { showLoader, hideLoader } from "../utils/loader.js";
 
-export const homepageImages = ["homepage1", "homepage2", "homepage3"];
-const aboutImages = ["About_me"];
 let HPImages = [];
 let currentIndex = 0;
-export async function imageSlider(containerSelector, imageNames) {
+export async function displayBigBannerSlider(containerSelector, imageNames) {
   const container = document.querySelector(containerSelector);
 
   if (!container) {
@@ -18,7 +16,7 @@ export async function imageSlider(containerSelector, imageNames) {
   sliderWrapper.classList.add("homepage-slider-wrapper");
 
   try {
-    hideLoader();
+    showLoader();
     container.innerHTML = "";
 
     // Fetching image URLs
@@ -80,14 +78,9 @@ export async function imageSlider(containerSelector, imageNames) {
     hideLoader();
     return;
   }
+  hideLoader();
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await imageSlider(".homepage-slider", homepageImages);
-});
-document.addEventListener("DOMContentLoaded", async () => {
-  await imageSlider(".about-slider", aboutImages);
-});
 function showNextImage() {
   HPImages[currentIndex].style.display = "none";
   currentIndex = (currentIndex + 1) % HPImages.length;

@@ -27,6 +27,7 @@
   opacity: 0.8;
   padding: 20px;
   text-align: left;
+  display: none;
 }
 .about p {
   font-weight: bolder;
