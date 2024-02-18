@@ -2,15 +2,15 @@ import { displayPosts } from "../render/bloglist.js";
 import {
   fetchPostsSortedByDate,
   fetchPostsAccordingToSearch,
+  fetchPostsByCategory,
 } from "../api/fetching_api.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 import { handleError } from "../utils/errors.js";
 import {
-  fetchPostsByCategory,
-  getSelectedCategory,
   renderCategoryDropdown,
   isDefaultCategorySelected,
 } from "./category.js";
+import { getSelectedCategory } from "../utils/utils.js";
 
 const numberOfPostsToDisplay = 9;
 const categoryDropdownName = "categoryDropdownContainer";

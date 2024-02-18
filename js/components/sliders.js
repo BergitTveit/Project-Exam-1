@@ -2,6 +2,7 @@ import { fetchPostsSortedByDate } from "../api/fetching_api.js";
 import { displayPosts } from "../render/bloglist.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 import { handleError } from "../utils/errors.js";
+import { createElement } from "../utils/utils.js";
 
 let currentIndex = 0;
 const singlePostWidth = 200;
@@ -106,13 +107,6 @@ export function moveSlider(items, direction, containerSelector, capacity) {
   const displayContainer = document.querySelector(containerSelector);
   displayContainer.innerHTML = "";
   displayPosts(visibleItems, containerSelector, containerPostsCapasity);
-}
-
-export function createElement(tag, options) {
-  const element = document.createElement(tag);
-
-  Object.assign(element, options);
-  return element;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
