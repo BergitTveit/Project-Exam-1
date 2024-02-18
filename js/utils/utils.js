@@ -108,9 +108,8 @@ export function createMessageTextArea(messageVal) {
   messageArea.addEventListener("input", function () {
     validateTextField(messageVal.id, messageVal.maxLength);
   });
-  messageArea.style.width = "400px";
-  messageArea.style.height = "100px";
 
+  messageArea.classList.add("message-area");
   return messageArea;
 }
 

@@ -35,7 +35,7 @@
 }
 #prvBtn:hover,
 #nextBtn:hover {
-  background-color: #d4bdbc;
+  background-color: var(--accent-color);
 }
 
 #nextBtn {
