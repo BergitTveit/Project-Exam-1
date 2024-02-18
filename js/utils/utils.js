@@ -108,7 +108,6 @@ export function createMessageTextArea(messageVal) {
   messageArea.addEventListener("input", function () {
     validateTextField(messageVal.id, messageVal.maxLength);
   });
-
   messageArea.classList.add("message-area");
   return messageArea;
 }

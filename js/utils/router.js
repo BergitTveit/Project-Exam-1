@@ -16,13 +16,19 @@ export async function rout() {
     case "/bloglist/index.html":
       loadBlogPage();
       break;
-    case "/about.html":
+    case "/about/":
+    case "/about":
+    case "/about/index.html":
       loadAboutPage();
       break;
-    case "/contact.html":
+    case "/contact/":
+    case "/contact":
+    case "/contact/index.html":
       loadContactPage();
       break;
-    case "/location.html":
+    case "/location/":
+    case "/location":
+    case "/location/index.html":
       loadLocationPage();
       break;
     case "/blogdetails/":
