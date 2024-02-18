@@ -1,4 +1,4 @@
-import { fetchAllPosts } from "../api/api.js";
+import { fetchAllPosts } from "../api/fetching_api.js";
 import { renderPosts } from "./bloglist.js";
 
 const defaultCategory = "-- All Categories --";
@@ -41,32 +41,6 @@ export async function renderCategoryDropdown(containerId) {
 }
 
 ///////////////////////////////////////////////////////////////////
-
-export async function fetchPostsByCategory(targetCategory) {
-  try {
-    const posts = await fetchAllPosts();
-
-    const filteredPosts = posts.filter((post) => {
-      return (
-        post.categories &&
-        post.categories.some(
-          (category) =>
-            category && category.toLowerCase() === targetCategory.toLowerCase()
-        )
-      );
-    });
-
-    return filteredPosts;
-  } catch (error) {
-    console.error("Error fetching posts by category", error);
-  }
-}
-
-export function getSelectedCategory(dropdownName) {
-  const categoryElement = document.getElementById(dropdownName + "Select");
-
-  return categoryElement.options[categoryElement.selectedIndex].label;
-}
 
 export function isDefaultCategorySelected(category) {
   return category === defaultCategory;

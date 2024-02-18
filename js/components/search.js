@@ -1,20 +1,12 @@
-import { fetchAllPosts } from "../api/api.js"; // Create this
 import { displayPosts } from "../render/bloglist.js"; // Create this
+import { fetchPostsAccordingToSearch } from "../api/fetching_api.js"; // Create this
+
 //SEARCH WORKING BUT NOT WORKING ON DETAILS PAGE, check paths
 const search = document.querySelector("#searchInput");
 
 let typeTimer;
 
 const doneTypingInterval = 100;
-
-export async function fetchPostsAccordingToSearch(searchText) {
-  const allPosts = await fetchAllPosts();
-  const filteredPosts = allPosts.filter(
-    (post) => post.title.toLowerCase().includes(searchText.toLowerCase()) //check parameters (ADDED RENDERED)
-  );
-
-  return filteredPosts;
-}
 
 search.addEventListener("keyup", async function (event) {
   clearTimeout(typeTimer);
