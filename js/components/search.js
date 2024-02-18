@@ -1,5 +1,5 @@
 import { fetchAllPosts } from "../api/api.js"; // Create this
-import { displayPosts } from "../render-bloglist.js"; // Create this
+import { displayPosts } from "../render/bloglist.js"; // Create this
 //SEARCH WORKING BUT NOT WORKING ON DETAILS PAGE, check paths
 const search = document.querySelector("#searchInput");
 

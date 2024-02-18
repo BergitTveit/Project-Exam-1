@@ -1,5 +1,5 @@
 import { fetchPostsSortedByDate } from "../api/api.js";
-import { displayPosts } from "../render-bloglist.js";
+import { displayPosts } from "../render/bloglist.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 import { fetchPostsAccordingToSearch } from "./search.js";
 import { handleError } from "../utils/errors.js";

@@ -1,5 +1,5 @@
 import { fetchAllPosts, fetchPostById } from "../api/api.js";
-import { displayPostDetails } from "../render-blogdetails.js";
+import { displayPostDetails } from "../render/blogdetails.js";
 
 // Update page title, for the post entered.
 export async function updatePageTitle(postId) {
