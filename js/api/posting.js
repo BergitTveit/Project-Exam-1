@@ -1,26 +1,34 @@
-import { mediaUrl, commentsUrl } from "../utils/constants.js";
+import { ContactFormUrl, mediaUrl, commentsUrl } from "../utils/constants.js";
 
 export async function sendContactForm(invalidMessage) {
   if (invalidMessage.length === 0) {
-    alert("CONTACT FORM SENT");
-    // try {
-    //   console.log(JSON.stringify(Object.fromEntries(formData)));
-    //   formData.append(" _wpcf7_unit_tag", "randomTagName");
-    //   const response = await fetch(ContactFormUrl.href, {
-    //     method: "POST",
+    try {
+      const formData = new FormData();
 
-    //     body: formData,
-    //   });
-    //   console.log(response);
-    //   if (!response.ok) {
-    //     throw new Error("HTTP Error! Status: ${response.status}");
-    //   }
+      formData.append("firstName", document.getElementById("firstName").value);
+      formData.append("lastName", document.getElementById("lastName").value);
+      formData.append("email", document.getElementById("email").value);
+      formData.append(
+        "phoneNumber",
+        document.getElementById("phoneNumber").value
+      );
+      console.log(JSON.stringify(Object.fromEntries(formData)));
+      formData.append(" _wpcf7_unit_tag", "randomTagName");
+      const response = await fetch(ContactFormUrl.href, {
+        method: "POST",
 
-    //   const data = await response.json();
-    //   console.log("SUCCESS POST CONTACT FORM API ", data);
-    // } catch (error) {
-    //   console.error("ERROR;", error);
-    // }
+        body: formData,
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error("HTTP Error! Status: ${response.status}");
+      }
+
+      const data = await response.json();
+      console.log("SUCCESS POST CONTACT FORM API ", data);
+    } catch (error) {
+      console.error("ERROR;", error);
+    }
   } else {
     alert(invalidMessage);
   }

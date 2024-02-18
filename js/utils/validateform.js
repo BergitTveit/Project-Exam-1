@@ -4,7 +4,8 @@ import {
   emailVal,
   phoneVal,
   subjectVal,
-} from "../components/contactform.js";
+  dateOfWeddingVal,
+} from "../components/contact_form_values.js";
 
 export function validateTextField(fieldId, minLength) {
   const inputField = document.getElementById(fieldId);
@@ -59,25 +60,26 @@ export function validateDateOfWedding(DOWId) {
 
 export function getValidationMessage() {
   let message = "";
-  if (!validateTextField(firstNameVal[3], firstNameVal[4])) {
-    message += "Name field must contain min 5 characters\n";
+  if (!validateTextField(firstNameVal.id, firstNameVal.maxLength)) {
+    message += "Name field must contain at least 5 characters\n";
   }
-  if (!validateTextField(lastNameVal[3], lastNameVal[4])) {
-    message += "Last field must contain min 5 characters\n";
+  if (!validateTextField(lastNameVal.id, lastNameVal.maxLength)) {
+    message += "Last name field must contain at least 5 characters\n";
   }
-  if (!validateEmail(emailVal[2])) {
+  if (!validateEmail(emailVal.id)) {
     message += "Email has wrong format\n";
   }
-  if (!validatePhone(phoneVal[2])) {
+  if (!validatePhone(phoneVal.id)) {
     message += "Phone number has wrong format\n";
   }
-  if (!validateDateOfWedding("dateOfWedding")) {
+  if (!validateDateOfWedding(dateOfWeddingVal.id)) {
     message +=
-      "Online requests must be made three weeks before, if not call.\n";
+      "Online requests must be made three weeks before; if not, please call.\n";
   }
-  if (!validateTextField(subjectVal[3], subjectVal[4])) {
-    message += "Name field must contain min 5 characters\n";
+  if (!validateTextField(subjectVal.id, subjectVal.maxLength)) {
+    message += "Subject field must contain at least 5 characters\n";
   }
+
   return message;
 }
 

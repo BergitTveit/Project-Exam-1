@@ -17,12 +17,12 @@ export function createLineBreak() {
 
 export function createInput(inputVal) {
   const input = document.createElement("input");
-  input.name = inputVal[0];
-  input.type = inputVal[1];
-  input.placeholder = inputVal[2];
-  input.id = inputVal[3];
+  input.name = inputVal.name;
+  input.type = inputVal.type;
+  input.placeholder = inputVal.placeholder;
+  input.id = inputVal.id;
   input.addEventListener("input", function () {
-    validateTextField(inputVal[3], inputVal[4]);
+    validateTextField(inputVal.id, inputVal.maxLength);
   });
 
   return input;
@@ -30,36 +30,36 @@ export function createInput(inputVal) {
 
 export function createEmailInput(emailVal) {
   const emailInput = document.createElement("input");
-  emailInput.name = emailVal[0];
+  emailInput.name = emailVal.name;
   emailInput.type = "email";
-  emailInput.placeholder = emailVal[1];
-  emailInput.id = emailVal[2];
+  emailInput.placeholder = emailVal.placeholder;
+  emailInput.id = emailVal.id;
   emailInput.addEventListener("input", function () {
-    validateEmail(emailVal[2]);
+    validateEmail(emailVal.id);
   });
   return emailInput;
 }
 
 export function createPhoneInput(phoneVal) {
   const phoneInput = document.createElement("input");
-  phoneInput.name = phoneVal[0];
+  phoneInput.name = phoneVal.name;
   phoneInput.type = "tel";
-  phoneInput.placeholder = phoneVal[1];
-  phoneInput.id = phoneVal[2];
+  phoneInput.placeholder = phoneVal.placeholder;
+  phoneInput.id = phoneVal.id;
   phoneInput.addEventListener("input", function () {
-    validatePhone(phoneVal[2]);
+    validatePhone(phoneVal.id);
   });
   return phoneInput;
 }
 
-export function createRadio(name, id, value, label) {
+export function createRadio(radioValues) {
   const radio = document.createElement("input");
   radio.type = "radio";
-  radio.name = name;
-  radio.id = id;
-  radio.value = value;
+  radio.name = radioValues.name;
+  radio.id = radioValues.id;
+  radio.value = radioValues.value;
 
-  const radioLabel = document.createTextNode(" " + label);
+  const radioLabel = document.createTextNode(" " + radioValues.label);
   const container = document.createElement("label");
   container.appendChild(radio);
   container.appendChild(radioLabel);
@@ -67,21 +67,24 @@ export function createRadio(name, id, value, label) {
   return container;
 }
 
-export function createDateInput(name, id, placeholder) {
+export function createDateInput(dateInputValues) {
   const dateInput = document.createElement("input");
-  dateInput.name = name;
+  dateInput.name = dateInputValues.name;
   dateInput.type = "date";
-  dateInput.id = id;
+  dateInput.id = dateInputValues.id;
   dateInput.style.display = "none";
-  dateInput.placeholder = placeholder || "Date of the big day";
+  dateInput.placeholder = dateInputValues.placeholder || "Date of the big day";
 
   dateInput.addEventListener("change", function () {
-    validateDateOfWedding(id);
+    validateDateOfWedding(dateInputValues.id);
   });
+
   return dateInput;
 }
 
-export function createSelect(name, options, id) {
+export function createSelect(selectValues) {
+  const { name, options, id } = selectValues;
+
   const select = document.createElement("select");
   select.name = name;
   select.id = id;
@@ -95,6 +98,20 @@ export function createSelect(name, options, id) {
   });
 
   return select;
+}
+
+export function createMessageTextArea(messageVal) {
+  const messageArea = document.createElement("textarea");
+  messageArea.name = messageVal.name;
+  messageArea.placeholder = messageVal.placeholder;
+  messageArea.id = messageVal.id;
+  messageArea.addEventListener("input", function () {
+    validateTextField(messageVal.id, messageVal.maxLength);
+  });
+  messageArea.style.width = "400px";
+  messageArea.style.height = "100px";
+
+  return messageArea;
 }
 
 export function getSelectedCategory(dropdownName) {
