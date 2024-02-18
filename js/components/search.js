@@ -18,7 +18,6 @@ export async function fetchPostsAccordingToSearch(searchText) {
 
 search.addEventListener("keyup", async function (event) {
   clearTimeout(typeTimer);
-  console.log("TIMEEER", typeTimer);
   typeTimer = setTimeout(async () => {
     const searchValue = event.target.value.trim().toLowerCase();
     location.href = getUrlWithSearchValue(location.href, searchValue);

@@ -225,7 +225,6 @@ function createSelect(name, options, id) {
   const select = document.createElement("select");
   select.name = name;
   select.id = id;
-  console.log("log 1", id);
   select.style.display = "none";
 
   options.forEach((optionText, index) => {
