@@ -3,7 +3,7 @@ import {
   mediaUrl,
   ContactFormUrl,
   commentsUrl,
-} from "./utils/constants.js";
+} from "../utils/constants.js";
 
 // Get all Posts.
 export async function fetchAllPosts() {

@@ -1,4 +1,4 @@
-import { fetchAllPosts, fetchPostById } from "../api.js";
+import { fetchAllPosts, fetchPostById } from "../api/api.js";
 import { displayPostDetails } from "../render-blogdetails.js";
 
 // Update page title, for the post entered.

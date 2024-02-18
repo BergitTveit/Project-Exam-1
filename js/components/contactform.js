@@ -1,4 +1,4 @@
-import { imageUrlByName, sendContactForm } from "../api.js";
+import { imageUrlByName, sendContactForm } from "../api/api.js";
 import {
   validateTextField,
   validateEmail,

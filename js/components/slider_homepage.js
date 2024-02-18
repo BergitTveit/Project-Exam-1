@@ -1,4 +1,4 @@
-import { imageUrlByName } from "../api.js";
+import { imageUrlByName } from "../api/api.js";
 import { handleError } from "../utils/errors.js";
 import { hideLoader } from "../utils/loader.js";
 
