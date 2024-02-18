@@ -33,8 +33,11 @@ export function displayPostDetails(post) {
   postContentContainer.appendChild(imgContainer);
   postContentContainer.appendChild(contentElement);
 }
-
+let modalIsOpen = false;
 function openModal(imgSrc, altTxt) {
+  if (modalIsOpen) {
+    return;
+  }
   const modalContainer = document.createElement("div");
   modalContainer.classList.add("modal-container");
 
@@ -56,11 +59,14 @@ function openModal(imgSrc, altTxt) {
   modalContainer.appendChild(modalText);
   modalContainer.appendChild(closeModalBtn);
   document.body.appendChild(modalContainer);
+  modalIsOpen = true;
+
   document.addEventListener("click", clickOutsideModal);
 }
 
 function closeModal(modalContainer) {
   document.body.removeChild(modalContainer);
+  modalIsOpen = false;
   document.removeEventListener("click", clickOutsideModal);
 }
 
