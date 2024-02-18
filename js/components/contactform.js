@@ -1,11 +1,11 @@
-import { imageUrlByName, sendContactForm } from "./api.js";
+import { imageUrlByName, sendContactForm } from "../api.js";
 import {
   validateTextField,
   validateEmail,
   validatePhone,
   validateDateOfWedding,
   getValidationMessage,
-} from "./utils/validateform.js";
+} from "../utils/validateform.js";
 
 export const firstNameVal = [
   "firstName",

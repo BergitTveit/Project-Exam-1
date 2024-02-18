@@ -1,4 +1,4 @@
-import { postComment } from "./api.js";
+import { postComment } from "../api.js";
 
 export function displayPostDetails() {
   const commentsContainer = document.querySelector(".comments-container");

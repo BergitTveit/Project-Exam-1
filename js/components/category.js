@@ -1,4 +1,4 @@
-import { fetchAllPosts } from "./api.js";
+import { fetchAllPosts } from "../api.js";
 import { renderPosts } from "./bloglist.js";
 
 const defaultCategory = "-- All Categories --";

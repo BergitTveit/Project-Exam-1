@@ -1,6 +1,6 @@
-import { imageUrlByName } from "./api.js";
-import { handleError } from "./utils/errors.js";
-import { hideLoader } from "./utils/loader.js";
+import { imageUrlByName } from "../api.js";
+import { handleError } from "../utils/errors.js";
+import { hideLoader } from "../utils/loader.js";
 
 export const homepageImages = ["homepage1", "homepage2", "homepage3"];
 const aboutImages = ["About_me"];
