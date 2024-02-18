@@ -87,7 +87,7 @@ export function createSelect(name, options, id) {
   select.id = id;
   select.style.display = "none";
 
-  options.forEach((optionText, index) => {
+  options.forEach((optionText) => {
     const option = document.createElement("option");
     select.appendChild(option);
     option.value = optionText;

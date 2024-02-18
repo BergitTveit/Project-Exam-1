@@ -1,4 +1,4 @@
-import { imageUrlByName, sendContactForm } from "../api/api.js";
+import { sendContactForm } from "../api/posting.js";
 import { getValidationMessage } from "../utils/validateform.js";
 import {
   createLineBreak,

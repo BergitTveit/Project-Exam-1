@@ -1,5 +1,5 @@
-import { fetchAllPosts } from "../api/fetching_api.js";
-import { renderPosts } from "./bloglist.js";
+import { fetchAllPosts } from "../api/fetching.js";
+import { buildPostsList } from "./bloglist.js";
 
 const defaultCategory = "-- All Categories --";
 
@@ -33,7 +33,7 @@ export async function renderCategoryDropdown(containerId) {
           ".blog-list-container"
         );
         postListContainer.innerHTML = "";
-        renderPosts();
+        buildPostsList();
       } catch (error) {
         console.error("Error handling filtered posts:", error);
       }

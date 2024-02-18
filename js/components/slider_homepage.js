@@ -1,4 +1,4 @@
-import { imageUrlByName } from "../api/api.js";
+import { fetchImageUrlByName } from "../api/fetching.js";
 import { handleError } from "../utils/errors.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 
@@ -20,7 +20,7 @@ export async function displayBigBannerSlider(containerSelector, imageNames) {
     container.innerHTML = "";
 
     const imageUrls = await Promise.all(
-      imageNames.map((imageName) => imageUrlByName(imageName))
+      imageNames.map((imageName) => fetchImageUrlByName(imageName))
     );
 
     const width = getDeviceWidth();

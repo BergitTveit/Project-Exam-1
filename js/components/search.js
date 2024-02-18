@@ -1,5 +1,5 @@
 import { displayPosts } from "../render/bloglist.js";
-import { fetchPostsAccordingToSearch } from "../api/fetching_api.js";
+import { fetchPostsAccordingToSearch } from "../api/fetching.js";
 
 const search = document.querySelector("#searchInput");
 

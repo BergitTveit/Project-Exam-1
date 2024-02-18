@@ -1,5 +1,5 @@
 import { displayBigBannerSlider } from "../components/slider_homepage.js";
-import { fetchPostsSortedByDate } from "../api/fetching_api.js";
+import { fetchPostsSortedByDate } from "../api/fetching.js";
 import {
   displayPostsSlider,
   calculatePostsCapacity,

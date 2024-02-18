@@ -1,4 +1,4 @@
-import { fetchAllPosts, fetchPostById } from "../api/fetching_api.js";
+import { fetchAllPosts, fetchPostById } from "../api/fetching.js";
 import { displayPostDetails } from "../render/blogdetails.js";
 
 export async function updatePageTitle(postId) {

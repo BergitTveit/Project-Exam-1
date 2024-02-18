@@ -3,7 +3,7 @@ import {
   fetchPostsSortedByDate,
   fetchPostsAccordingToSearch,
   fetchPostsByCategory,
-} from "../api/fetching_api.js";
+} from "../api/fetching.js";
 import { showLoader, hideLoader } from "../utils/loader.js";
 import { handleError } from "../utils/errors.js";
 import { isDefaultCategorySelected } from "./category.js";
@@ -14,7 +14,7 @@ const categoryDropdownName = "categoryDropdownContainer";
 
 let posts;
 
-export async function renderPosts() {
+export async function buildPostsList() {
   const postListContainer = document.querySelector(".blog-list-container");
   const loadMoreContainer = document.getElementById("load-more");
   try {
@@ -53,7 +53,6 @@ export async function renderPosts() {
 }
 
 async function loadMorePosts() {
-  const postListContainer = document.querySelector(".blog-list-container");
   const loadMoreBtn = document.querySelector("button");
 
   const displayContainer = document.querySelector(".blog-list-container");

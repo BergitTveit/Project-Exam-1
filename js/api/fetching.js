@@ -1,9 +1,4 @@
-import {
-  url,
-  mediaUrl,
-  ContactFormUrl,
-  commentsUrl,
-} from "../utils/constants.js";
+import { url, mediaUrl } from "../utils/constants.js";
 
 export async function fetchAllPosts() {
   try {
@@ -53,7 +48,6 @@ export async function fetchPostById(postId) {
   }
 }
 
-//Sort posts by date created.
 export async function fetchPostsSortedByDate(amount) {
   try {
     let posts = await fetchAllPosts();
@@ -71,8 +65,8 @@ export async function fetchPostsSortedByDate(amount) {
 
 export async function fetchPostsAccordingToSearch(searchText) {
   const allPosts = await fetchAllPosts();
-  const filteredPosts = allPosts.filter(
-    (post) => post.title.toLowerCase().includes(searchText.toLowerCase()) //check parameters (ADDED RENDERED)
+  const filteredPosts = allPosts.filter((post) =>
+    post.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return filteredPosts;
@@ -95,5 +89,33 @@ export async function fetchPostsByCategory(targetCategory) {
     return filteredPosts;
   } catch (error) {
     console.error("Error fetching posts by category", error);
+  }
+}
+
+export async function fetchImageUrlByName(imageName) {
+  try {
+    const response = await fetch(mediaUrl);
+
+    if (!response.ok) {
+      throw new Error(`Failed to images. Status: ${response.status}`);
+    }
+
+    const wpMedia = await response.json();
+
+    const imageMatch = wpMedia.find(
+      (properties) => properties.title.rendered === imageName
+    );
+
+    if (!imageMatch) {
+      throw new Error(`Image with name "${imageName}" not found.`);
+    }
+
+    const imageUrl = imageMatch.media_details.sizes.full.source_url;
+
+    return imageUrl;
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+
+    throw error;
   }
 }

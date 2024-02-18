@@ -1,33 +1,5 @@
 import { mediaUrl, commentsUrl } from "../utils/constants.js";
 
-export async function imageUrlByName(imageName) {
-  try {
-    const response = await fetch(mediaUrl);
-
-    if (!response.ok) {
-      throw new Error(`Failed to images. Status: ${response.status}`);
-    }
-
-    const wpMedia = await response.json();
-
-    const imageMatch = wpMedia.find(
-      (properties) => properties.title.rendered === imageName
-    );
-
-    if (!imageMatch) {
-      throw new Error(`Image with name "${imageName}" not found.`);
-    }
-
-    const imageUrl = imageMatch.media_details.sizes.full.source_url;
-
-    return imageUrl;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-
-    throw error;
-  }
-}
-
 export async function sendContactForm(invalidMessage) {
   if (invalidMessage.length === 0) {
     alert("CONTACT FORM SENT");

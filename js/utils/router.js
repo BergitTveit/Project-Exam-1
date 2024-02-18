@@ -6,8 +6,6 @@ import { loadLocationPage } from "../pages/location.js";
 import { loadPostPage } from "../pages/post.js";
 
 export async function rout() {
-  console.log("ROUT: ", window.location.pathname);
-
   switch (window.location.pathname) {
     case "/":
     case "/index.html":
