@@ -5,7 +5,7 @@ import {
   validatePhone,
   validateDateOfWedding,
   getValidationMessage,
-} from "./validateform.js";
+} from "./utils/validateform.js";
 
 export const firstNameVal = [
   "firstName",

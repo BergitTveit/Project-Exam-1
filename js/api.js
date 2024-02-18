@@ -1,4 +1,9 @@
-import { url, mediaUrl, ContactFormUrl, commentsUrl } from "./constants.js";
+import {
+  url,
+  mediaUrl,
+  ContactFormUrl,
+  commentsUrl,
+} from "./utils/constants.js";
 
 // Get all Posts.
 export async function fetchAllPosts() {

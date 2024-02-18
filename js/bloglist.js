@@ -1,8 +1,8 @@
 import { fetchPostsSortedByDate } from "./api.js";
 import { displayPosts } from "./render-bloglist.js";
-import { showLoader, hideLoader } from "./loader.js";
+import { showLoader, hideLoader } from "./utils/loader.js";
 import { fetchPostsAccordingToSearch } from "./search.js";
-import { handleError } from "./errors.js";
+import { handleError } from "./utils/errors.js";
 import {
   fetchPostsByCategory,
   getSelectedCategory,

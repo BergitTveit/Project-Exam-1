@@ -4,7 +4,7 @@ import {
   emailVal,
   phoneVal,
   subjectVal,
-} from "./contactform.js";
+} from "../contactform.js";
 
 export function validateTextField(fieldId, minLength) {
   const inputField = document.getElementById(fieldId);
