@@ -48,7 +48,7 @@ export async function displayBigBannerSlider(containerSelector, imageNames) {
       "",
       showPrevImage,
       "prvBtn",
-      "prev-button"
+      "back-button"
     );
     prevButton.setAttribute("aria-label", "Previous Button");
     container.appendChild(prevButton);

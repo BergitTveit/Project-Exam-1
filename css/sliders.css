@@ -18,7 +18,16 @@
   align-items: center;
   justify-content: center;
 }
-
+.next-button {
+  cursor: pointer;
+}
+.back-button {
+  cursor: pointer;
+}
+.back-button:hover,
+.next-button:hover {
+  color: var(--accent-color);
+}
 .video-text {
   width: 5vw;
   margin-left: 2rem;
