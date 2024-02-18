@@ -39,10 +39,7 @@ const imageUrl = await imageUrlByName("Contact_form");
 
 export function displayContactForm() {
   const contactFormContainer = document.querySelector(".section-container");
-  contactFormContainer.style.backgroundImage = `url("${imageUrl}")`;
-
-  const formTitle = document.createElement("h2");
-  formTitle.textContent = "Get in touch";
+  // contactFormContainer.style.backgroundImage = `url("${imageUrl}")`;
 
   const contactForm = document.createElement("form");
   contactForm.id = "contactForm";
@@ -126,7 +123,7 @@ export function displayContactForm() {
   });
 
   contactFormContainer.appendChild(contactForm);
-  contactForm.appendChild(formTitle);
+
   contactForm.appendChild(firstNameInput);
   contactForm.appendChild(createLineBreak());
   contactForm.appendChild(lastNameInput);

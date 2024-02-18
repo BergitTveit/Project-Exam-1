@@ -1,3 +1,7 @@
+:root {
+  --custom-color: #d4bdbc;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   display: flex;
@@ -23,7 +27,8 @@ h2 {
 }
 
 p {
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .m-top {
@@ -69,6 +74,11 @@ nav {
 .topnav {
   display: none;
 }
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+}
 
 @media screen and (max-width: 767px) {
   header {
@@ -111,7 +121,7 @@ nav {
   }
   /* Style the hamburger menu */
   .topnav a.icon {
-    background: #d4bdbc;
+    background: var(--custom-color);
     display: block;
     position: absolute;
     right: 0;
@@ -122,7 +132,7 @@ nav {
   }
   /* Add a grey background color on mouse-over */
   .topnav a:hover {
-    background-color: #d4bdbc;
+    background-color: var(--custom-color);
     color: black;
   }
   .topnav #myLinks.show {
