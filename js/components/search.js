@@ -1,7 +1,6 @@
-import { displayPosts } from "../render/bloglist.js"; // Create this
-import { fetchPostsAccordingToSearch } from "../api/fetching_api.js"; // Create this
+import { displayPosts } from "../render/bloglist.js";
+import { fetchPostsAccordingToSearch } from "../api/fetching_api.js";
 
-//SEARCH WORKING BUT NOT WORKING ON DETAILS PAGE, check paths
 const search = document.querySelector("#searchInput");
 
 let typeTimer;
@@ -16,7 +15,7 @@ search.addEventListener("keyup", async function (event) {
     localStorage.setItem("searchValue", searchValue);
 
     const filteredPosts = await fetchPostsAccordingToSearch(searchValue);
-    displayPosts(filteredPosts, ".blog-list-container"); // create class
+    displayPosts(filteredPosts, ".blog-list-container");
   }, doneTypingInterval);
 });
 

@@ -1,9 +1,5 @@
 import { mediaUrl, commentsUrl } from "../utils/constants.js";
 
-//Get ID from single Post.
-
-// Get large images based on name, for easy maintenance of styling background images.
-
 export async function imageUrlByName(imageName) {
   try {
     const response = await fetch(mediaUrl);
@@ -32,7 +28,6 @@ export async function imageUrlByName(imageName) {
   }
 }
 
-// Send Contact Form - Connect to API
 export async function sendContactForm(invalidMessage) {
   if (invalidMessage.length === 0) {
     alert("CONTACT FORM SENT");
@@ -59,7 +54,6 @@ export async function sendContactForm(invalidMessage) {
   }
 }
 
-////////////////////////////////////////
 export async function postComment(commentData) {
   try {
     const response = await fetch(commentsUrl, {

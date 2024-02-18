@@ -19,12 +19,9 @@ export async function displayBigBannerSlider(containerSelector, imageNames) {
     showLoader();
     container.innerHTML = "";
 
-    // Fetching image URLs
     const imageUrls = await Promise.all(
       imageNames.map((imageName) => imageUrlByName(imageName))
     );
-
-    // create img with width
 
     const width = getDeviceWidth();
 
@@ -39,7 +36,6 @@ export async function displayBigBannerSlider(containerSelector, imageNames) {
 
     container.appendChild(sliderWrapper);
 
-    // Adding event listener for window resize
     window.addEventListener("resize", () => {
       const w = getDeviceWidth();
       HPImages.forEach((imgElement) => {

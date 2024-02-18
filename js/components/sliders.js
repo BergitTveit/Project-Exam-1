@@ -8,7 +8,6 @@ let currentIndex = 0;
 export let containerPostsCapacity;
 calculatePostsCapacity();
 
-// Finds gow many posts to display on device, for dynamic scaling ////////////////////////////
 export function calculatePostsCapacity() {
   const widthArrows = 64 * 2;
   const singlePostWidth = 200;
@@ -80,7 +79,6 @@ export async function displayPostsSlider(
   );
 }
 
-// Move Slider
 export function moveSlider(items, direction, containerSelector, capacity) {
   currentIndex += direction;
   if (currentIndex < 0) {

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Set container as the positioning context */
+  position: relative;
 }
 
 .about-slider {

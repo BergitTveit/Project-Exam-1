@@ -40,8 +40,6 @@ export async function renderCategoryDropdown(containerId) {
     });
 }
 
-///////////////////////////////////////////////////////////////////
-
 export function isDefaultCategorySelected(category) {
   return category === defaultCategory;
 }

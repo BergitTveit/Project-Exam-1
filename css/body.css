@@ -52,7 +52,7 @@ p {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-/* /////////////////////////////////////////////////////////////////////////////////// */
+
 nav ul {
   justify-content: center;
   display: flex;
@@ -99,12 +99,10 @@ footer {
     width: 100vw;
   }
 
-  /* Hide the links inside the navigation menu (except for logo/home) */
   .topnav #myLinks {
     display: none;
   }
 
-  /* Style navigation menu links */
   .topnav a {
     color: black;
     padding: 14px 16px;
@@ -119,7 +117,7 @@ footer {
     font-size: 17px;
     display: block;
   }
-  /* Style the hamburger menu */
+
   .topnav a.icon {
     background: var(--custom-color);
     display: block;
@@ -128,9 +126,9 @@ footer {
     top: 0;
   }
   .topnav .icon {
-    color: rgb(255, 255, 255); /* Change this to the desired color */
+    color: rgb(255, 255, 255);
   }
-  /* Add a grey background color on mouse-over */
+
   .topnav a:hover {
     background-color: var(--custom-color);
     color: black;
@@ -138,7 +136,7 @@ footer {
   .topnav #myLinks.show {
     display: block;
   }
-  /* Style the active link (or home/logo) */
+
   .active {
     background-color: #fff;
     color: black;

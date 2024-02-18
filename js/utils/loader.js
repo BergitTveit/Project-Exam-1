@@ -1,6 +1,6 @@
 export function showLoader() {
   document.innerHtml = "";
-  const loader = document.getElementById("loader"); //CREATE LOADER
+  const loader = document.getElementById("loader");
   loader.style.display = "block";
 }
 

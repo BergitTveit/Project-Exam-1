@@ -13,7 +13,6 @@ const numberOfPostsToDisplay = 9;
 const categoryDropdownName = "categoryDropdownContainer";
 
 let posts;
-// Creating the posts page for all posts, initially show 9 posts.////////////////
 
 export async function renderPosts() {
   const postListContainer = document.querySelector(".blog-list-container");
@@ -52,8 +51,6 @@ export async function renderPosts() {
     loadMoreContainer.appendChild(loadMoreBtn);
   }
 }
-
-// Loading more posts. ////////////////////////////////////////
 
 async function loadMorePosts() {
   const postListContainer = document.querySelector(".blog-list-container");
