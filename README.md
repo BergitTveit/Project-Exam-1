@@ -14,7 +14,7 @@ I created an API using WordPress for my Project Exam 1 to enhance the online pre
 
 - WordPress
 - VS Code
-  Plug in :
+  Wordpress Plug-in :
 - Contact form 7
 
 ### Getting Started
@@ -28,7 +28,8 @@ git clone https://github.com/BergitTveit/Project-Exam-1.git -->
 
 #### Running
 
-?
+The recommended way of running is to install [Visual Studio Code](https://code.visualstudio.com/)
+For visual aid it is also recommened to install the following plugin [Live Server](https://github.com/ritwickdey/vscode-live-server-plus-plus)
 
 ### Contributing
 
